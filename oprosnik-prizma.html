@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Опросник: концепция Prizma HR — блоки 11–16</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --paper: #F6F8F7;
+    --card: #FFFFFF;
+    --ink: #20302C;
+    --muted: #5C6F6A;
+    --accent: #0E7C7B;
+    --accent-ink: #0A5B5A;
+    --accent-soft: #E3F0EF;
+    --line: #D6DEDB;
+    --warn: #A8632B;
+    --btn-ink: #FFFFFF;
+    --shadow: 0 1px 3px rgba(32, 48, 44, 0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #131A18;
+      --card: #1B2320;
+      --ink: #E4ECE9;
+      --muted: #96A6A1;
+      --accent: #53B4B0;
+      --accent-ink: #7CCBC7;
+      --accent-soft: #16302E;
+      --line: #2A3531;
+      --warn: #D89055;
+      --btn-ink: #10201E;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #131A18;
+    --card: #1B2320;
+    --ink: #E4ECE9;
+    --muted: #96A6A1;
+    --accent: #53B4B0;
+    --accent-ink: #7CCBC7;
+    --accent-soft: #16302E;
+    --line: #2A3531;
+    --warn: #D89055;
+    --btn-ink: #10201E;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  }
+  :root[data-theme="light"] {
+    --paper: #F6F8F7;
+    --card: #FFFFFF;
+    --ink: #20302C;
+    --muted: #5C6F6A;
+    --accent: #0E7C7B;
+    --accent-ink: #0A5B5A;
+    --accent-soft: #E3F0EF;
+    --line: #D6DEDB;
+    --warn: #A8632B;
+    --btn-ink: #FFFFFF;
+    --shadow: 0 1px 3px rgba(32, 48, 44, 0.07);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1rem 4rem; }
+
+  /* ── прогресс ── */
+  .progress {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 1rem 0.55rem;
+  }
+  .progress-inner { max-width: 44rem; margin: 0 auto; }
+  .progress-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.3rem;
+  }
+  .progress-label strong { color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+  .bar { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .bar > div {
+    height: 100%; width: 0%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.25s ease;
+  }
+  @media (prefers-reduced-motion: reduce) { .bar > div { transition: none; } }
+
+  /* ── шапка ── */
+  header.lead { padding-top: 2.2rem; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.75rem; font-weight: 700; line-height: 1.25;
+    text-wrap: balance; margin: 0 0 0.8rem;
+  }
+  .lead p { margin: 0.5rem 0; max-width: 62ch; }
+  .lead .note {
+    margin-top: 1.1rem; padding: 0.75rem 1rem;
+    background: var(--accent-soft); border-radius: 8px;
+    font-size: 0.92rem; color: var(--accent-ink);
+  }
+
+  /* ── блоки ── */
+  .block { margin-top: 2.6rem; }
+  .eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent-ink); font-weight: 600; margin-bottom: 0.2rem;
+  }
+  .block > h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem; line-height: 1.3; text-wrap: balance;
+    margin: 0 0 0.3rem;
+  }
+  .block > .block-lead { color: var(--muted); font-size: 0.95rem; margin: 0 0 1rem; max-width: 62ch; }
+
+  /* ── карточка вопроса ── */
+  .q {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 1.1rem 1.15rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .q h3 { font-size: 1.02rem; line-height: 1.4; margin: 0 0 0.35rem; text-wrap: balance; }
+  .q h3 .qnum { color: var(--accent-ink); }
+  .q .qlead { font-size: 0.93rem; color: var(--muted); margin: 0 0 0.8rem; }
+  .q details.more { margin: -0.3rem 0 0.8rem; }
+  .q details.more summary {
+    cursor: pointer; font-size: 0.88rem; color: var(--accent-ink);
+    list-style: none; display: inline-block;
+  }
+  .q details.more summary::before { content: "▸ "; }
+  .q details.more[open] summary::before { content: "▾ "; }
+  .q details.more div { font-size: 0.9rem; color: var(--muted); padding: 0.4rem 0 0; max-width: 60ch; }
+
+  .opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  label.opt {
+    display: flex; gap: 0.65rem; align-items: flex-start;
+    border: 1.5px solid var(--line); border-radius: 9px;
+    padding: 0.6rem 0.75rem;
+    cursor: pointer; font-size: 0.96rem; line-height: 1.45;
+    background: var(--card);
+  }
+  label.opt:hover { border-color: var(--accent); }
+  label.opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  label.opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+  label.opt input { margin-top: 0.22rem; accent-color: var(--accent); flex: 0 0 auto; width: 1.05rem; height: 1.05rem; }
+  label.opt b { font-weight: 600; }
+
+  .followup { margin-top: 0.5rem; display: none; }
+  .followup.show { display: block; }
+  .followup input[type="text"], .comment textarea, #summary-text {
+    width: 100%; font: inherit; color: var(--ink);
+    background: var(--paper); border: 1.5px solid var(--line); border-radius: 8px;
+    padding: 0.55rem 0.7rem;
+  }
+  .followup input:focus-visible, .comment textarea:focus-visible, #summary-text:focus-visible,
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  details.comment { margin-top: 0.7rem; }
+  details.comment summary {
+    cursor: pointer; font-size: 0.88rem; color: var(--muted);
+    list-style: none; display: inline-block;
+  }
+  details.comment summary::before { content: "✎ "; }
+  details.comment textarea { margin-top: 0.45rem; min-height: 3.2rem; resize: vertical; }
+
+  /* ── финал ── */
+  .finish {
+    margin-top: 2.8rem;
+    background: var(--card); border: 1.5px solid var(--accent); border-radius: 12px;
+    padding: 1.2rem 1.15rem 1.3rem;
+  }
+  .finish h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem; margin: 0 0 0.5rem;
+  }
+  .finish p { font-size: 0.94rem; margin: 0.35rem 0; max-width: 62ch; }
+  #missing { color: var(--warn); font-size: 0.92rem; }
+  .btns { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 0.9rem; }
+  button, a.btn {
+    font: inherit; font-size: 0.95rem; font-weight: 600;
+    border-radius: 9px; padding: 0.65rem 1.05rem;
+    cursor: pointer; text-decoration: none; text-align: center;
+    border: 1.5px solid var(--accent);
+  }
+  button.primary { background: var(--accent); color: var(--btn-ink); }
+  button.ghost, a.btn { background: transparent; color: var(--accent-ink); }
+  button:hover, a.btn:hover { filter: brightness(1.06); }
+  #copy-status { font-size: 0.9rem; color: var(--accent-ink); min-height: 1.3em; }
+  #summary-text { min-height: 9rem; font-size: 0.85rem; line-height: 1.5; resize: vertical; }
+
+  footer {
+    margin-top: 2rem; font-size: 0.85rem; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 0.9rem; max-width: 62ch;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" role="status">
+  <div class="progress-inner">
+    <div class="progress-label">
+      <span>Заполнение опросника</span>
+      <strong id="prog-count">0 из 18</strong>
+    </div>
+    <div class="bar"><div id="prog-bar"></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="lead">
+    <h1>Вопросы по концепции «Prizma HR» — блоки 11–16</h1>
+    <p>Яна Сергеевна, добрый день! Спасибо за концепцию — мы её внимательно
+    изучили и многое готовы взять в работу. Чтобы правильно встроить её в
+    проект, просим ответить на вопросы ниже: достаточно отмечать варианты,
+    поля для комментариев — по желанию.</p>
+    <p>Это продолжение прежнего опросника (там были блоки 1–10), поэтому
+    нумерация начинается с 11.</p>
+    <div class="note">Черновик сохраняется в этом браузере автоматически —
+    можно заполнять в несколько подходов. Ответы никуда не отправляются, пока
+    Вы не нажмёте кнопку «Отправить» внизу страницы.</div>
+  </header>
+
+  <main id="form-root"></main>
+
+  <section class="finish" id="finish">
+    <h2>Отправить ответы</h2>
+    <p id="missing"></p>
+    <p>Нажмите «Скопировать» и вставьте текст в наш чат (Telegram или
+    WhatsApp) — этого достаточно. Либо скачайте файл и пришлите его.</p>
+    <div class="btns">
+      <button class="primary" id="btn-copy" type="button">Скопировать ответы</button>
+      <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Открыть Telegram с ответами</a>
+      <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    </div>
+    <div id="copy-status" aria-live="polite"></div>
+    <p style="margin-top:0.8rem">Текст, который будет отправлен (обновляется по мере заполнения):</p>
+    <textarea id="summary-text" readonly aria-label="Итоговый текст ответов"></textarea>
+  </section>
+
+  <footer>
+    Проект «Формула компании». Опросник соответствует документу «Вопросы по
+    концепции Prizma HR» от 31.07.2026 (блоки 11–16); полные пояснения — в
+    переданных DOCX/PDF. Черновик ответов хранится только в памяти этого
+    браузера.
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+/* ── данные опросника: блоки 11–16, tz/14 от 2026-07-31 ── */
+const BLOCKS = [
+  { id: 11, title: "Статус концепции",
+    lead: "Раньше первая версия была зафиксирована так: один отдел в существующей компании, Ваш диагностический блок из семи тестов, расстановка людей по ролям. Концепция описывает больше.",
+    questions: [
+      { id: "11.1", title: "Чем считать присланный документ?", required: true, type: "radio",
+        opts: [
+          { v: "А", t: "<b>Образ продукта в целом.</b> Первая версия идёт по согласованному контуру, концепция — карта развития; отдельные элементы можно взять уже сейчас (вопрос 11.2)." },
+          { v: "Б", t: "<b>Требования к первой версии.</b> Контур пересобирается: объём и сроки заметно вырастут, потребуются решения по лицензиям тестов (блок 12) и данным для адаптивного алгоритма (блок 14)." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "11.2", title: "Если выбран вариант А — что взять в первую версию уже сейчас?", required: false, type: "multi",
+        lead: "Можно отметить несколько.",
+        opts: [
+          { v: "анкета", t: "анкету запроса руководителя (с поправками из блока 16)" },
+          { v: "тест руководителя", t: "тестирование самого руководителя — для оценки совместимости" },
+          { v: "индекс достоверности", t: "индекс достоверности ответов как отдельную строку отчёта" },
+          { v: "архетипы-ярлыки", t: "архетипы как ярлыки-пояснения в отчёте (без влияния на расчёт)" },
+          { v: "ничего", t: "ничего — первая версия остаётся строго прежней" },
+          { v: "другое", t: "другое:", input: true }
+        ]}
+    ]},
+  { id: 12, title: "Батарея тестов: переданный блок и список из концепции",
+    lead: "Вы передали блок из семи тестов с ключами — мы его полностью разобрали. В концепции одиннадцать методик, среди них пять новых: методика Климова, 16PF, MMPI-2, HEXACO и отдельная шкала социальной желательности.",
+    questions: [
+      { id: "12.1", title: "Что является инструментом первой версии?", required: true, type: "radio",
+        opts: [
+          { v: "А", t: "<b>Переданный блок из семи тестов;</b> одиннадцать методик — перспектива следующих версий." },
+          { v: "Б", t: "<b>Первая версия должна включать и новые методики</b> — тогда просим ключи и порядок подсчёта к каждой добавляемой." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "12.2", title: "«Big Five (NEO PI-R)» — что имеется в виду?", required: true, type: "radio",
+        lead: "В переданном блоке Большая пятёрка — 30 утверждений. NEO PI-R — это 240 утверждений, платный тест издательства PAR; наша сверка показала, что переданные утверждения с ним не совпадают.",
+        more: "Официальную русскую версию NEO PI-R делала лаборатория по годовой лицензии PAR; сами адаптаторы называют распространение других русских версий незаконным. Это же был вопрос 3.1 прежнего опросника.",
+        opts: [
+          { v: "А", t: "Имелся в виду именно <b>полный NEO PI-R</b> — нужен лицензионный договор, передаём вопрос юристу." },
+          { v: "Б", t: "<b>Большая пятёрка как подход</b>, а конкретный опросник — Ваш набор из 30 утверждений (или открытая аттестованная краткая форма из вопроса 3.2)." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "12.3", title: "Опросник Айзенка: EPI или EPQ?", required: true, type: "radio",
+        lead: "Переданный ключ — опросник из 57 вопросов с тремя шкалами (в литературе — EPI, 1963). В концепции назван EPQ (1975) — другой опросник: около 90 вопросов и дополнительная шкала «психотизм».",
+        opts: [
+          { v: "А", t: "Работаем с переданным <b>EPI на 57 вопросов</b> — в документах проекта будет стоять EPI." },
+          { v: "Б", t: "Нужен именно <b>EPQ со шкалой психотизма</b> — тогда просим ключ к нему." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "12.4", title: "Платные зарубежные тесты — лицензии или аналоги?", required: true, type: "radio",
+        lead: "NEO PI-R, 16PF и MMPI-2 — платные лицензируемые тесты; включать их в коммерческий продукт без договоров нельзя. HEXACO — исключение: авторы открыто продают коммерческое использование. Методика Климова создана для профориентации школьников; данных о её пригодности для отбора взрослых мы не нашли.",
+        more: "Проверка от 31 июля с источниками — в рабочих материалах проекта. Правообладатели: NEO PI-R — PAR; 16PF — Pearson/Talogy; MMPI-2 — Университет Миннесоты/Pearson. HEXACO — 2 канадских доллара за прохождение, напрямую у авторов.",
+        opts: [
+          { v: "А", t: "В программу входят только инструменты со <b>свободным или недорогим официальным путём</b> (Ваш блок, HEXACO, открытые аттестованные формы) — без юридических рисков." },
+          { v: "Б", t: "Заказчик готов <b>оплачивать лицензии</b> — составляем смету и передаём юристу подготовку договоров (заметные деньги и сроки)." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "12.5", title: "MMPI-2 — отдельное решение", required: true, type: "radio",
+        lead: "MMPI-2 — клинический опросник (567 вопросов); в США продаётся только специалистам высшей категории, и суд там признал его применение при найме «медицинским обследованием». Статус русской адаптации (СМИЛ) выясняет юрист. Насколько MMPI-2 принципиален для замысла?",
+        opts: [
+          { v: "А", t: "<b>Не принципиален</b> — психологическую надёжность оцениваем имеющимися шкалами (нейротизм, стресс, искренность) без клинического теста." },
+          { v: "Б", t: "<b>Принципиален</b> — ждём заключения юриста и решаем после него." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "12.6", title: "Рисуночный тест", required: true, type: "radio",
+        lead: "В концепции рисуночного теста «Я в коллективе» нет, а в переданном блоке он есть (как качественный, без баллов).",
+        opts: [
+          { v: "остаётся", t: "<b>Остаётся</b>, как раньше — материал для беседы специалиста." },
+          { v: "исключается", t: "<b>Исключается.</b>" },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]}
+    ]},
+  { id: 13, title: "Архетипы сотрудников и бизнеса",
+    lead: "Пять архетипов сотрудников (Стратег, Драйвер, Аналитик, Защитник, Созидатель) и пять архетипов бизнеса.",
+    questions: [
+      { id: "13.1", title: "Откуда пятёрка архетипов и как её считать?", required: true, type: "radio",
+        lead: "Для программы главное: есть ли правило, по которому архетип определяется из результатов тестов (какие шкалы, какие пороги)?",
+        opts: [
+          { v: "авторская, правило есть", t: "Авторская типология; <b>правило «тесты → архетип» есть</b> — пришлю." },
+          { v: "авторская, правило разработать", t: "Авторская; правило <b>предстоит разработать вместе</b>." },
+          { v: "адаптация", t: "Адаптация существующей типологии (укажите названия и канон):", input: true },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "13.2", title: "Человек не совпал со «штатным» архетипом подразделения", required: true, type: "radio",
+        lead: "В концепции архетип привязан к подразделению: финансовый блок — Аналитик, коммерческий — Драйвер. А если тесты показывают, что бухгалтер по складу — выраженный Драйвер? Что должна сделать программа?",
+        opts: [
+          { v: "сигнал", t: "Показать несоответствие <b>как сигнал</b> и предложить роли по профилю." },
+          { v: "эталон-подразделение", t: "Считать эталоном подразделение: <b>несоответствие снижает оценку</b> пригодности." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "13.3", title: "Архетип бизнеса в расчёте", required: true, type: "radio",
+        lead: "Как архетип направления бизнеса участвует в оценке кандидата? Есть ли таблица соответствия «архетип сотрудника × архетип бизнеса» с весами?",
+        opts: [
+          { v: "таблица есть", t: "<b>Таблица есть</b> — пришлю." },
+          { v: "составить вместе", t: "Предстоит <b>составить вместе</b>." },
+          { v: "качественное", t: "Это <b>качественное описание</b>, в расчёт не входит." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]}
+    ]},
+  { id: 14, title: "Адаптивное тестирование: 200–250 вопросов вместо 1400",
+    lead: "Идея сократить время адаптивным подбором вопросов — рабочая, такие системы существуют. Но честное сокращение требует «откалиброванного банка»: каждый вопрос заранее измерен на большой выборке (обычно сотни человек на шкалу), чтобы алгоритм знал, какой вопрос сколько информации даёт.",
+    questions: [
+      { id: "14.1", title: "Что стоит за адаптивным алгоритмом?", required: true, type: "radio",
+        opts: [
+          { v: "банк есть", t: "<b>Есть готовый банк / платформа</b> (укажите, какая):", input: true },
+          { v: "банка нет", t: "Банка нет — это <b>задача на будущее</b>." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "14.2", title: "Если банка нет — согласны ли на поэтапный путь?", required: true, type: "radio",
+        lead: "Первая версия работает с полным переданным блоком (60–80 минут, а не 4 часа); программа накапливает обезличенные данные; когда их станет достаточно — строим адаптивную версию и проверяем, что сокращённый тест даёт те же результаты.",
+        opts: [
+          { v: "согласна", t: "<b>Согласна</b>, путь разумный." },
+          { v: "не согласна", t: "Не согласна (почему):", input: true }
+        ]}
+    ]},
+  { id: 15, title: "Дополнительные модули: цифровая психология и астрология",
+    lead: "В концепции есть «цифровая психология Сюцай» и астрологический профиль — оба помечены как дополнительные аналитические модули. Здесь важно быть аккуратными, и мы говорим прямо, потому что это влияет на судьбу продукта.",
+    questions: [
+      { id: "15.1", title: "Роль модулей в системе", required: true, type: "radio",
+        lead: "Право: по Трудовому кодексу отбор допустим только по деловым качествам — дата рождения и имя ими не являются; отказ кандидату по такому выводу — судебный риск для клиента. Наука: в крупнейшей слепой проверке (Nature, 1985) и сводном анализе сорока исследований астрологические прогнозы не отличились от случайного угадывания.",
+        more: "Продукт позиционируется как научный — включение этих модулей в расчёт даст юристам и конкурентам готовый аргумент против всей системы, включая её сильную часть. Как отдельный познавательный блок — вне расчёта, без показа руководителю, с честной пометкой — модули существовать могут.",
+        opts: [
+          { v: "А", t: "<b>Убрать из продукта совсем.</b>" },
+          { v: "Б", t: "<b>Оставить как отдельный познавательный блок:</b> в расчёты и отчёт руководителю не входит, показывается только самому человеку по его желанию, с пометкой о статусе метода." },
+          { v: "В", t: "Считаю, что они <b>должны влиять на оценку</b> — обсудим отдельно (напишите, почему):", input: true },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]}
+    ]},
+  { id: 16, title: "Анкета руководителя и итоговый отчёт",
+    lead: "Анкета запроса руководителя — сильный элемент концепции, мы хотим взять её в первую версию.",
+    questions: [
+      { id: "16.1", title: "Пол, возраст и семейное положение в анкете", required: true, type: "radio",
+        lead: "Вопросы «какой пол/возраст кандидата нужен» и «семейное положение имеет значение» прямо запрещены Трудовым кодексом (ст. 3 и 64 — отбор только по деловым качествам; за дискриминационные объявления есть и административный штраф). Предлагаем заменить их вопросами о требованиях к опыту, нагрузке, графику и командировкам.",
+        opts: [
+          { v: "согласна", t: "<b>Согласна</b>, заменяем." },
+          { v: "возражения", t: "Есть возражения:", input: true }
+        ]},
+      { id: "16.2", title: "Тест руководителя", required: true, type: "radio",
+        lead: "Для «совместимости с руководителем» концепция предусматривает «описание + тест» самого руководителя. Каким инструментом его тестировать?",
+        opts: [
+          { v: "тот же блок", t: "<b>Тем же диагностическим блоком</b>, что и сотрудников." },
+          { v: "сокращённый", t: "<b>Сокращённым набором</b> (каким):", input: true },
+          { v: "выбрать вместе", t: "Предстоит <b>выбрать вместе</b>." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "16.3", title: "Шесть итоговых индексов", required: true, type: "radio",
+        lead: "В концепции шесть интегральных индексов (соответствия, потенциала развития, командной совместимости, надёжности, управленческого потенциала, корпоративной совместимости). Есть ли формулы их расчёта — из каких шкал, с какими весами?",
+        opts: [
+          { v: "формулы есть", t: "<b>Формулы есть</b> — пришлю." },
+          { v: "разработать", t: "Формул нет — <b>предстоит разработать</b> (станет частью расчётного ядра)." },
+          { v: "свой", t: "Свой вариант:", input: true }
+        ]},
+      { id: "16.3а", title: "Индекс «психологической надёжности» — до заключения юриста", required: true, type: "radio",
+        lead: "В него входят эмоциональная устойчивость и риски — показатели, которые мы до юридического заключения не выводим руководителю (об этом был блок 8). Согласны, что до решения юриста этот индекс показывается только специалисту?",
+        opts: [
+          { v: "согласна", t: "<b>Согласна.</b>" },
+          { v: "возражения", t: "Есть возражения:", input: true }
+        ]},
+      { id: "16.4", title: "«Формула из книги» — сверим понимание", required: true, type: "radio",
+        lead: "У нас расчёт двухслойный: сначала статическое соответствие человека роли (по тестам), затем — динамическая модель из книги (как коллектив выполняет план во времени). Что Вы называете «формулой из книги»?",
+        opts: [
+          { v: "обе части", t: "<b>Обе части вместе</b> — так и задумано." },
+          { v: "статика", t: "Только <b>статическое соответствие</b>." },
+          { v: "динамика", t: "Только <b>динамическую модель</b>." },
+          { v: "сверим", t: "Затрудняюсь — <b>давайте сверим на встрече</b>." }
+        ]}
+    ]}
+];
+
+const STORE_KEY = "prizma-oprosnik-11-16-v1";
+const REQUIRED = BLOCKS.flatMap(b => b.questions).filter(q => q.required).map(q => q.id);
+
+/* ── рендер ── */
+const root = document.getElementById("form-root");
+BLOCKS.forEach(block => {
+  const sec = document.createElement("section");
+  sec.className = "block";
+  sec.innerHTML = `
+    <div class="eyebrow">Блок ${block.id}</div>
+    <h2>${block.title}</h2>
+    ${block.lead ? `<p class="block-lead">${block.lead}</p>` : ""}`;
+  block.questions.forEach(q => {
+    const card = document.createElement("div");
+    card.className = "q";
+    card.dataset.qid = q.id;
+    const inputType = q.type === "multi" ? "checkbox" : "radio";
+    const optsHtml = q.opts.map((o, i) => {
+      const inputId = `in-${q.id}-${i}`;
+      const follow = o.input
+        ? `<div class="followup" data-for="${inputId}">
+             <input type="text" data-follow="${q.id}::${o.v}" placeholder="напишите здесь" aria-label="Уточнение к варианту">
+           </div>`
+        : "";
+      return `
+        <label class="opt">
+          <input type="${inputType}" name="q-${q.id}" id="${inputId}" value="${o.v}">
+          <span>${o.t}</span>
+        </label>${follow}`;
+    }).join("");
+    card.innerHTML = `
+      <h3><span class="qnum">${q.id}.</span> ${q.title}</h3>
+      ${q.lead ? `<p class="qlead">${q.lead}</p>` : ""}
+      ${q.more ? `<details class="more"><summary>Подробнее</summary><div>${q.more}</div></details>` : ""}
+      <div class="opts">${optsHtml}</div>
+      <details class="comment">
+        <summary>Комментарий (необязательно)</summary>
+        <textarea data-comment="${q.id}" aria-label="Комментарий к вопросу ${q.id}"></textarea>
+      </details>`;
+    sec.appendChild(card);
+  });
+  root.appendChild(sec);
+});
+
+/* ── состояние ── */
+function collect() {
+  const answers = {}, follows = {}, comments = {};
+  BLOCKS.flatMap(b => b.questions).forEach(q => {
+    const els = [...document.querySelectorAll(`input[name="q-${q.id}"]:checked`)];
+    if (els.length) answers[q.id] = els.map(e => e.value);
+  });
+  document.querySelectorAll("input[data-follow]").forEach(el => {
+    if (el.value.trim()) follows[el.dataset.follow] = el.value.trim();
+  });
+  document.querySelectorAll("textarea[data-comment]").forEach(el => {
+    if (el.value.trim()) comments[el.dataset.comment] = el.value.trim();
+  });
+  return { answers, follows, comments };
+}
+
+function restore() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || "null"); } catch (e) { /* повреждённый черновик игнорируем */ }
+  if (!saved) return;
+  Object.entries(saved.answers || {}).forEach(([qid, vals]) => {
+    vals.forEach(v => {
+      const el = [...document.querySelectorAll(`input[name="q-${qid}"]`)].find(e => e.value === v);
+      if (el) el.checked = true;
+    });
+  });
+  Object.entries(saved.follows || {}).forEach(([key, val]) => {
+    const el = document.querySelector(`input[data-follow="${CSS.escape(key)}"]`);
+    if (el) el.value = val;
+  });
+  Object.entries(saved.comments || {}).forEach(([qid, val]) => {
+    const el = document.querySelector(`textarea[data-comment="${CSS.escape(qid)}"]`);
+    if (el) { el.value = val; el.closest("details").open = true; }
+  });
+}
+
+function persist(state) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* приватный режим — просто без черновика */ }
+}
+
+/* ── итоговый текст ── */
+function optLabel(q, v) {
+  const o = q.opts.find(o => o.v === v);
+  if (!o) return v;
+  const plain = o.t.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim().replace(/[:：]\s*$/, "");
+  return plain.length > 90 ? `${v} — ${plain.slice(0, 87)}…` : `${v} — ${plain}`;
+}
+
+function buildSummary(state) {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear();
+  const lines = [`ОТВЕТЫ ПО КОНЦЕПЦИИ «PRIZMA HR» (блоки 11–16), заполнено ${dd}`, ""];
+  BLOCKS.forEach(block => {
+    block.questions.forEach(q => {
+      const vals = state.answers[q.id];
+      let line = `${q.id}: `;
+      if (!vals || !vals.length) {
+        line += q.required ? "— (без ответа)" : "—";
+      } else {
+        line += vals.map(v => {
+          const follow = state.follows[`${q.id}::${v}`];
+          return optLabel(q, v) + (follow ? ` [${follow}]` : "");
+        }).join("; ");
+      }
+      lines.push(line);
+      if (state.comments[q.id]) lines.push(`   комментарий: ${state.comments[q.id]}`);
+    });
+  });
+  return lines.join("\n");
+}
+
+/* ── обновление UI ── */
+const progBar = document.getElementById("prog-bar");
+const progCount = document.getElementById("prog-count");
+const missingEl = document.getElementById("missing");
+const summaryEl = document.getElementById("summary-text");
+const tgBtn = document.getElementById("btn-tg");
+
+function refresh() {
+  const state = collect();
+  document.querySelectorAll(".followup").forEach(f => {
+    const input = document.getElementById(f.dataset.for);
+    f.classList.toggle("show", !!(input && input.checked));
+  });
+  const done = REQUIRED.filter(id => state.answers[id] && state.answers[id].length).length;
+  progCount.textContent = `${done} из ${REQUIRED.length}`;
+  progBar.style.width = `${Math.round(100 * done / REQUIRED.length)}%`;
+  const missing = REQUIRED.filter(id => !state.answers[id] || !state.answers[id].length);
+  missingEl.textContent = missing.length
+    ? `Без ответа: ${missing.join(", ")}. Отправить можно и частично — недостающее обсудим отдельно.`
+    : "Все обязательные вопросы отвечены — спасибо!";
+  const text = buildSummary(state);
+  summaryEl.value = text;
+  tgBtn.href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(текст сокращён — полная версия кнопкой «Скопировать»)" : text
+  );
+  persist(state);
+  return text;
+}
+
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+
+/* ── кнопки ── */
+const statusEl = document.getElementById("copy-status");
+function say(msg) { statusEl.textContent = msg; }
+
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try {
+    await navigator.clipboard.writeText(text);
+    say("Скопировано. Теперь вставьте текст в чат и отправьте.");
+  } catch (e) {
+    summaryEl.focus();
+    summaryEl.select();
+    say("Автокопирование не сработало — текст выделен ниже, скопируйте его вручную (Ctrl+C / долгое нажатие).");
+  }
+});
+
+const dlBtn = document.getElementById("btn-dl");
+dlBtn.addEventListener("click", async () => {
+  const text = refresh();
+  if (window.claude && window.claude.downloads) {
+    try {
+      await window.claude.downloads.save({ filename: "otvety-prizma-bloki-11-16.txt", data: text });
+      say("Файл сохранён — пришлите его нам в чат.");
+    } catch (err) {
+      if (err && err.code === "declined") say("Сохранение отменено.");
+      else if (err && err.code === "rate_limited") say("Предыдущее окно сохранения ещё открыто — подтвердите его или подождите немного.");
+      else say("Сохранение файла здесь недоступно — воспользуйтесь кнопкой «Скопировать».");
+    }
+    return;
+  }
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "otvety-prizma-bloki-11-16.txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам (например, в Telegram).");
+});
+
+restore();
+refresh();
+</script>
+</body>
+</html>

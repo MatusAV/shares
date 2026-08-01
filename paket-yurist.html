@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Пакет вопросов юристу — «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h2 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h2 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q ol { margin:.3rem 0 .8rem 1.2rem; padding:0; font-size:.95rem; }
+  .q ol li { margin:.35rem 0; }
+  .q textarea { width:100%; min-height:5.5rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Заключения</span><strong id="pcount">0 из 12</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Пакет вопросов юристу — продукт «Формула компании»</h1>
+  <p>Программа для отдела кадров: сотрудник или кандидат проходит батарею
+  психологических тестов, программа считает профиль и предлагает расстановку
+  людей по ролям. Решение всегда принимает человек — программа готовит
+  рекомендацию и объяснение. Сервер — внутри компании заказчика, данные наружу
+  не уходят.</p>
+  <p>Обрабатываются: ФИО и контакты (отдельной таблицей), ответы на тесты и
+  баллы (по внутреннему идентификатору), история рабочих задач, заключения
+  психолога, журнал действий (только на дозапись). Часть баллов может читаться
+  как сведения о психическом состоянии — они скрыты от руководителя и не
+  участвуют в оценке до вашего заключения.</p>
+  <p class="note">Продукт не выпущен и не применяется — стадия технического
+  задания. Ваши ответы встраиваются в ТЗ как обязательные требования. По
+  каждому блоку — поле для заключения; черновик сохраняется в этом браузере
+  автоматически, отвечать можно частями.</p>
+</header>
+<div id="qs"></div>
+<div class="finish">
+  <h2>Вернуть заключения</h2>
+  <p>Соберите текст кнопкой и отправьте нам любым удобным способом.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст заключений"></textarea>
+</div>
+<footer>Пакет сформирован 01.08.2026 по главному ТЗ v2.0-draft. Ссылки на
+нормы (152-ФЗ ст. 6/10/14/16, ТК РФ ст. 3/64/72, 242-ФЗ, GDPR ст. 9/22,
+EU AI Act / Digital Omnibus) — наша предварительная навигация, не позиция.</footer>
+</div>
+<script>
+const BLOCKS = [
+ { id:"Ю1", t:"Специальная категория персональных данных",
+   c:"Баллы нейротизма (два теста) и суммарный балл шкалы стресса могут быть выводом о психическом здоровье. Мы предварительно отнесли их к спец-категории (152-ФЗ ст. 10; GDPR ст. 9): не показываем руководителю, не включаем в оценку, храним отдельно.",
+   qs:["Верна ли квалификация: это данные специальной категории?","Строка согласия в раздаточных материалах — общая. Достаточна ли для спец-категории? Если нет — просим формулировку.","В целевой батарее есть MMPI-2 — клинический опросник целиком. Меняет ли его включение квалификацию массива данных?"] },
+ { id:"Ю2", t:"Лицензии зарубежных методик и статус СМИЛ",
+   c:"В батарее — методики зарубежных правообладателей: NEO PI-R (PAR), 16PF (Pearson/Talogy), MMPI-2 (Ун-т Миннесоты/Pearson). В США MMPI-2 продаётся только специалистам и признавался судом «медицинским обследованием» при найме (Karraker). Статус русской адаптации (СМИЛ) нам установить не удалось.",
+   qs:["Что требуется для законного использования каждой методики в коммерческом продукте в РФ?","Каков правовой статус СМИЛ и русских адаптаций без явной лицензии?","Допустимо ли в РФ применять клинический опросник при отборе персонала в принципе?"] },
+ { id:"Ю3", t:"Анкета руководителя — дискриминационные пункты",
+   c:"В исходной анкете были пункты о поле, возрасте и семейном положении кандидата. Мы их исключили (ТК РФ ст. 3, ст. 64) и заменили на требования к деловым качествам.",
+   qs:["Подтверждаете ли рамку «только деловые качества»? Есть ли исключения (квоты, требования закона)?","Просим типовую безопасную формулировку для поля «требования к кандидату»."] },
+ { id:"Ю4", t:"«Познавательный блок» (нумерология, астрология)",
+   c:"Отдельный раздел «для самого человека»: в расчёты и отчёт руководителю не входит, показывается только сотруднику с пометкой об отсутствии научной валидности. Для расчёта нужны дата рождения и имя.",
+   qs:["Планируем отдельное согласие на дату рождения и имя именно под эту цель. Верно ли, и какова формулировка?","Есть ли дополнительные риски (защита прав потребителя, требования к пометкам), которые закрыть текстами интерфейса?"] },
+ { id:"Ю5", t:"Автоматизация первичного собеседования",
+   c:"Рамка продукта: решение о человеке не может быть исключительно автоматизированным (152-ФЗ ст. 16; GDPR ст. 22).",
+   qs:["Какие формы автоматизации собеседования допустимы в этой рамке?","Что фиксировать, чтобы доказать «человека в контуре»?"] },
+ { id:"Ю6", t:"Внешний психолог — поручение обработки",
+   c:"Заключения по проективным методикам может давать внешний специалист с доступом к чувствительным показателям конкретных людей.",
+   qs:["Верно ли, что это поручение обработки третьему лицу, требующее договора и основания (152-ФЗ ст. 6)?","Перечень обязательных условий такого договора?"] },
+ { id:"Ю7", t:"Валидация на исторических данных",
+   c:"Для проверки прогнозов нужно ретроспективно обработать данные об исходах работы (результативность, увольнения) и замеры прошедшей программы тренингов.",
+   qs:["Какое правовое основание нужно: отдельное согласие, обезличивание, иное?","Достаточно ли обезличивания (личные данные изначально в отдельной таблице, связь по внутреннему идентификатору)?"] },
+ { id:"Ю8", t:"Права тестируемого",
+   c:"Заложено: уведомление о применении инструмента, право видеть своё, право оспорить — в т.ч. срабатывание «шкалы лжи» (пометка о недостоверности ответов, не автоматический отказ).",
+   qs:["Достаточен ли набор прав? Что добавить по 152-ФЗ ст. 14/16?","«Пометка о недостоверности» — есть ли риск квалификации как порочащих сведений, какие формулировки отчёта безопасны?"] },
+ { id:"Ю9", t:"Действующие сотрудники — переводы",
+   c:"Для работающего сотрудника рекомендация «лучше подходит роли X» может стать основанием перевода или понижения.",
+   qs:["Какие гарантии ТК (ст. 72 и смежные) обязана учитывать программа?","Нужен ли отдельный режим/предупреждение в интерфейсе для действующих сотрудников?"] },
+ { id:"Ю10", t:"Косвенная дискриминация и документирование валидности",
+   c:"Риски: поля резюме и наличие «рабочей истории» коррелируют со стажем, стаж — с возрастом; люди без накопленных данных могут систематически проигрывать. Заложены тест на непропорциональный отсев и документирование валидности.",
+   qs:["Требования РФ-права к таким проверкам? Что документировать для защитимой позиции?","Оцените механизм «нет данных → слой отключён, человек не наказан» с точки зрения дискриминационных рисков."] },
+ { id:"Ю11", t:"Размещение данных",
+   c:"Сервер внутри компании заказчика, внешнего хостинга нет. Полагаем, что локализация БД персональных данных граждан РФ (242-ФЗ) выполняется автоматически.",
+   qs:["Подтвердите применимость и достаточность схемы.","Требования к резервным копиям и журналу доступа по 152-ФЗ?"] },
+ { id:"Ю12", t:"Иностранные юрисдикции",
+   c:"Первичная юрисдикция — РФ; резюме может содержать данные граждан ЕС. EU AI Act относит найм к высокому риску; сроки сдвинуты Digital Omnibus (Reg. (EU) 2026/1744): high-risk обязательства с 02.12.2027.",
+   qs:["При каких условиях EU AI Act и GDPR реально применимы к продукту в РФ?","Что минимально заложить сейчас, чтобы не перестраивать продукт при выходе за пределы РФ?"] }
+];
+const KEY = "paket-yurist-v1";
+const root = document.getElementById("qs");
+BLOCKS.forEach(b => {
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h2><span class="num">${b.id}.</span> ${b.t}</h2><p class="ctx">${b.c}</p>
+    <ol>${b.qs.map(q => `<li>${q}</li>`).join("")}</ol>
+    <textarea data-id="${b.id}" placeholder="Ваше заключение по блоку ${b.id} (можно по пунктам: 1) … 2) …)"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  document.querySelectorAll("textarea[data-id]").forEach(t => { if (t.value.trim()) s[t.dataset.id] = t.value; });
+  return s;
+}
+function refresh() {
+  const s = state();
+  const n = Object.keys(s).length;
+  document.getElementById("pcount").textContent = `${n} из ${BLOCKS.length}`;
+  let text = "ЗАКЛЮЧЕНИЯ ЮРИСТА — «Формула компании», пакет от 01.08.2026\n\n";
+  BLOCKS.forEach(b => { text += `${b.id}. ${b.t}\n${s[b.id] ? s[b.id] : "— (без ответа)"}\n\n`; });
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  document.querySelectorAll("textarea[data-id]").forEach(t => { if (saved[t.dataset.id]) t.value = saved[t.dataset.id]; });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в письмо или чат."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "zaklyucheniya-yurista-formula-kompanii.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

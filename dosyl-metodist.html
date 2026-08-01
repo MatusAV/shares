@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Досыл методисту — шесть уточнений («Формула компании»)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  details.accepted { margin-top:1rem; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:.7rem 1rem; font-size:.93rem; }
+  details.accepted summary { cursor:pointer; font-weight:600; color:var(--accent-ink); }
+  details.accepted ul { margin:.6rem 0 .2rem 1.1rem; padding:0; }
+  details.accepted li { margin:.3rem 0; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h2 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h2 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Уточнения</span><strong id="pcount">0 из 6</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Спасибо за ответы — осталось шесть уточнений</h1>
+  <p>Ваши ответы на опросник (все блоки 1–20) получены 1 августа, разобраны и
+  встроены в техническое задание в тот же день. Почти всё принято без
+  изменений — сводка ниже, под спойлером. Здесь только то, что нужно
+  дозакрыть.</p>
+  <details class="accepted">
+    <summary>Что уже принято по вашим ответам (кратко)</summary>
+    <ul>
+      <li>Все правки ключей: PSS-10 к официальной версии, две таблицы КОС-2 и
+      ваша шкала уровней, выравнивание ключа Белбина по 4 позиции + проценты от
+      максимума, пункт 11 — прямой, «одно правило: 30 вопросов», развод частей
+      В/Г, опечатка.</li>
+      <li>Правила шкалы искренности 0–3 / 4–5 / 6–9 с индексом достоверности;
+      шкала социальной желательности = шкала L Айзенка.</li>
+      <li>Рисуночный тест исключён; СМИЛ вместо MMPI-2; батарея закреплена по
+      вашему перечню с кодами BIO…LIE.</li>
+      <li>Ваше техзадание на единую сокращённую батарею — целевой этап; банк
+      вопросов создаёт система, валидация за вами; перерыв ≈30 минут,
+      процедура одинакова для всех.</li>
+      <li>Порог 70%; рабочая история вне итоговой формулы; «балл силы резюме»
+      к собеседованию; собеседование после тестирования.</li>
+      <li>Категория «инаких» и «смешанный» тип архетипа.</li>
+      <li>Решения заказчика: Большая пятёрка = текущий блок из 30 (в
+      перспективе — аттестованная BFI-2-S); пол/возраст/семейное положение —
+      по вашему варианту 16.1 (справочно, вне расчёта); чувствительные
+      показатели до юридического заключения — двухслойный расчёт (полный
+      контур видите только вы).</li>
+    </ul>
+  </details>
+  <p class="note">По каждому пункту — варианты и поле для комментария; черновик
+  сохраняется в этом браузере автоматически, отвечать можно частями.</p>
+</header>
+<div id="qs"></div>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и отправьте нам любым удобным способом.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Досыл сформирован 01.08.2026 по итогам разбора ваших ответов
+(техническое задание v2.1-draft). Материалы по цифровой психологии Сюцай
+(ваше поручение 20.1) собраны и передаются отдельным документом.</footer>
+</div>
+<script>
+const QS = [
+ { id:"У1", t:"Издания ключей: Климов, 16PF, HEXACO",
+   c:"Вы ответили «берём опубликованные, напишу какой» (17.1). Чтобы взять ровно те ключи и нормы, которые вы имеете в виду, нужны конкретные издания или редакции (название, автор адаптации, год).",
+   opts:["Напишу издания в комментарии ниже","Подберём вместе на встрече","Возьмите открытые публикации на своё усмотрение — пришлёте мне на проверку"],
+   ph:"Например: Климов — ДДО, классическая редакция …; 16PF — форма …, адаптация …; HEXACO — форма 100, перевод …" },
+ { id:"У2", t:"Действия при срабатывании шкалы искренности (вопрос 2.2)",
+   c:"Ваш ответ на 2.2 пришёл пустым. Правила 0–3 / 4–5 / 6–9 и индекс достоверности уже приняты (2.1/2.3) — вопрос только о ДЕЙСТВИЯХ системы при срабатывании, сверх снижения индекса.",
+   opts:["Только пометка и снижение индекса — ничего сверх","Плюс рекомендация уточняющей беседы / структурированного интервью","Плюс автоматическое предложение повторного тестирования","Свой вариант (в комментарии)"],
+   ph:"Комментарий…" },
+ { id:"У3", t:"Расхождение Большой пятёрки и Айзенка (B-1 ↔ E-2)",
+   c:"Оба инструмента меряют экстраверсию и нейротизм независимо. Если у одного человека результаты заметно расходятся — что делать программе?",
+   opts:["Считать сигналом недостоверности — снижать индекс достоверности (как шкала L)","Верить основному блоку Большой пятёрки, Айзенка использовать справочно","Автоматике не решать: оба результата показывать специалисту","Свой вариант (в комментарии)"],
+   ph:"Комментарий: какой порог считать «заметным расхождением», если есть мнение…" },
+ { id:"У4", t:"Нормы Большой пятёрки при пилоте 20–25 человек",
+   c:"Заказчик определил пилотное подразделение в 20–25 сотрудников — меньше 30, минимума для внутренних норм из ваших ключей.",
+   opts:["Опереться на опубликованные нормы BFI-2-S (закрывает вопрос для этого блока)","Расширить выборку до 30+ (доберём людей из соседних подразделений)","Копить внутренние нормы постепенно; до готовности выдавать сырые баллы с пометкой","Свой вариант (в комментарии)"],
+   ph:"Комментарий…" },
+ { id:"У5", t:"Источник ключа EPQ (со шкалой психотизма)",
+   c:"Вы просили найти валидизированный ключ EPQ в интернете. Юрист предупредил: источник надо проверять на авторские права — «скачать из интернета» годится только для изданий с открытой лицензией.",
+   opts:["Укажу конкретное издание/источник в комментарии","Подобрать вместе, с проверкой прав юристом","Пока остаёмся на переданном EPI, EPQ отложить","Свой вариант (в комментарии)"],
+   ph:"Комментарий…" },
+ { id:"У6", t:"Встреча по формуле (ваш ответ 16.4)",
+   c:"Соотношение формулы Анисимова с психодиагностическими методиками вы предложили сверить на встрече — согласны, ждём вашего времени.",
+   opts:["Предложу дату и время в комментарии","Согласуем время через заказчика","Удобнее созвон (напишу когда)"],
+   ph:"Дата, время, формат…" }
+];
+const KEY = "dosyl-metodist-v1";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h2><span class="num">${q.id}.</span> ${q.t}</h2><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.id}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.id}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.id}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.id}"]`);
+    if (r || (t && t.value.trim())) s[q.id] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ НА ДОСЫЛ (уточнения У1–У6) — «Формула компании», 01.08.2026\n\n";
+  QS.forEach(q => {
+    const a = s[q.id];
+    if (!a) { text += `${q.id}: — (без ответа)\n\n`; return; }
+    text += `${q.id}: ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([id, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${id}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${id}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в письмо или чат."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-dosyl-metodist-formula-kompanii.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

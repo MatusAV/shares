@@ -90,7 +90,7 @@
   <div id="copy-status"></div>
   <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
 </div>
-<footer>Страница сформирована 05.08.2026 к техническому заданию «Формула
+<footer>Страница сформирована 04.08.2026 к техническому заданию «Формула
 компании», версия 2.3. Расчёт блока цифровой психологии закрыт Вашим прошлым
 ответом; эти три пункта закрывают его описание целиком.</footer>
 </div>
@@ -133,7 +133,7 @@ function state() {
 function refresh() {
   const s = state();
   document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
-  let text = "ОТВЕТЫ М19–М21 — блок цифровой психологии, «Формула компании», 05.08.2026\n\n";
+  let text = "ОТВЕТЫ М19–М21 — блок цифровой психологии, «Формула компании», 04.08.2026\n\n";
   QS.forEach(q => {
     const a = s[q.id];
     if (!a) return;

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Четыре последних уточнения по блоку · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .done { margin-top:1.2rem; padding:.85rem 1rem; background:var(--ok-soft); border-left:3px solid var(--ok); border-radius:0 8px 8px 0; font-size:.93rem; }
+  .done h3 { font-family:Georgia,serif; font-size:1rem; margin:0 0 .4rem; color:var(--ok); }
+  .done table { border-collapse:collapse; width:100%; margin-top:.5rem; font-size:.9rem; }
+  .done td, .done th { border:1px solid var(--line); padding:.3rem .45rem; text-align:left; }
+  .done th { color:var(--muted); font-weight:600; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h2 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h2 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 4</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Четыре последних уточнения по блоку</h1>
+  <p>Спасибо — правила построения матрицы получены и проверены. Ваш пример
+  15.08.1992 воспроизвёлся у нас точно: число сознания 6, сумма цифр 35,
+  предназначение 8. Расхождений с прошлыми контрольными примерами нет ни одного.</p>
+
+  <div class="done">
+    <h3>Что закреплено в техническом задании</h3>
+    <p>Три слоя: <strong>число сознания</strong> (день рождения → 1–9 → планета),
+    <strong>число предназначения</strong> (сумма всех цифр → 1–9 → одно из девяти
+    значений) и <strong>матрица</strong> (счётчик каждой цифры от 1 до 9, ноль не
+    считается, градации «нет / 1 / 2 / 3 / 4 и более»). Исходный день рождения
+    хранится отдельно — как Вы и просили.</p>
+    <table>
+      <tr><th>Дата</th><th>Сознания</th><th>Предназначения</th></tr>
+      <tr><td>15.08.1995</td><td>6 · Венера</td><td>2 · Миротворец</td></tr>
+      <tr><td>29.02.1988</td><td>2 · Луна</td><td>3 · Творец</td></tr>
+      <tr><td>30.12.2001</td><td>3 · Юпитер</td><td>9 · Гуманист</td></tr>
+      <tr><td>15.08.1992</td><td>6 · Венера</td><td>8 · Управленец</td></tr>
+    </table>
+    <p style="margin-top:.5rem">Эти четыре даты работают как проверка расчёта:
+    программа обязана давать ровно эти значения.</p>
+  </div>
+
+  <p class="note">Четыре вопроса ниже закрывают описание блока полностью. Выберите
+  вариант и, если нужно, добавьте комментарий. Черновик сохраняется в браузере.</p>
+</header>
+<div id="qs"></div>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница сформирована 05.08.2026 к техническому заданию «Формула
+компании». После этих четырёх ответов описание блока цифровой психологии
+закрывается целиком и остаётся только написание текстов.</footer>
+</div>
+<script>
+const QS = [
+ { id:"М22", t:"Специальные числа — сохраняются или сводятся",
+   c:"В правилах построения матрицы Вы написали, что число сознания сводится к 1–9 «(при необходимости сохраняются специальные числа, если это предусмотрено внутренней методологией)». Это расходится с Вашим же контрольным примером: <em>29.02.1988 — число сознания 2</em>. День 29 даёт промежуточное 11, и раз итог 2, значит одиннадцать было сведено до конца. Пока мы считаем по контрольному примеру: свёртка идёт до одного знака всегда. Если это неверно, старые контрольные примеры перестают действовать и нужны новые.",
+   opts:["Сводятся всегда, исключений нет — контрольные примеры верны","Специальные числа сохраняются — пришлю новые контрольные примеры взамен старых","Сохраняются только в отдельных случаях — опишу правило и пришлю примеры","Свой вариант (в комментарии)"],
+   ph:"Если сохраняются — какие именно (11, 22, 33?) и в каком показателе…" },
+ { id:"М23", t:"Тексты трактовок: срок проверки и авторство исходного описания",
+   c:"Порядок Вы приняли — проект текстов готовим мы, Вы проверяете. Объём вырос после передачи матрицы: девять описаний к числам сознания, девять к числам предназначения, девять цифр матрицы в трёх состояниях, пять градаций повторяемости и девять производных выходов. Чтобы спланировать работу, нужен ориентир по сроку проверки. <em>И повторим вопрос, который остался без ответа:</em> чей текст в описании девяти значений предназначения — в нём осталось обращение от первого лица «Если хотите, я могу рассчитать и подробно разобрать всю вашу матрицу…» и пример на дате 28.05.1997, которой в нашей переписке не было. От этого зависит, можем ли мы на него опираться.",
+   opts:["Проверю в пределах недели после получения — авторство поясню в комментарии","Проверю по частям, по мере готовности блоков — срок каждой части в комментарии","Назову срок после того, как увижу объём первого блока","Свой вариант (в комментарии)"],
+   ph:"Срок; и чей текст в описании девяти значений…" },
+ { id:"М24", t:"Соответствие корпоративной культуре — откуда берутся данные",
+   c:"В описании расчёта итогового процента Вы перечислили шесть составляющих, и среди них «соответствие корпоративной культуре». Остальные пять опираются на понятные источники: требования технического задания, профессиональные компетенции, архетип должности, архетип предприятия и потенциал эффективности. А для корпоративной культуры источник данных не назван — из чего система должна её выводить, у нас в задании не описано ничем.",
+   opts:["Из анкеты руководителя — добавим блок вопросов о культуре компании","Из архетипа предприятия — отдельного источника не нужно, это его проекция","Отдельный опрос сотрудников компании при внедрении","Свой вариант (в комментарии)"],
+   ph:"Какой источник, какие вопросы…" },
+ { id:"М25", t:"Матрица и число предназначения — это не два независимых источника",
+   c:"Мы проверили расчёт и получили результат, который стоит обсудить. Число предназначения — это сумма цифр даты, а сумма цифр равна сумме «цифра × сколько раз она встретилась», то есть она целиком выводится из матрицы. Проверено на 25933 датах за 1940–2010: <em>ни одного случая</em>, когда один и тот же набор счётчиков дал бы разные числа предназначения. Это важно вот почему: Вы пишете, что «при совпадении нескольких источников информации уровень достоверности выводов повышается». Для пары «матрица ↔ число предназначения» это не работает — их согласие гарантировано арифметикой и ничего не подтверждает. Независимыми остаются блок целиком, психометрика, когнитивная оценка и экспертное заключение.",
+   opts:["Согласна: матрица и число предназначения — один источник, считать их подтверждением друг друга нельзя","Это разные показатели по смыслу, хотя и связаны арифметически — поясню в комментарии","Нужно обсудить отдельно","Свой вариант (в комментарии)"],
+   ph:"Комментарий…" }
+];
+const KEY = "voprosy-m22-m25-v1";
+
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h2><span class="num">${q.id}.</span> ${q.t}</h2><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.id}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.id}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.id}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.id}"]`);
+    if (r || (t && t.value.trim())) s[q.id] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ М22–М25 — блок цифровой психологии, «Формула компании», 05.08.2026\n\n";
+  QS.forEach(q => {
+    const a = s[q.id];
+    if (!a) return;
+    text += `${q.id} ${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([id, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${id}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${id}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-m22-m25.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

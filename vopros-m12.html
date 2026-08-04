@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>М12 — как считается число сознания · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .split { margin:1.4rem 0 .2rem; display:grid; gap:.7rem; grid-template-columns:1fr 1fr; }
+  @media (max-width:34rem) { .split { grid-template-columns:1fr; } }
+  .rule { background:var(--card); border:1.5px solid var(--line); border-radius:10px; padding:.85rem .9rem; }
+  .rule h3 { font-family:Georgia,serif; font-size:1rem; margin:0 0 .35rem; color:var(--accent-ink); }
+  .rule p { margin:.3rem 0; font-size:.92rem; }
+  .rule .calc { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:.88rem; background:var(--paper); border-radius:6px; padding:.4rem .5rem; margin-top:.45rem; display:block; }
+  .rule .res { font-weight:700; color:var(--warn); }
+  .obs { margin-top:1rem; padding:.75rem 1rem; background:var(--warn-soft); border-left:3px solid var(--warn); border-radius:0 8px 8px 0; font-size:.92rem; }
+  .obs strong { color:var(--warn); }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h2 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h2 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 3</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Как считается число сознания</h1>
+  <p>Спасибо за материалы по цифровой психологии — получены полностью: двадцать
+  изображений и оба пояснения. Модель принята в работу, место под неё в
+  техническом задании размечено.</p>
+  <p>Перед тем как закладывать расчёт в программу, нужно снять одно
+  противоречие. В присланном число сознания определено <strong>двумя разными
+  способами</strong>, и они дают разный результат — значит, в системе может
+  работать только одно правило, и выбрать его должны Вы.</p>
+
+  <div class="split">
+    <div class="rule">
+      <h3>Правило 1 — день рождения</h3>
+      <p>День рождения в месяце, сведённый к диапазону 1–9. Так устроена
+      присланная таблица «Закон чисел» и заголовок первой карточки: отсюда
+      группы 1/10/19/28, 2/11/20/29 и далее.</p>
+      <span class="calc">15.08.1995 → 1 + 5 = <span class="res">6</span> → Венера</span>
+    </div>
+    <div class="rule">
+      <h3>Правило 2 — вся дата</h3>
+      <p>Сумма всех цифр даты рождения, сведённая к диапазону 1–9. Так написано
+      в Вашем сообщении, присланном вместе с изображениями.</p>
+      <span class="calc">15.08.1995 → 1+5+0+8+1+9+9+5 = 38 → 3 + 8 = 11 → 1 + 1 = <span class="res">2</span> → Луна</span>
+    </div>
+  </div>
+
+  <div class="obs"><strong>Что мы заметили при сверке.</strong> Присланная
+  таблица разложена по дням месяца и сходится идеально: девять групп покрывают
+  ровно все дни с 1-го по 31-е, ни один день не пропущен и ни один не стоит не
+  в своей группе. Под правилом 2 такой разбивки по дням не получается вовсе —
+  сумма цифр всей даты днём месяца не является. Это довод в пользу правила 1,
+  но решение за Вами: возможно, второе правило Вы имели в виду как отдельный
+  показатель.</div>
+
+  <p class="note">Три вопроса ниже — только про расчёт. Выберите вариант и, если
+  нужно, добавьте комментарий. Черновик сохраняется в этом браузере
+  автоматически, можно отвечать частями.</p>
+</header>
+<div id="qs"></div>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница сформирована 04.08.2026 к техническому заданию «Формула
+компании». Вопрос М12 — единственный, который сейчас держит расчёт блока
+цифровой психологии: пока правило не выбрано, программа не может посчитать
+показатель. Остальные уточнения по модели придут отдельным пакетом.</footer>
+</div>
+<script>
+const QS = [
+ { id:"М12.1", t:"Какое правило верное",
+   c:"Правило 1 — день рождения в месяце, сведённый к 1–9 (так устроена присланная таблица). Правило 2 — сумма всех цифр даты рождения, сведённая к 1–9 (так написано в Вашем сообщении). На дате 15.08.1995 первое даёт 6 и Венеру, второе — 2 и Луну. У большинства людей результаты расходятся, поэтому нужно одно.",
+   opts:["Правило 1 — день рождения в месяце (как в таблице «Закон чисел»)","Правило 2 — сумма всех цифр даты рождения (как в моём сообщении)","Оба нужны — это два разных показателя; имя и смысл второго напишу в комментарии","Свой вариант (в комментарии)"],
+   ph:"Если показателей два — как называется второй и что он означает…" },
+ { id:"М12.2", t:"Нужен ли «сырой» день как уточняющий слой",
+   c:"В карточках внутри одного числа Вы разделяете дни: например, у числа 1 отдельные пометки стоят у 1-го, 10-го, 19-го и 28-го, у числа 3 — у 3-го, 12-го, 21-го и 30-го. Это значит, что кроме свёрнутого числа 1–9 модель использует и сам день. Нам нужно понять, обязателен ли этот второй слой в расчёте или пометки справочные. Обратите внимание: если верно правило 2 (сумма всех цифр), «сырого» дня в результате нет вовсе и этот слой применить не к чему.",
+   opts:["Да, обязателен: кроме числа 1–9 система учитывает и сам день — пометки применяются как в карточках","Нет: работает только свёрнутое число 1–9, пометки к дням справочные","Слой нужен, но перечень пометок я пришлю заново в выверенном виде","Свой вариант (в комментарии)"],
+   ph:"Как именно применяется день…" },
+ { id:"М12.3", t:"Контрольные примеры для сверки расчёта",
+   c:"Чтобы гарантированно совпасть с Вами, нам нужны две-три даты с результатом, посчитанным Вашей рукой. Мы сверим с ними программу перед тем, как что-то показывать. Предлагаем эти три: 15.08.1995, 29.02.1988 и 30.12.2001 — но подойдут любые Ваши.",
+   opts:["Посчитаю предложенные даты и пришлю числа с планетами","Возьмите даты на свой выбор — правило из первого вопроса однозначно","Пришлю свои примеры, они у меня уже разобраны","Свой вариант (в комментарии)"],
+   ph:"Например: 15.08.1995 — число …, планета …" }
+];
+const KEY = "vopros-m12-chislo-soznaniya-v1";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h2><span class="num">${q.id}.</span> ${q.t}</h2><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.id}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.id}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.id}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.id}"]`);
+    if (r || (t && t.value.trim())) s[q.id] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТ ПО ВОПРОСУ М12 — число сознания, «Формула компании», 04.08.2026\n\n";
+  QS.forEach(q => {
+    const a = s[q.id];
+    if (!a) return;
+    text += `${q.id} ${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([id, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${id}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${id}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvet-m12-chislo-soznaniya.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

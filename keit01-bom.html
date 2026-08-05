@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>KeiT01 — перечни: палец и кисть</title>
+<style>
+  :root{
+    --bg:#fafaf8; --fg:#1c1c1a; --muted:#6b6b66; --card:#ffffff; --line:#e4e2dc;
+    --accent:#155e4e; --accent-bg:#e8f3ef; --warn:#8a4b08; --warn-bg:#fdf0e0;
+    --ok:#155e4e; --bad:#a03020; --bad-bg:#fbeae7; --chip:#f0efe9;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#161614; --fg:#e8e6e1; --muted:#9a978f; --card:#1f1f1c; --line:#33322e;
+      --accent:#63c2a8; --accent-bg:#12312a; --warn:#e0a35c; --warn-bg:#33260f;
+      --ok:#63c2a8; --bad:#e08573; --bad-bg:#3a1f19; --chip:#2a2a26;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+       -webkit-text-size-adjust:100%}
+  .wrap{max-width:780px;margin:0 auto;padding:16px 14px 60px}
+  h1{font-size:1.45em;line-height:1.25;margin:.4em 0 .2em}
+  h2{font-size:1.15em;margin:1.6em 0 .5em;padding-bottom:.25em;border-bottom:2px solid var(--line)}
+  h3{font-size:1em;margin:1.2em 0 .4em}
+  .sub{color:var(--muted);font-size:.9em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+  .pill{display:inline-block;background:var(--chip);border-radius:999px;padding:1px 10px;font-size:.8em;margin:0 4px 4px 0;white-space:nowrap}
+  .pill.ok{background:var(--accent-bg);color:var(--ok)}
+  .pill.warn{background:var(--warn-bg);color:var(--warn)}
+  .pill.bad{background:var(--bad-bg);color:var(--bad)}
+  .note{background:var(--warn-bg);border-left:4px solid var(--warn);border-radius:8px;padding:8px 12px;margin:10px 0;font-size:.92em}
+  .src{color:var(--muted);font-size:.8em}
+  table{width:100%;border-collapse:collapse;font-size:.92em}
+  .tablebox{overflow-x:auto;margin:8px 0}
+  th,td{padding:6px 8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{font-size:.85em;color:var(--muted);font-weight:600}
+  label.item{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-bottom:1px solid var(--line);cursor:pointer}
+  label.item:last-child{border-bottom:none}
+  label.item input{margin-top:3px;flex:0 0 auto;width:18px;height:18px;accent-color:var(--accent)}
+  label.item .t{flex:1}
+  label.item .q{color:var(--muted);white-space:nowrap;font-size:.9em}
+  label.item.checked .t{opacity:.45;text-decoration:line-through}
+  .small{font-size:.85em;color:var(--muted)}
+  a{color:var(--accent)}
+  code{background:var(--chip);border-radius:5px;padding:0 5px;font-size:.9em}
+  .total{font-weight:700}
+  ol li, ul li{margin:.3em 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>KeiT01 — протез правой кисти InMoov i2</h1>
+<p class="sub">Перечни для сборки: ① рабочий палец (стартовый пакет) · ② кисть.
+Составлено 05.08.2026. Источники: <a href="https://inmoov.fr/finger-starter/">inmoov.fr/finger-starter</a> (прочитано 05.08.2026),
+<a href="https://inmoov.fr/hand-i2/">inmoov.fr/hand-i2</a> + <a href="https://inmoov.fr/hand-and-forarm/">hand-and-forarm</a> (прочитаны 04.08.2026).
+Цены — живые проверки Tokopedia 04.08.2026 (открывались карточки товаров). Галочки сохраняются в этом браузере.</p>
+
+<h2>📊 Статус печати: 21 из 45 STL</h2>
+<div class="card">
+  <p style="margin:4px 0"><span class="pill ok">✓ напечатано 21 (20 годных)</span>
+  <span class="pill bad">✗ 1 брак: TensionerRightV1 — перепечатать</span></p>
+  <p style="margin:6px 0">Материал всей сборки — PETG (Polymaker PB05013). Напечатаны полностью:
+  <b>стартовый набор пальца</b> (5 дет.), <b>несущая структура кисти</b> (7 дет.),
+  <b>3 детали запястья</b>, <b>серво-кровать предплечья</b> (6 дет., один брак).</p>
+  <p style="margin:6px 0"><b>Осталось для правой руки:</b> RotaWrist2V3, RotaWrist3V3 (запястье) ·
+  CoverFingerV3, HandCoverV1, PalmCoverV2 (крышки, с поддержками) ·
+  перепечатка TensionerRightV1 · опция SensorFinger7-5Piece (оправка датчика).</p>
+  <p class="small" style="margin:4px 0">Left-детали и PDI6225-варианты не печатаются (решения 02–04.08).</p>
+</div>
+
+<h2>① Рабочий палец — стартовый пакет</h2>
+<p class="sub">Официальный туториал: <a href="https://inmoov.fr/finger-starter/">inmoov.fr/finger-starter</a>.
+Печатная часть готова — не хватает только привода, контроллера и мелочёвки.</p>
+
+<h3>Печать — готово ✓</h3>
+<div class="card">
+  <label class="item"><input type="checkbox" data-k="f-print" checked disabled><span class="t">Calibrator, FingerIndexV4, FingerTesterV2, RobRingV2, Servo-PulleyV2 — все напечатаны (PETG)</span></label>
+</div>
+
+<h3>Купить / найти дома</h3>
+<div class="card" id="finger-list">
+  <label class="item"><input type="checkbox" data-k="f-servo-a"><span class="t"><b>Серво — вариант А:</b> MG996R или MG946R (1 шт). Туториал собран на HK15298; MG995 автор InMoov больше <b>не</b> рекомендует — «горят, много подделок» (его ответ в комментариях страницы). Цена в Индонезии не проверена.</span><span class="q">1 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="f-servo-b"><span class="t"><b>Серво — вариант Б:</b> взять один из 6× JX PDI-6225MG-300, закупаемых для кисти (см. перечень ②). Палец ждёт прихода серво (дешёвый продавец — предзаказ ~10 дней).</span><span class="q">1 из 6</span></label>
+  <label class="item"><input type="checkbox" data-k="f-ctrl-1"><span class="t"><b>Контроллер — вариант 1:</b> Arduino Uno / клон. Официальный путь: готовый скетч со страницы туториала, минимум неожиданностей. Цена не проверена.</span><span class="q">1 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="f-ctrl-2"><span class="t"><b>Контроллер — вариант 2:</b> Seeed XIAO nRF52840 — <b>есть дома</b> (по складской ведомости, куплен 15.07). Скетч туториала придётся адаптировать.</span><span class="q">дома</span></label>
+  <label class="item"><input type="checkbox" data-k="f-ctrl-3"><span class="t"><b>Контроллер — вариант 3:</b> STM32H743 (WeAct) — целевой «мозг» руки. Статус платы спорный до пересчёта склада (одна из двух могла сгореть 04.06).</span><span class="q">пересчёт</span></label>
+  <label class="item"><input type="checkbox" data-k="f-psu"><span class="t"><b>Внешнее питание 5 В</b> для серво (адаптер/лабораторный БП). Страница прямо предупреждает: питание серво с пина платы может перезагружать её даже с одним серво.</span><span class="q">1 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="f-wires"><span class="t"><b>Провода Dupont</b> серво→плата: сигнал → PWM (в туториале pin 3), +5V, GND.</span><span class="q">3 жилы</span></label>
+  <label class="item"><input type="checkbox" data-k="f-line"><span class="t"><b>Тяга 2× ~50 см.</b> Для теста подойдёт любой тонкий прочный шнур (страница разрешает); штатно для InMoov — плетёнка PE 0.8 мм 200LB (позиция перечня ②, продавец на Бали).</span><span class="q">~1 м</span></label>
+  <label class="item"><input type="checkbox" data-k="f-pins"><span class="t"><b>Оси шарниров:</b> винты или шпилька Ø3 мм (~3 шт). В туториале — кусок филамента 3 мм; у нас принтер на 1.75 мм, поэтому — крепёж 3 мм из магазина (альтернатива, которую даёт сама страница).</span><span class="q">~3 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="f-drill"><span class="t"><b>Свёрла 3.0 и 3.5 мм</b> — развёртка шарниров: боковые отверстия 3.0, внутренние 3.5.</span><span class="q">по 1</span></label>
+  <label class="item"><input type="checkbox" data-k="f-glue"><span class="t"><b>Клей</b> для секций пальца. Для PETG — цианакрилат (суперклей) или 2К эпоксидка <i>(наша практика: InMoov про PETG не пишет, его варианты — эпоксидка/Zap-A-Gap для PLA, ацетон для ABS)</i>.</span><span class="q">1</span></label>
+</div>
+<div class="note">⚠️ На нашем экземпляре RobRing уже напечатан, но по опыту сборщиков из комментариев страницы RobRing рассчитан на малые серво (SG90-класс); на HK15298/MG996 сообщество сажает <b>servo-pulley</b> (у нас тоже напечатан) или разогревает RobRing и напрессовывает. Решится примеркой.</div>
+
+<h2>② Кисть (правая, InMoov i2)</h2>
+<p class="sub">BOM со страницы <a href="https://inmoov.fr/hand-i2/">inmoov.fr/hand-i2</a> (04.08.2026).
+Цены: Tokopedia, проверены по карточкам товаров 04.08.2026. Импорт не нужен — всё нашлось внутри Индонезии.</p>
+
+<h3>Железо и материалы</h3>
+<div class="card" id="hand-list">
+  <label class="item"><input type="checkbox" data-k="h-servo"><span class="t"><b>Серво JX PDI-6225MG-300</b> (именно суффикс -300 — ход 300°!). Дёшево: Rp321.100/шт, предзаказ ~10 дней (Shabeera Store, Джакарта). В наличии сразу: Rp530.000/шт (fajriskastore). <span class="pill warn">гоча: дешёвые листинги с большим «Stok» — на деле предзаказ из Китая; проверять «Waktu Preorder» в карточке</span></span><span class="q">6 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-hall"><span class="t"><b>Датчик Холла AH3503</b> — по одному в кончик пальца. Rp4.000/шт (Bekasi).</span><span class="q">5 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-spring"><span class="t"><b>Пружины растяжения 4.8×44.5 мм</b> (3/16″×1¾″) — возврат секций пальцев. Готового SKU в Индонезии не нашлось — мастерские делают под заказ (Сурабая/Батам/Джакарта). Цена неизвестна до запроса.</span><span class="q">5 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-tens"><span class="t"><b>Пружинки тензионера</b> (проволока 0.5 мм, длина ~10 мм) — Rp3.000/шт (Bandung Barat). Точное кол-во страница не называет — берём с запасом.</span><span class="q">~5 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-braid"><span class="t"><b>Плетёнка PE 0.8 мм 200LB</b> — сухожилия (5×50 см + запас). Катушка 150 м Rp189.000 — <b>Jebot Bali Fishing, Бадунг (Бали)</b>, реально местный продавец.</span><span class="q">3 м (катушка)</span></label>
+  <label class="item"><input type="checkbox" data-k="h-ribbon"><span class="t"><b>Шлейф 16 жил, гибкий</b> — проводка датчиков в пальцах (отрезок 40 см → 5×3 жилы). Катушка Rp124.775 (Tangerang Selatan).</span><span class="q">3 м</span></label>
+  <label class="item"><input type="checkbox" data-k="h-magnet"><span class="t"><b>Магниты-диски 2.5×1 мм</b> — в силиконовые кончики, к Холлам. Точного размера в Индонезии не нашлось; ближайший 2×1 мм Rp40.000/партия (Jakarta Barat) — проверить на сборке.</span><span class="q">5 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-ptfe"><span class="t"><b>Трубка PTFE ID1.5×OD2.5 мм</b> — каналы тяг в предплечье (длины 300–360 мм ×5). Rp284.000/м (Kab. Tangerang) — листинг мультиразмерный, OD 2.5 подтвердить в карточке перед заказом.</span><span class="q">3 м</span></label>
+  <label class="item"><input type="checkbox" data-k="h-m3"><span class="t"><b>Винты потайные M3×16 (25 шт), M3×12 (1 шт), M3×4 (5 шт)</b> + <b>гайки M3</b> (секции пальцев собираются «винт M3×16 + гайка»; кол-во гаек страница отдельно не даёт — брать по числу винтов). Rp498–578/шт за винт (Джакарта/Tangerang).</span><span class="q">31+ шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-m15"><span class="t"><b>Винты M1.5×4 плоские</b> (5 шт) и <b>~M2×4</b> (~5 шт, фиксация пружин в секциях). Точного M1.5×4 нет — ближайший набор M1–M1.7 Rp4.500 (Tangerang Selatan).</span><span class="q">~10 шт</span></label>
+  <label class="item"><input type="checkbox" data-k="h-rtv"><span class="t"><b>RTV-силикон 2К</b> — литьё кончиков пальцев в напечатанные формы FingersMold (у автора Ecoflex 00-10).</span><span class="q">1 набор</span></label>
+</div>
+
+<h3>Инструмент и расходка (ревизия дома, докупить недостающее)</h3>
+<div class="card">
+  <label class="item"><input type="checkbox" data-k="t-drills"><span class="t">Свёрла 1.5 / 2 / 2.5 / 3 / 5.5 / 8 мм; метчик M3; надфиль; иголки (натяжка пружин в двух секциях)</span></label>
+  <label class="item"><input type="checkbox" data-k="t-cons"><span class="t">Суперклей, 2К эпоксидка, Kapton-лента (изоляция пайки Холлов), паяльник</span></label>
+</div>
+
+<h3>Питание функционального теста (6 серво)</h3>
+<div class="card">
+  <label class="item"><input type="checkbox" data-k="p-batt"><span class="t">Аккумулятор 18650 3.7 В + TP4056 + повышающий до 5 В + LDO 3.3 В — комплект из плана PoC-1</span><span class="q">1 компл.</span></label>
+</div>
+<div class="note">⚠️ Ток 6 серво в стопоре не измерен — «6 серво на одном 18650» пока непроверенное допущение (дыра паспорта). И записанное правило безопасности: до появления токового шунта + аварийного стопа замкнутого контура с рукой на столе быть не должно; Dupont-джамперы на линиях питания запрещены (так уже сгорела плата 04.06).</div>
+
+<h3>💰 Ориентир по деньгам (кисть, цены 04.08.2026)</h3>
+<div class="tablebox"><table>
+  <tr><th>Позиция</th><th>Расчёт</th><th>Rp</th></tr>
+  <tr><td>Серво ×6 (предзаказ)</td><td>6 × 321.100</td><td>1.926.600</td></tr>
+  <tr><td>Холлы ×5</td><td>5 × 4.000</td><td>20.000</td></tr>
+  <tr><td>Плетёнка (катушка 150 м)</td><td>—</td><td>189.000</td></tr>
+  <tr><td>Шлейф 16 жил</td><td>—</td><td>124.775</td></tr>
+  <tr><td>PTFE ×3 м</td><td>3 × 284.000</td><td>852.000</td></tr>
+  <tr><td>Пружинки тензионера ×5</td><td>5 × 3.000</td><td>15.000</td></tr>
+  <tr><td>Винты M3 (~31 шт)</td><td>~31 × ~500</td><td>~15.500</td></tr>
+  <tr><td>Магниты (ближайший размер)</td><td>партия</td><td>40.000</td></tr>
+  <tr><td>Набор M1–M1.7</td><td>—</td><td>4.500</td></tr>
+  <tr><td class="total">Итого (серво-предзаказ)</td><td class="total">сумма строк выше</td><td class="total">≈ Rp 3.187.375</td></tr>
+  <tr><td class="total">Итого (серво в наличии)</td><td class="total">+ 6 × (530.000 − 321.100)</td><td class="total">≈ Rp 4.440.775</td></tr>
+</table></div>
+<p class="small">В долларах: ≈ $177 и ≈ $246 соответственно [REAL: формула = итог таблицы ÷ 18.043; курс USD/IDR зафиксирован при проверке цен Tokopedia 04.08.2026].
+Вне суммы: пружины 4.8×44.5 (кастом — цена по запросу), RTV-силикон, серво/контроллер варианта А для пальца, питание, инструмент (цены не проверялись — не выдумываем).</p>
+
+<h2>🗺 Этапы (справочно, порядок по туториалам InMoov)</h2>
+<div class="card"><ol>
+  <li><b>Палец</b>: развёртка 3.0/3.5 мм → склейка секций → серво + контроллер + внешние 5 В → тяги → тест скетчем. <span class="small">Печатная часть готова уже сейчас.</span></li>
+  <li><b>Допечатка</b>: RotaWrist2V3+3V3 → крышки ×3 (с поддержками) → перепечатка TensionerRightV1.</li>
+  <li><b>Структурная сборка кисти</b> (серво не нужны): пост-обработка → пальцы (M3×16+гайки, пружины 4.8×44.5) → проводка шлейфа → тяги из плетёнки → пальцы на WristLarge → узел запястья.</li>
+  <li><b>Функциональный тест</b>: 6× JX на серво-кровать (серво в середину хода ДО фиксации шкивов) → PTFE-каналы (335/300/300/300/360 мм) → тензионер → управление.</li>
+  <li><b>Сенсорика</b>: Холлы в кончики (пайка, Kapton) → силиконовые кончики из FingersMold → магнит 2.5×1 южным полюсом к датчику → <a href="https://inmoov.fr/test-your-finger-sensor/">проверка</a>.</li>
+</ol>
+<p class="small">Решение 05.08: сейчас — только перечни; закупка запускается отдельной командой.</p></div>
+
+<p class="src">Проверяемость: печать — пересчёт папки моделей 05.08.2026 (дельта корня против «Не напечатано»); BOM — страницы inmoov.fr, даты выше; цены — карточки Tokopedia 04.08.2026, полные URL в паспорте проекта (market.mf). Помеченное «не проверено» — честно не проверено.</p>
+
+<script>
+  document.querySelectorAll('input[type=checkbox][data-k]').forEach(cb=>{
+    const k='keit01bom:'+cb.dataset.k;
+    if(!cb.disabled && localStorage.getItem(k)==='1'){cb.checked=true;cb.closest('label').classList.add('checked');}
+    cb.addEventListener('change',()=>{
+      if(cb.disabled)return;
+      localStorage.setItem(k,cb.checked?'1':'0');
+      cb.closest('label').classList.toggle('checked',cb.checked);
+    });
+  });
+</script>
+</div>
+</body>
+</html>

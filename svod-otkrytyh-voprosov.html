@@ -12,65 +12,211 @@
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
   .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
   header.lead { padding-top:2.2rem; }
   h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
   .lead p { margin:.5rem 0; max-width:62ch; }
-  .note-ok { margin-top:1rem; padding:.75rem 1rem; background:var(--ok-soft); border-radius:8px; font-size:.95rem; color:var(--ok); }
-  .status { background:var(--card); border:1.5px solid var(--ok); border-radius:12px; padding:1.2rem 1.15rem 1.1rem; margin-top:1.6rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
-  .status h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .6rem; }
-  .status ul { margin:.4rem 0 .4rem 1.2rem; padding:0; }
-  .status li { margin:.35rem 0; font-size:.95rem; }
-  .next { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
-  .next h2 { font-family:Georgia,serif; font-size:1.2rem; margin:0 0 .5rem; }
-  .next p { font-size:.95rem; margin:.4rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
   footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .map-wrap { overflow-x:auto; margin-top:1.2rem; }
+  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
+  table.map td.full { color:var(--warn); }
 </style>
 </head>
 <body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 5</strong></div></div>
 <div class="wrap">
 <header class="lead">
   <h1>Открытые вопросы — сводная страница</h1>
-  <p>Здесь собираются все вопросы по техническому заданию «Формула компании»,
-  которые заданы и пока остаются без ответа, — в одном месте, чтобы ничего
+  <p>Здесь собраны все вопросы по техническому заданию «Формула компании»,
+  которые уже заданы и пока остаются без ответа, — в одном месте, чтобы ничего
   не потерялось в переписке.</p>
-  <p class="note-ok">Обновлено 12.08 (вечер). Ответы на все девять карточек
-  получены — спасибо! Открытых вопросов на этой странице сейчас нет.
-  Главное: <b>банк 200 вопросов готов и отправлен на Вашу вычитку</b>.</p>
+  <p class="note">Обновлено 12.08 (поздний вечер). <b>Банк 200 вопросов у Вас
+  на вычитке (Г4, PDF в Telegram)</b> — правки по ID вопроса любым способом,
+  это отдельная работа и карточек по ней здесь нет. Ниже — пять карточек по
+  Вашим материалам от 12.08 «Кабинет психолога (этап обучения ИИ)» и
+  «Параметры вывода отчёта»: материалы разобраны и почти целиком вошли в
+  проект; спасибо — по существу они совпали с уже согласованной архитектурой.
+  Три решения владельца проекта по спорным местам, чтобы Вы видели рамку:
+  <b>альманах/цифропсихология руководителю не выводятся</b> (адресаты слоя —
+  психолог и методолог; ввод — после пилота, как Вы и ответили по А-1) ·
+  <b>веса и ключи меняются только Вашей новой версией</b> (пометка психолога
+  об ошибке уходит Вам, не правит модель сама) · <b>радар-график — только в
+  кабинете психолога</b>, руководителю профиль подаётся текстом. Карточки
+  Г-1…Г-5 — параметры, которые может задать только автор методики.</p>
 </header>
-<div class="status">
-  <h2>Решения от 12.08 (вечер) — приняты в работу</h2>
-  <ul>
-    <li><b>Генерация банка вопросов:</b> старт подтверждён. Пропорция:
-    примерно каждый пятый вопрос — обратный (≈20 %). Перечень методик
-    расчётного слоя согласован итогово (10 позиций + Ричи–Мартин). Каждый вопрос рождается с заполненным
-    паспортом, эталонные методики не копирует, до пилота проходит Вашу
-    экспертную вычитку.</li>
-    <li><b>Альманах-слой для специалистов:</b> на пилоте не вводится —
-    решение будет принято дополнительно после проверки и анализа. Ваши
-    решения на будущее зафиксированы: состав — полный набор, поле пола —
-    да, «альманах дня» — после пилота, время рождения — следующая версия.</li>
-    <li><b>Пакет согласий:</b> три величины (срок хранения, статьи памятки,
-    ПЭП) — согласуются дополнительно после пилота; изменения в бланки пока
-    не вносятся, действует редакция от 10.08.</li>
-    <li><b>Встреча по площадке:</b> дата будет назначена дополнительно.</li>
-  </ul>
+<div id="qs"></div>
+<h2 class="sect">Приложение к Г-2 — черновая карта категорий</h2>
+<p class="sect-sub">39 действующих конструктов реестра → 17 категорий профиля
+(Ваши 15 + две новые, иначе девять конструктов остаются без места). 🔒 —
+чувствительный контур: категория целиком видна только психологу. №26
+«Чувствительность» в карту сознательно не включён — его место назначаете Вы
+(карточка Г-2).</p>
+<div class="map-wrap"><table class="map">
+<tr><th>Категория профиля</th><th>Конструкты реестра</th><th>Слой</th></tr>
+<tr><td>1. Мотивация</td><td>№1 Мотивация (слитая) · №30 Потребность в развитии · №31 Карьерные ожидания</td><td>базовый</td></tr>
+<tr><td>2. Ответственность</td><td>№7 Ответственность</td><td>базовый</td></tr>
+<tr><td>3. Добросовестность</td><td>№20 Добросовестность · №27 Нормативность поведения · №35 Исполнительность</td><td>базовый</td></tr>
+<tr><td>4. Самостоятельность</td><td>№13 Самостоятельность</td><td>базовый</td></tr>
+<tr><td>5. Коммуникативность</td><td>№9 Коммуникативность · №23 Социальная смелость</td><td>базовый</td></tr>
+<tr><td>6. Эмоциональная устойчивость 🔒</td><td>№8 🔒 Эмоц. устойчивость · №28 🔒 Тревожность (обр.) · №29 Импульсивность (обр.)</td><td class="full">полный</td></tr>
+<tr><td>7. Стрессоустойчивость 🔒</td><td>№39 🔒 Стрессоустойчивость · №40 🔒 Ощущение контроля · №41 🔒 Психол. ресурсы</td><td class="full">полный</td></tr>
+<tr><td>8. Обучаемость</td><td>№10 Обучаемость</td><td>базовый</td></tr>
+<tr><td>9. Открытость новому</td><td>№11 Открытость новому · №12 Готовность к изменениям · №36 Творческий потенциал ⚠️</td><td>базовый</td></tr>
+<tr><td>10. Самоконтроль</td><td>№15 Самоконтроль</td><td>базовый</td></tr>
+<tr><td>11. Принятие решений</td><td>№16 Принятие решений (интегральный Б-1)</td><td>базовый</td></tr>
+<tr><td>12. Лидерский потенциал</td><td>№14 Лидерский потенциал (слитый) · №25 Доминантность</td><td>базовый</td></tr>
+<tr><td>13. Аналитические способности</td><td>№34 Аналитические способности · №24 Интеллектуальная гибкость</td><td>базовый</td></tr>
+<tr><td>14. Командное поведение</td><td>№37 Командное поведение · №42 Предпочтительная роль в коллективе</td><td>базовый</td></tr>
+<tr><td>15. Профессиональная зрелость</td><td>№17 Проф. зрелость (интегральный Б-2)</td><td>базовый</td></tr>
+<tr><td>16. Профессиональные склонности 🆕</td><td>№2 к людям · №3 к технике · №4 к знаковой информации · №5 художественно-творческий · №6 к природе</td><td>базовый</td></tr>
+<tr><td>17. Этика и честность 🆕</td><td>№18 Честность · №19 Скромность · №21 Этичность · №22 Склонность к манипуляциям (обр.)</td><td>базовый</td></tr>
+</table></div>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
 </div>
-<div class="next">
-  <h2>Что дальше</h2>
-  <p><b>Банк из 200 вопросов готов и отправлен Вам на экспертную вычитку
-  12.08</b> (PDF в Telegram): 39 конструктов, у каждого вопроса паспорт,
-  каждый пятый — обратный. Правки удобно давать по номеру вопроса
-  (например «Б18.6 — переформулировать…») любым удобным способом.</p>
-  <p>После Вашей вычитки — пилот; до неё ни один вопрос в работу не идёт.</p>
+<footer>Страница сформирована 05.08.2026, пересобрана 12.08.2026 (поздний
+вечер) — пять карточек Г-1…Г-5 по кабинету психолога и отчёту руководителю
+(Ваши материалы от 12.08). Отдельно и без карточек: банк 200 вопросов на
+Вашей вычитке (Г4). Прочие ожидания: дата встречи по площадке · пилотный
+старт · документы на права · подтверждение задания (З39). Это единственная
+действующая страница вопросов по проекту — новый вопрос появится здесь же.</footer>
 </div>
-<footer>Страница сформирована 05.08.2026, переведена в статусный режим
-12.08.2026 (вечер) — ответы на девять карточек получены, генерация банка
-запущена, перечень методик расчётного слоя согласован итогово. Ожидания
-вне карточек: дата встречи · документы на права · подтверждение задания
-(З39) после финальной редакции ТЗ · после пилота — величины согласий и
-решение по альманах-слою. Это
-единственная действующая страница вопросов по проекту — новый вопрос
-появится здесь же.</footer>
-</div>
+<script>
+const QS = [
+ { sect:"Методологу — кабинет психолога и отчёт руководителю (по Вашим материалам от 12.08)",
+   sub:"Пять параметров, которые может задать только автор методики. Контекст: кабинет показывает психологу полную логику каждого вывода (исходные данные, паспорта вопросов, противоречия, сопоставление с матрицей, уверенность) и требует его решения по каждому кандидату; отчёт руководителю остаётся двухслойным.",
+   k:"g1", id:"Г-1", t:"Градации итога и рекомендации в отчёте руководителю",
+   c:"Вы предложили 4 уровня соответствия (высокое / достаточное / условное / низкое) и рекомендацию из 4 вариантов (рекомендуется / при условиях / нужна доп. проверка / не рекомендуется). Действующая норма ТЗ: итоговый процент С ИНТЕРВАЛОМ уверенности + рекомендация из двух значений «рекомендован / не рекомендован» (порог ≥70% — Ваш ответ 10.1) + «инакие» отдельным сигналом, не третьим значением.",
+   opts:["Оставить норму ТЗ: процент с интервалом, два значения рекомендации + «инакие» сигналом","Ввести мои 4 уровня и 4 варианта рекомендации — числовые границы уровней пришлю; соотношение «нужна доп. проверка» ↔ «инакие» опишу в комментарии","Комбинация: процент с интервалом + моя рекомендация из 4 вариантов (без уровней соответствия)","Свой вариант — в комментарии"],
+   ph:"Границы уровней в %; соотношение с «инакие»…" },
+ { k:"g2", id:"Г-2", t:"Карта категорий профиля — черновик на Вашу правку (таблица ниже на странице)",
+   c:"По Вашему же формату бюджетов («пришлите черновое — поправлю и утвержу»): 39 конструктов реестра разложены в 17 категорий (Ваши 15 из «Параметров вывода отчёта» + «Профессиональные склонности» + «Этика и честность»). Категории с 🔒-конструктами — целиком полный слой (только психологу). Два места ждут именно Вас: №36 «Творческий потенциал» (поставлен в «Открытость новому» — уместно?) и №26 «Чувствительность» (не размещён — в «Эмоциональную устойчивость», отдельной строкой или не выводить в профиль?).",
+   opts:["Утверждаю карту как есть; решения по №26 и №36 — в комментарии","Поправлю и утвержу — правки в комментарии (или пришлю файлом)","Состав категорий нужен другой — опишу в комментарии"],
+   ph:"№26 — куда; №36 — оставить/перенести; правки карты…" },
+ { k:"g3", id:"Г-3", t:"Шкала отображения профиля 1–5 — правило перевода",
+   c:"Балл категории — сумма по её конструктам (анкета даёт +2/0/−2 на вопрос, диапазон от −2·n до +2·n). Ваш документ показывает профиль по шкале 1–5. Нужно правило перевода. До норм пилота любое значение — ориентировочное, и подпись об этом в интерфейсе обязательна (принцип «назначенное число неотличимо от измеренного»).",
+   opts:["Линейный перевод: минимум → 1, ноль → 3, максимум → 5; подпись «ориентировочно до норм пилота»","До пилотных норм чисел не показывать — только словесные уровни (выражено ниже / средне / выше)","Свой способ — в комментарии"],
+   ph:"Правило перевода; когда переходим на нормы…" },
+ { k:"g4", id:"Г-4", t:"Формулировки степени уверенности и качества данных",
+   c:"Кабинет показывает уверенность КАЖДОГО существенного вывода (Ваш документ: высокая / средняя / низкая — уверенность относится к выводу, не к кандидату) и качество исходных данных. Черновые расшифровки на Вашу правку: ВЫСОКАЯ — данные полны, противоречий нет · СРЕДНЯЯ — данные полны, но есть неподтверждённые места или единичные противоречия · НИЗКАЯ — данных недостаточно либо противоречия существенны. Качество данных: достаточно / недостаточно (с перечнем отсутствующего) / не рассчитывалось (с причиной).",
+   opts:["Утверждаю черновые расшифровки","Поправлю — редакция в комментарии","Другие градации (число уровней / названия) — в комментарии"],
+   ph:"Редакция расшифровок…" },
+ { k:"g5", id:"Г-5", t:"Четыре новые секции отчёта руководителю",
+   c:"К действующей структуре отчёта (норма ТЗ §9а.2 сохраняется целиком — интервал, разбивка по составляющим, достоверность, прогноз, «чего в отчёте нет») добавляются четыре Ваши секции: «Ключевой профиль» · «Мотивационное соответствие» · «Рабочее поведение» · «Что дополнительно проверить». Радар-график и альманах в отчёт руководителю не входят (решения владельца 12.08; по альманаху действует и Ваш ответ Э-6 — авторский слой вне расчёта соответствия).",
+   opts:["Состав подтверждаю — тексты-шаблоны секций пришлите мне черновиками на правку","Состав правлю — что убрать/добавить в комментарии","Секции не добавлять — оставить отчёт как в ТЗ"],
+   ph:"Правки состава; пожелания к шаблонам…" }
+];
+const KEY = "svod-otkrytyh-voprosov-v19";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ ПО КАБИНЕТУ ПСИХОЛОГА И ОТЧЁТУ (Г-1…Г-5) — «Формула компании», 12.08.2026\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-g1-g5-kabinet-i-otchet.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
 </body>
 </html>

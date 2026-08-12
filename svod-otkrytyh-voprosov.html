@@ -12,69 +12,198 @@
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
   .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
   header.lead { padding-top:2.2rem; }
   h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
   .lead p { margin:.5rem 0; max-width:62ch; }
-  .note-ok { margin-top:1rem; padding:.75rem 1rem; background:var(--ok-soft); border-radius:8px; font-size:.95rem; color:var(--ok); }
-  .status { background:var(--card); border:1.5px solid var(--ok); border-radius:12px; padding:1.2rem 1.15rem 1.1rem; margin-top:1.6rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
-  .status h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .6rem; }
-  .status ul { margin:.4rem 0 .4rem 1.2rem; padding:0; }
-  .status li { margin:.35rem 0; font-size:.95rem; }
-  .next { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
-  .next h2 { font-family:Georgia,serif; font-size:1.2rem; margin:0 0 .5rem; }
-  .next p { font-size:.95rem; margin:.4rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .done { margin-top:.6rem; padding:.75rem 1rem; background:var(--ok-soft); border-radius:8px; font-size:.92rem; color:var(--ok); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
   footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
 </style>
 </head>
 <body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 9</strong></div></div>
 <div class="wrap">
 <header class="lead">
   <h1>Открытые вопросы — сводная страница</h1>
-  <p>Здесь собираются все вопросы по техническому заданию «Формула компании»,
+  <p>Здесь собраны все вопросы по техническому заданию «Формула компании»,
   которые заданы и пока остаются без ответа, — в одном месте, чтобы ничего
   не потерялось в переписке.</p>
-  <p class="note-ok">Обновлено 12.08 (вечер). Этап «реестр + бюджеты + шкала»
-  СОГЛАСОВАН ЦЕЛИКОМ — спасибо! Открытых вопросов на этой странице сейчас
-  нет.</p>
+  <p class="done">Этап «реестр + бюджеты + шкала» закрыт целиком 12.08 —
+  спасибо! Слияния конструктов решены, бюджеты 200 вопросов приняты для
+  пилота, шкала анкеты утверждена: три варианта ответа — «Согласен» (+2) ·
+  «Затрудняюсь ответить (нейтрально)» (0) · «Не согласен» (−2).</p>
+  <p class="note">Свод пересобран 12.08 (вечер): <b>девять карточек</b> —
+  два вопроса запуска генерации банка вопросов · пять по предложенному
+  альманах-слою для специалистов (PDF от 12.08) · юристу три величины пакета
+  согласий · дата встречи по площадке. Отвечать можно карточками здесь или
+  любым удобным способом — как обычно.</p>
 </header>
-<div class="status">
-  <h2>Итоги 12.08 — этап закрыт, все решения приняты в работу</h2>
-  <ul>
-    <li><b>Слияния:</b> «Мотивация + Внутренние мотиваторы» (M-в) и
-    «Лидерский потенциал + Потребность в координации + Умение координировать»
-    (M-г) — слиты, каждая группа получает один бюджет и одну шкалу.
-    Остальные пять групп (M-а, M-б, M-д, M-е, M-ж) — раздельные конструкты,
-    их согласованность станет точками перекрёстной проверки. Присланные
-    Вами определения (эмоциональная устойчивость / стрессоустойчивость,
-    честность / этичность, командное поведение / предпочтительная роль)
-    пойдут в паспорта вопросов дословно.</li>
-    <li><b>«Принятие решений» и «Профессиональная зрелость»</b> — интегральные
-    комплексы: система формирует их как вывод по совокупности показателей,
-    не приписывая одной шкале; для «принятия решений» дополнительно
-    ситуационное задание.</li>
-    <li><b>Бюджеты:</b> черновое распределение (39 конструктов, сумма 200)
-    принято для пилотного проекта — отладка чисел будет происходить в
-    процессе.</li>
-    <li><b>Шкала анкеты:</b> три варианта ответа — «Согласен» (+2) ·
-    «Затрудняюсь ответить (нейтрально)» (0) · «Не согласен» (−2); обратные
-    утверждения при подсчёте переворачиваются; что человек видит в анкете —
-    то и подсчитывается.</li>
-  </ul>
+<div id="qs"></div>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
 </div>
-<div class="next">
-  <h2>Что дальше</h2>
-  <p>Начинается <b>генерация банка вопросов</b>: каждый вопрос рождается с
-  заполненным паспортом, ничего не копирует из эталонных методик, проходит
-  Вашу экспертную вычитку до пилота.</p>
-  <p>Для старта нужен один Ваш параметр: <b>пропорция прямых и обратных
-  утверждений</b> (например «примерно каждый пятый вопрос — обратный») —
-  напишите удобным способом.</p>
+<footer>Страница сформирована 05.08.2026, пересобрана 12.08.2026 (вечер) —
+девять карточек: запуск генерации банка (Г3-1/Г3-2), альманах-слой для
+специалистов (А-1…А-5), величины пакета согласий (юристу), дата встречи.
+Ожидания вне карточек: документы на права методик (в комплект юриста) ·
+подтверждение задания З39 (после финальной редакции ТЗ) · пилотный старт.
+Это единственная действующая страница вопросов по проекту — новый вопрос
+появится здесь же.</footer>
 </div>
-<footer>Страница сформирована 05.08.2026, переведена в статусный режим
-12.08.2026 — ответы на десять карточек пакета «реестр + бюджеты» получены.
-Прочие ожидания вне карточек: дата встречи по площадке · пилотный старт ·
-документы на права · подтверждение задания (З39). Это единственная
-действующая страница вопросов по проекту — новый вопрос появится здесь же.</footer>
-</div>
+<script>
+const QS = [
+ { sect:"Методологу — запуск генерации банка вопросов",
+   sub:"Реестр, бюджеты и шкала утверждены — следующий этап: генерация 200 вопросов. Каждый вопрос рождается с заполненным паспортом, ничего не копирует из эталонных методик и до пилота проходит Вашу экспертную вычитку. Для старта не хватает двух Ваших решений.",
+   k:"g31", id:"Г3-1", t:"Пропорция прямых и обратных утверждений",
+   c:"Часть вопросов формулируется «от обратного» — согласие с ними говорит ПРОТИВ конструкта (например, для самостоятельности: «Мне комфортнее, когда решение за меня принимает кто-то другой»). Обратные вопросы нужны для проверки внимательности и достоверности ответов; при подсчёте они переворачиваются (+2 ↔ −2) — это уже утверждено. Вопрос: какую долю обратных закладывать в банк?",
+   opts:["Примерно каждый пятый вопрос — обратный (≈20 %)","Примерно каждый третий (≈33 %)","Своё соотношение — в комментарии","На усмотрение разработки — проверю на вычитке"],
+   ph:"Ваше соотношение или пожелания…" },
+ { k:"g32", id:"Г3-2", t:"Старт генерации и итоговый список методик",
+   c:"Вы говорили (ответ Э-7), что будет загружен итоговый вариант списка методик. Наши вопросы эталонные методики не копируют — список нужен для загрузки текстов методик в расчётный слой и сверки, поэтому мы готовы начать генерацию уже по утверждённому реестру и бюджетам, не дожидаясь списка. Подтвердите или поправьте.",
+   opts:["Подтверждаю — начинайте, итоговый список пришлю позже","Сначала итоговый список — пришлю его, тогда стартуем","Свой вариант — в комментарии"],
+   ph:"Комментарий, сроки списка…" },
+ { sect:"Методологу и психологу — альманах: дополнительный слой для специалистов",
+   sub:"Предложение от 12.08 (PDF переслан): наш собственный выверенный движок «альманах» (Ба-цзы — китайские «столпы судьбы» по дате рождения) уже отведён в ТЗ под познавательный раздел для самого человека. Предлагаем добавить от него ВТОРОЙ срез — аналитический, в кабинеты психолога и методолога: отдельный вывод для расширения кругозора при общей аналитике. В скоринг не входит, руководителю не показывается, с цифровой психологией не смешивается — каждый блок помечен своим источником. Система культурно-познавательная, не предсказательная.",
+   k:"a1", id:"А-1", t:"Вводить ли альманах-слой для специалистов?",
+   c:"Дата рождения уже предусмотрена отдельным согласием (раздел BIO/AST) — новых данных для базового варианта слоя не нужно.",
+   opts:["Да — и психологу, и методологу (в оба кабинета)","Да — только методологу (общая аналитика)","Да — только психологу (индивидуальная работа)","Не вводить (остаётся только раздел для самого человека)"],
+   ph:"Комментарий…" },
+ { k:"a2", id:"А-2", t:"Состав слоя на старте",
+   c:"Из имеющихся данных движок даёт: символическую структуру даты рождения (три «столпа» с классическими образами) · «стихию личности» · баланс пяти стихий · классическую сетку отношений «десять богов» · символические звёзды · гармонии и столкновения знаков · динамику текущего года · словарные очерки к каждому объекту (443 статьи). Трактовка остаётся за специалистом — слой сам выводов о личности не делает.",
+   opts:["Полный набор (карта + все блоки + очерки)","Сокращённый: стихия личности + баланс стихий + динамика года","Отмечу построчно — пришлите таблицу-чеклист"],
+   ph:"Комментарий…" },
+ { k:"a3", id:"А-3", t:"Время рождения — добавить необязательное поле «если известно»?",
+   c:"Открывает полную карту: четвёртый (часовой) столп, полный баланс стихий, «дворцы судьбы и тела», точный вход десятилетних тактов. У многих людей времени рождения нет — слой обязан работать и без него. Формулировка согласия на новое поле — юристу до сбора.",
+   opts:["Да, сразу","Нет — работаем по дате рождения","Отложить до следующей версии"],
+   ph:"Комментарий…" },
+ { k:"a4", id:"А-4", t:"Пол — добавить поле для блока «большая судьба»?",
+   c:"«Большая судьба» (да-юнь) — десятилетние такты жизни и какой такт идёт сейчас. Направление тактов в традиции зависит от пола и года рождения; без поля пола этот блок просто не считается, остальной слой работает.",
+   opts:["Да (одно поле — открывает такты жизни)","Нет (блок не считается, остальное работает)"],
+   ph:"Комментарий…" },
+ { k:"a5", id:"А-5", t:"«Альманах дня» для планирования встреч специалистом?",
+   c:"Традиционные характеристики конкретной даты (чиновник дня, дух дня, созвездие) — сервисная функция кабинета специалиста для планирования встреч и собеседований. К карте человека не привязана, дополнительных данных не требует.",
+   opts:["Да, как сервисную функцию кабинета","Нет, не нужно","Позже, после пилота"],
+   ph:"Комментарий…" },
+ { sect:"Юристу — величины пакета согласий",
+   sub:"Пакет согласий (два бланка + памятка + журнал) согласован в финальной редакции 10.08. Открытыми остались три величины — по решению от 10.08 они нужны к пилотному старту.",
+   k:"uv", id:"Ю-В", t:"Три величины пакета согласий",
+   c:"1) Срок хранения персональных данных — пункт 8 обоих бланков, сейчас плейсхолдер. 2) Реквизиты статей законов в памятке о правах. 3) Достаточность простой электронной подписи для электронного подписания согласий (бумажный дубль для руководителя пока держим).",
+   opts:["Отвечу по всем трём — в комментарии","Нужна встреча/созвон — напишу когда"],
+   ph:"Срок хранения…; статьи…; ПЭП…" },
+ { sect:"Заказчику — организационное",
+   sub:"Лист выбора пилотной площадки передан ранее; подтверждение задания (З39) остаётся за финальной редакцией ТЗ.",
+   k:"zd", id:"З-Д", t:"Дата встречи по пилотной площадке",
+   c:"Ждём дату встречи для выбора площадки и обсуждения пилотного старта.",
+   opts:["Назову дату — в комментарии","Предложите варианты дат вы"],
+   ph:"Дата/период…" }
+];
+const KEY = "svod-otkrytyh-voprosov-v18";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h3><span class="num">${q.id}.</span> ${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ ПО ОТКРЫТЫМ ВОПРОСАМ — «Формула компании», 12.08.2026\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id} ${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-otkrytye-voprosy.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
 </body>
 </html>

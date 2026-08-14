@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Открытые вопросы — сводная страница · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .map-wrap { overflow-x:auto; margin-top:1.2rem; }
+  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
+  table.map td.full { color:var(--warn); }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 14</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Открытые вопросы — сводная страница</h1>
+  <p>Здесь собраны все вопросы по техническому заданию «Формула компании»,
+  которые уже заданы и пока остаются без ответа, — в одном месте, чтобы ничего
+  не потерялось в переписке.</p>
+  <p class="note"><b>Обновлено 14.08 — страница пересобрана целиком.</b>
+  Здесь теперь <b>все</b> вопросы, открытые на сегодня, — и наши к Вам, и те,
+  что адресованы заказчику. Прямого канала к нему у нас нет, поэтому просим
+  согласовать их вместе с ним и вернуть ответы <b>одним списком</b>.</p>
+  <p class="note"><b>Что уже закрыто и внесено</b> (переспрашивать не нужно):
+  банк вопросов v1.1 подтверждён целиком, направление пунктов NEO PI-R — Ваша
+  правка по пункту 21 принята, и наш ключ сошёлся с независимой открытой
+  таблицей по всем тридцати подшкалам, форма учёта контроля достоверности,
+  распределение конструктов по осям, порядок «сначала связь, потом веса»,
+  порог расхождения в 2 балла, порог анонимности от трёх ответивших.</p>
+  <p class="note"><b>Восемь карточек: три Вам, пять заказчику.</b> Одна из
+  Ваших — та же, что была на прошлой странице (расхождение описаний), она не
+  потерялась. Ничего из прежнего не удалено.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница сформирована 05.08.2026; 14.08.2026 — пересобрана
+целиком: восемь карточек. Методологу — К-7-бис (схема показа расхождения
+описаний), К-8-бис (прочтение несоответствия по модели), А-1 (доступ к
+содержанию профилей). Заказчику — З39 (подтверждение задания), Д4 (название
+пилотного подразделения), А-2а/А-2б/А-2в (разбор технических сбоев: вводить
+ли исключение, кто одобряет, предельный срок). Закрыто и внесено, не
+переспрашиваем: банк вопросов v1.1, направление пунктов NEO PI-R (ключ сошёлся
+с открытой таблицей по всем 30 подшкалам), пункт 35, M-5, правило СМИЛ,
+контроль достоверности пометкой рядом с оценкой, источник и четыре оси
+корпоративной культуры, распределение конструктов по осям, бюджет 4 на ось,
+выдача по осям, порядок «сначала связь, потом веса», порог расхождения
+2 балла, порог анонимности от 3 ответивших. Список подразделений (П-1а) снят —
+структура вводится в приложении. Шестой архетип «Дивергент» подтверждён
+заказчиком 13.08 устно, формой — карточкой З39. Юридический блок — заключение
+по переданному пакету, сверка формы согласия сотрудников, документы на права,
+порог анонимности, а также вопрос о том, кто выступает оператором персональных
+данных в контуре соискателя, — по решению от 13.08.2026 переходит на этап
+после запуска пилота. Это единственная действующая страница вопросов по
+проекту — новый вопрос появится здесь же.</footer>
+</div>
+<script>
+const QS = [
+ { sect:"Вам — три карточки",
+   sub:"Первая была на прошлой странице и осталась без изменений. Две другие появились после разбора архитектуры 14.08.",
+   k:"k7b", id:"К-7-бис", t:"Расхождение руководителя и сотрудников — подтвердите схему",
+   c:"Вы выбрали «только методологу и психологу, руководителю ничего», а в комментарии написали, что заключение после разбора психологом добавляется в общий отчёт психолога для предоставления руководителю отдельным параграфом. Это разные адресаты, поэтому мы не стали фиксировать ни то, ни другое. Читаем Ваш комментарий так, и, если верно, это лучше нашего исходного предложения: расхождение как таковое — сколько и по каким осям разошлись описания — руководителю не показывается, его видят только Вы и психолог; а вот заключение психолога по этому расхождению, уже осмысленное человеком, попадает в отчёт руководителю отдельным параграфом со своей структурой. Мы предлагали руководителю автоматический флаг «низкая согласованность» — Ваш вариант содержательнее и снимает наше возражение лучше: человек читает вывод специалиста, а не сигнал программы. Два уточнения, без которых это нельзя перенести в согласованный документ о ролях. Первое: в комментарии есть вставка «(от кого из)» — мы не смогли восстановить её смысл. Второе: кто создаёт структуру параграфа — психолог пишет его сам по каждому подразделению, или структура задана шаблоном заранее и психолог её заполняет?",
+   opts:["Да, схема верна: сырое расхождение — методологу и психологу, заключение психолога — параграфом руководителю","Руководителю не идёт ничего, даже заключение психолога","Руководителю идёт и заключение, и само расхождение","Опишу схему своими словами в комментарии"],
+   ph:"Комментарий (обязательно: что означает «от кого из», и кто создаёт структуру параграфа — психолог сам или по шаблону)…" },
+
+ { k:"k8b", id:"К-8-бис", t:"Несоответствие по модели Анисимова — подтвердите наше прочтение",
+   c:"К порогу в 2 балла Вы приписали: «опираться на математическую статистику и модель Анисимова». Мы проверили это по первоисточнику, а не приняли на слово, — и приписка оказалась предметной: порог в книге действительно напечатан («превосходит некоторое пороговое значение», стр. 101–102), там же есть сама величина несоответствия и напряжение, которое растёт вместе с ней. Одно место требует Вашего слова. В книге несоответствие — это разрыв У ОДНОГО человека между тем, к чему он стремится, и тем, что есть на самом деле. У нас же расхождение между ДВУМЯ источниками: описанием руководителя и сводным описанием сотрудников. Мы прочитали это так: описание руководителя — ориентир, сводное описание сотрудников — реальное положение дел; тогда всё сходится с моделью. Но это НАША интерпретация, и выдавать её за Вашу или за положение книги мы не станем. Отдельно: числа порога в книге нет — «2 балла» это Ваше назначенное значение, и математическая статистика на пилотных данных его проверит, а не выведет заново.",
+   opts:["Да, прочтение верное: описание руководителя — ориентир, сотрудников — реальное","Наоборот: ориентир — сводное описание сотрудников","Ни то ни другое — поясню в комментарии","Пока не фиксируем, вернёмся к этому после пилота"],
+   ph:"Комментарий…" },
+
+ { k:"a1", id:"А-1", t:"Ваш доступ к содержанию профилей — менять ли согласованное 11.08",
+   c:"11.08 Вы подтвердили разведение на два кабинета, и в согласованной модели Вы видите аномалии психометрики агрегатом — без имён и без содержания отдельных профилей; содержание видит психолог. Владелец проекта решил открыть содержание и Вам — с тем же журналированием, что у психолога: каждый просмотр отдельной строкой. Разведение кабинетов при этом сохраняется, меняется только объём чтения. Спрашиваем потому, что нынешнюю норму подтверждали Вы сами, и менять её молча мы не будем. Практическая сторона: на пилоте методолог и психолог — одно лицо, так что фактически содержание Вам доступно уже сейчас, через кабинет психолога. Разница решения не в объёме, а в следе: сколько записей в журнале останется и под какой ролью.",
+   opts:["Принимаю: вижу содержание профилей, каждый просмотр — в журнале","Оставить как согласовано 11.08 — агрегат без имён","Видеть содержание только по тем, чьи профили вынесены на разбор методики","Опишу нужный объём в комментарии"],
+   ph:"Комментарий…" },
+
+ { sect:"Заказчику — пять карточек, через Вас",
+   sub:"Прямого канала к заказчику у нас нет. Просим согласовать эти пять вместе с ним; ответы вернутся тем же списком, что и Ваши.",
+   k:"z39", id:"З39", t:"Подтверждение задания — без него разработка не начинается",
+   c:"Главное техническое задание готово к подтверждению, и до Вашего слова «задание подтверждаю» код продукта не пишется — это правило проекта, а не формальность. Прежде чем просить это слово, обязаны показать, что изменилось с той редакции, которую Вы видели, потому что объём первой версии ВЫРОС. Пять изменений. Первое: подразделение и штатная единица становятся объектами данных — раньше «команды» были явно вынесены за пределы первой версии. Второе: появляется паспорт организации — набор характеристик компании; его требовало Ваше же правило «архетип предприятия определяется по характеристикам организации, а не по отрасли», но сам перечень характеристик нигде задан не был. Третье: каталог должностей получает механизм ведения — кто правит, с автором и датой каждой правки. Четвёртое: оргструктура перестаёт быть разовым файлом при внедрении и становится живой структурой с историей перестроек. Пятое: должностных архетипов шесть, а не пять — «Дивергент» Вы подтвердили 13.08 устно, здесь просим подтвердить формой, чтобы это было записано.",
+   opts:["Задание подтверждаю — можно начинать разработку","Подтверждаю, но с замечаниями — напишу в комментарии","Сначала нужна встреча или разбор","Пока не подтверждаю"],
+   ph:"Комментарий (замечания, если есть)…" },
+
+ { k:"d4", id:"Д4", t:"Название пилотного подразделения",
+   c:"Это единственный пункт по пилотной площадке, оставшийся открытым с 12.08. Критерий Вы уже задали: 50–100 сотрудников, должности сопоставимые либо объединяемые по сходству функций. ⚠️ Речь НЕ о списке всех подразделений — список мы больше не запрашиваем, структура компании будет вводиться прямо в приложении, конструктором. Нужно одно название, и вот зачем: по нему строятся нормы внутри отдела, готовится журнал учёта результатов работы и памятка руководителю этого подразделения. Пока названия нет, эти три вещи делать не из чего.",
+   opts:["Называю подразделение — в комментарии","Выберем при вводе структуры в приложении","Предложите варианты, обсудим","Пока не определились"],
+   ph:"Название подразделения, примерная численность, чем занимается…" },
+
+ { k:"a2a", id:"А-2а", t:"Разбор технических сбоев — вводить ли исключение из принципа",
+   c:"Вами принят принцип: администратор и техническая поддержка не имеют доступа к содержанию психологических профилей и заключений, и он распространён на техконтроль без исключений. При разборе архитектуры выяснилась его граница: часть сбоев по одному коду ошибки не диагностируется — чтобы починить, нужно видеть сами данные. Предлагаем принцип сохранить как режим по умолчанию: разбор идёт по обезличенной копии, где содержания нет вовсе, и этим закрывается большинство инцидентов. А для остатка ввести одно названное исключение: доступ к содержанию выдаётся по заявке — с указанием причины и срока, с одобрением второго лица, с автоматическим отзывом по истечении срока и полной записью в журнал. Так это устроено у крупных поставщиков: у Microsoft постоянного доступа персонала к данным клиента нет вовсе — только по заявке и только на ограниченное время.",
+   opts:["Исключение вводим — по заявке, со сроком и журналом","Исключение не вводим — принцип остаётся без исключений","Вводим, но каждую заявку одобряю лично","Обсудим отдельно"],
+   ph:"Комментарий…" },
+
+ { k:"a2b", id:"А-2б", t:"Кто одобряет заявку на доступ",
+   c:"⚠️ Отвечать только если по предыдущей карточке исключение вводится. Заявку должен одобрять человек на Вашей стороне — и обязательно не тот, кто её подал: в этом весь смысл процедуры. Сейчас подходящей роли в системе нет. Ближайшая — наблюдатель, но он по согласованной модели не видит содержания и решений не принимает, поэтому либо появляется отдельная роль одобряющего, либо роль наблюдателя расширяется этим правом.",
+   opts:["Руководитель компании","Отдельное назначенное лицо — назову в комментарии","Расширить роль наблюдателя правом одобрять","Решим позже"],
+   ph:"Комментарий…" },
+
+ { k:"a2v", id:"А-2в", t:"Предельный срок доступа по одной заявке",
+   c:"⚠️ Отвечать только если исключение вводится. Сколько времени действует доступ после одобрения, по истечении которого он гаснет сам, без чьего-либо участия. Для ориентира, не как образец: у Microsoft предельный срок доступа — 4 часа, а сама заявка исчезает, если её не одобрили в течение 12 часов. Назначать это число за Вас мы не будем — оно про Ваш риск, а не про нашу технику.",
+   opts:["До 4 часов","До 8 часов — рабочий день","До 24 часов","Другой срок — укажу в комментарии"],
+   ph:"Комментарий…" },
+];
+
+const KEY = "svod-otkrytyh-voprosov-v24";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ — «Формула компании» (страница v24: К-7-бис, К-8-бис, А-1; заказчику — З39, Д4, А-2а/б/в)\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-g4a-o4-o7.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

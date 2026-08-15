@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Групповой переход: разбор и шесть уточнений · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .map-wrap { overflow-x:auto; margin-top:1.2rem; }
+  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
+  table.map td.full { color:var(--warn); }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 14</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Расхождение описаний подразделения: что показал разбор</h1>
+  <p>Это <b>отдельная</b> страница, не замена сводной. Та, с четырнадцатью
+  карточками, остаётся как есть — ответы, которые Вы там уже начали, никуда не
+  денутся.</p>
+  <p>Вы поставили задачу: вывести из модели Анисимова для одного человека её
+  аналог для группы. Мы её выполнили — и результат оказался содержательнее, чем
+  «получилось / не получилось». Ниже коротко, что нашлось, а потом шесть
+  уточнений, где нужно Ваше решение.</p>
+
+  <p class="note"><b>Что вышло по первоисточнику.</b> Переход на уровень
+  подразделения по книге <b>возможен</b>: функция напряжения там определена «для
+  каждой системы», а не для каждого человека, а подразделение — система в смысле
+  книги. Но есть препятствие, которое мы обязаны назвать прямо. В книге всякое
+  несоответствие — это <b>оценка ценности против ценностного ориентира</b>, и
+  ориентир принадлежит той же системе. А описание руководителя против сводного
+  описания сотрудников — это <b>оценка против оценки</b>. Такой конструкции у
+  Анисимова нет. Значит прямого переноса не существует: чтобы расхождение стало
+  несоответствием по книге, один из двух источников надо <b>назначить</b>
+  ориентиром — а это решение, а не следствие из модели.</p>
+
+  <p class="note"><b>Что вышло по внешней науке.</b> Мы проверили, как эту же
+  задачу решает организационная психология, и нашли, что у неё есть готовое имя
+  и сорокалетняя литература: <b>модели композиции</b> (Chan, 1998) — пять
+  способов превратить индивидуальный показатель в групповой. Один из них,
+  <b>dispersion</b>, устроен ровно так, как один из наших вариантов: там
+  разброс мнений внутри группы является <b>самостоятельным показателем</b>, а не
+  техническим условием усреднения. В прикладной работе он называется «сила
+  климата».</p>
+
+  <p class="note"><b>И четыре места, где наша с Вами конструкция пока не
+  сходится с этой литературой.</b> Мы называем их честно, потому что каждое
+  придётся либо закрыть, либо сознательно принять с риском — как мы уже делали с
+  порогом анонимности. Все четыре — в карточках ниже. Ни одно не является
+  ошибкой методики: три из четырёх — это то, чего в задании просто ещё нет.</p>
+
+  <p class="note"><b>Шесть карточек.</b> Первая — главная, остальные пять
+  уточняют детали. Если на первую ответить «обсудим голосом», остальные можно
+  пропустить: они станут понятнее после неё.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница-разбор сформирована 15.08.2026 по итогам задачи, которую
+Вы поставили в ответах от 15.08: вывести из модели Анисимова для одного человека
+её аналог для группы. Полный вывод по первоисточнику со ссылками на страницы
+книги и внешняя научная сверка по пяти источникам хранятся у разработки и могут
+быть переданы целиком по Вашему запросу. Эта страница <b>не заменяет</b> сводную
+страницу открытых вопросов с четырнадцатью карточками — та действует, и ответы
+на ней сохраняются. В техническое задание по итогам разбора не внесено ничего:
+сперва Ваше решение. Ни один из шести вопросов не является претензией к
+методике — три из шести касаются того, чего в задании ещё нет, а остальные три
+уточняют уже принятые Вами решения.</footer>
+</div>
+<script>
+const QS = [
+ { sect:"Шесть уточнений",
+   sub:"Первая карточка — развилка, от которой зависят остальные. Пятая и шестая — короткие, про числа.",
+   k:"n1", id:"Н-1", t:"Что является ценностным ориентиром подразделения",
+   c:"Это главный вопрос, и без него расчёт не запускается. Вариант первый: ориентир задаёт руководитель — тогда расхождение с мнением сотрудников есть напряжение по Анисимову, оно порождает силу и входит в расчёт формулы компании. Цена такого решения: руководитель по согласованной ролевой модели сам является тестируемым субъектом, и его описание становится эталоном для его же людей. Вариант второй: ориентир задаёт эталонный профиль — архетип предприятия по характеристикам организации и четыре оси корпоративной культуры, которые мы уже согласовали. Тогда описание руководителя и сводное описание сотрудников — это два независимых измерения одного и того же, а их расхождение показывает не напряжение, а насколько согласованно организация себя видит. Во втором варианте расхождение в расчёт не входит, а остаётся диагностикой — и это, заметим, ровно то устройство, которое Вы уже подтвердили по адресатам: сырое расхождение видите Вы и психолог, а руководителю идёт заключение психолога.",
+   opts:["Ориентир задаёт руководитель — расхождение входит в расчёт","Ориентир — эталонный профиль, расхождение остаётся диагностикой","Ни то ни другое — поясню в комментарии","Нужно обсудить голосом, письменно не решить"],
+   ph:"Комментарий…" },
+
+ { k:"n2", id:"Н-2", t:"Порог расхождения: одно число или градация",
+   c:"Вы назначили порог в 2 балла, и правило «больше двух — описания разошлись» стало исполнимым. При проверке по литературе выяснилось, что у такой конструкции есть известная слабость, и мы обязаны Вам о ней сказать. В работах по согласию оценщиков единый пороговый рубеж критикуют за то, что он искусственно делит непрерывную величину надвое: разница в 1,9 и в 2,1 балла получают противоположные ярлыки, хотя различаются ничтожно. Взамен рекомендуют градацию — несколько ступеней вместо одной границы. Для нас это означало бы не «разошлись или нет», а «расхождение слабое, умеренное, сильное». Подчеркнём: числа из литературы к нашей шкале 1–5 напрямую не переносятся, заимствуется только принцип. Ваши 2 балла при этом никуда не деваются — они становятся границей между двумя ступенями.",
+   opts:["Оставляем один порог 2 балла — так проще и понятнее","Переходим на градацию, 2 балла = граница умеренного и сильного","Предложите шкалу ступеней, я посмотрю","Решим после пилота, на реальных числах"],
+   ph:"Комментарий…" },
+
+ { k:"n3", id:"Н-3", t:"Чем измеряем согласие сотрудников между собой",
+   c:"Здесь у нас пробел, и он наш, а не Ваш: в задании нигде не сказано, каким показателем считается согласованность ответов сотрудников. А это важно, потому что в литературе прямо показано: разные показатели согласия дают разные ответы на вопрос «достаточно ли согласны», и они не взаимозаменяемы — по опубликованным сравнениям, до трети их изменчивости не совпадает. То есть выбор показателя — это содержательное решение, а не техническая деталь, и его надо принять один раз и записать. Понятных варианта два. Простой: обычное стандартное отклонение ответов — легко объяснить и легко проверить. Специальный: показатель согласия оценщиков, принятый в организационной психологии, — он строже, но требует задать, как выглядел бы полностью случайный ответ.",
+   opts:["Простой: разброс ответов, обычное стандартное отклонение","Специальный показатель согласия оценщиков","Предложите оба и покажите на пилоте разницу","Это Ваша сторона — решайте сами и опишите в задании"],
+   ph:"Комментарий…" },
+
+ { k:"n4", id:"Н-4", t:"Как формулируются вопросы сотрудникам — про себя или про отдел",
+   c:"Ещё один пробел на нашей стороне, и он тоньше, чем кажется. Вопрос сотруднику можно задать двумя способами: «я считаю, что у нас принято…» или «в нашем отделе принято…». Разница не косметическая: в первом случае человек описывает своё личное восприятие, во втором — сознательно говорит от лица подразделения. В литературе это два разных способа собирать групповой показатель, у них разные правила усреднения, и есть сравнительные работы, показывающие, что результаты расходятся. Пока формулировки не зафиксированы, мы не можем сказать, какой именно групповой показатель получаем. Формулировки текстов — Ваша редакция, поэтому решение за Вами.",
+   opts:["От первого лица: «я считаю, что у нас…»","От лица подразделения: «в нашем отделе принято…»","Часть пунктов так, часть иначе — поясню","Сформулирую сама при подготовке опросника"],
+   ph:"Комментарий…" },
+
+ { k:"n5", id:"Н-5", t:"При каком числе ответивших групповую величину вообще можно показывать",
+   c:"Вы назначили порог анонимности — сводное мнение показывается от трёх ответивших. Это решение принято, и мы его не пересматриваем. Но у него есть следствие, о котором надо сказать: при трёх ответах любая мера согласованности статистически почти ничего не значит — на таком числе наблюдений она неустойчива. Получается натяжение между двумя правильными вещами: анонимность требует не показывать данные малых групп, а надёжность требует достаточного числа ответов. Мы видим выход не в изменении порога анонимности, а в том, чтобы при малом числе ответивших показывать величину с явной пометкой «оценка ненадёжна» либо не показывать вовсе. Что предпочтительнее с Вашей точки зрения?",
+   opts:["Показывать от 3, но с явной пометкой о ненадёжности","Не показывать групповую величину, пока ответивших меньше 5","Не показывать, пока меньше 7","Назову своё число в комментарии"],
+   ph:"Комментарий…" },
+
+ { k:"n6", id:"Н-6", t:"Пилот на одном подразделении — что делаем с этим ограничением",
+   c:"Последнее, и это ограничение дизайна, а не чья-то недоработка. В литературе право усреднить ответы сотрудников и назвать результат характеристикой подразделения обосновывают двумя проверками: первая — что разные подразделения по средним отличаются друг от друга, вторая — что внутри подразделения люди согласны между собой. Вторую на пилоте выполнить можно. А первую — нельзя в принципе: она требует нескольких подразделений, а пилот планируется на одном. Мы обязаны были сказать это заранее, а не обнаружить на пилоте. Практических выходов три, и все честные: либо на пилоте не называем результат характеристикой подразделения и говорим осторожнее, либо берём в пилот второе подразделение поменьше ради сравнения, либо принимаем ограничение осознанно и записываем его — как мы уже сделали с порогом анонимности.",
+   opts:["Формулируем осторожнее: на пилоте это не «культура подразделения»","Добавляем в пилот второе подразделение для сравнения","Принимаем ограничение с риском и записываем это","Поясню в комментарии"],
+   ph:"Комментарий…" },
+];
+
+const KEY = "razbor-gruppovogo-perehoda-v1";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ — «Формула компании», разбор группового перехода (Н-1…Н-6)\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-g4a-o4-o7.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

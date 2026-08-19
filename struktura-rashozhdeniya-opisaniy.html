@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Расхождение описаний: полная структура схемы · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:46rem; margin:0 auto; padding:0 1rem 4rem; }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .meta { font-size:.85rem; color:var(--muted); }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .note.warn { background:var(--warn-soft); color:var(--warn); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; margin-top:1.1rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .card h3 { font-family:Georgia,serif; font-size:1.1rem; margin:0 0 .45rem; }
+  .ask { border-left:4px solid var(--warn); }
+  .ask h3 { color:var(--warn); }
+  .tag { display:inline-block; font-size:.74rem; letter-spacing:.04em; text-transform:uppercase; border-radius:6px; padding:.1rem .5rem; margin-bottom:.45rem; }
+  .tag.open { color:var(--warn); background:var(--warn-soft); }
+  .tag.fixed { color:var(--ok); background:var(--ok-soft); }
+  .map-wrap { overflow-x:auto; margin-top:1rem; }
+  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.8rem; text-transform:uppercase; letter-spacing:.03em; }
+  figure { margin:1.2rem 0 0; }
+  .diagram { overflow-x:auto; }
+  svg { display:block; min-width:33rem; width:100%; height:auto; }
+  figcaption { font-size:.85rem; color:var(--muted); margin-top:.5rem; max-width:62ch; }
+  ul.tight { margin:.4rem 0 0; padding-left:1.1rem; }
+  ul.tight li { margin:.25rem 0; }
+  footer { margin-top:2.4rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .k { font-weight:600; color:var(--accent-ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="lead">
+  <h1>Расхождение описаний подразделения: полная структура схемы</h1>
+  <p class="meta">«Формула компании» · К-7-хвост · документ от 19.08.2026</p>
+  <p>Вы ответили: «Структуру давайте согласуем сейчас, не откладывая; разложите полную
+  наглядную логичную структуру, чтобы было видно, что требуется разъяснить». Это она —
+  от замера до фразы в отчёте, на одной странице.</p>
+  <div class="note">Читать так: сначала схема одной картинкой, затем те же четыре шага
+  подробно. <b>Открытых мест ровно два</b>, они помечены и собраны в конце — остальное
+  выведено из Ваших же ответов и правки не ждёт, а ждёт подтверждения.</div>
+</header>
+
+<h2 class="sect">Схема целиком</h2>
+<p class="sect-sub">Слева направо: что измеряем, что считаем, кому и в каком виде отдаём.</p>
+
+<figure class="diagram">
+<svg viewBox="0 0 900 400" role="img" aria-label="Схема: три источника данных, три расчётные величины, выдача по четырём ролям">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.4" color="var(--muted)" marker-end="url(#a)">
+    <path d="M248,74 H278"/><path d="M248,144 H278"/>
+    <path d="M496,109 H526"/><path d="M496,179 H526"/><path d="M496,249 H526"/>
+  </g>
+  <g stroke="var(--line)" stroke-width="1.4" fill="var(--card)">
+    <rect x="16" y="46" width="232" height="56" rx="10"/>
+    <rect x="16" y="116" width="232" height="56" rx="10"/>
+    <rect x="16" y="186" width="232" height="56" rx="10"/>
+    <rect x="278" y="81" width="218" height="56" rx="10"/>
+    <rect x="278" y="151" width="218" height="56" rx="10"/>
+    <rect x="278" y="221" width="218" height="56" rx="10"/>
+    <rect x="526" y="81" width="358" height="56" rx="10"/>
+    <rect x="526" y="151" width="358" height="56" rx="10"/>
+    <rect x="526" y="221" width="358" height="56" rx="10"/>
+    <rect x="526" y="291" width="358" height="56" rx="10"/>
+  </g>
+  <g font-family="-apple-system,Segoe UI,Roboto,Arial,sans-serif" fill="var(--ink)">
+    <text x="16" y="32" font-size="13" font-weight="700" fill="var(--accent-ink)">ЧТО ИЗМЕРЯЕМ</text>
+    <text x="278" y="32" font-size="13" font-weight="700" fill="var(--accent-ink)">ЧТО СЧИТАЕМ</text>
+    <text x="526" y="32" font-size="13" font-weight="700" fill="var(--accent-ink)">КТО ЧТО ВИДИТ</text>
+
+    <text x="28" y="70" font-size="12.5" font-weight="700">Р — описание руководителя</text>
+    <text x="28" y="88" font-size="11" fill="var(--muted)">анкета, четыре оси</text>
+    <text x="28" y="140" font-size="12.5" font-weight="700">С — сводное сотрудников</text>
+    <text x="28" y="158" font-size="11" fill="var(--muted)">опрос, от трёх ответивших</text>
+    <text x="28" y="210" font-size="12.5" font-weight="700">О — паспорт организации</text>
+    <text x="28" y="228" font-size="11" fill="var(--muted)">контекст, в расчёт не идёт</text>
+
+    <text x="290" y="105" font-size="12.5" font-weight="700">Ориентир</text>
+    <text x="290" y="123" font-size="11" fill="var(--muted)">эталонный профиль (Н-1)</text>
+    <text x="290" y="175" font-size="12.5" font-weight="700">Расхождение Р против С</text>
+    <text x="290" y="193" font-size="11" fill="var(--muted)">по осям; порог 2 балла (Н-2)</text>
+    <text x="290" y="245" font-size="12.5" font-weight="700">Согласие сотрудников</text>
+    <text x="290" y="263" font-size="11" fill="var(--muted)">от пяти ответивших (Н-5)</text>
+
+    <text x="538" y="105" font-size="12.5" font-weight="700">Методолог</text>
+    <text x="538" y="123" font-size="11" fill="var(--muted)">полный слой, сырое расхождение по осям</text>
+    <text x="538" y="175" font-size="12.5" font-weight="700">Психолог</text>
+    <text x="538" y="193" font-size="11" fill="var(--muted)">полный слой; пишет параграф-заключение</text>
+    <text x="538" y="245" font-size="12.5" font-weight="700">Руководитель</text>
+    <text x="538" y="263" font-size="11" fill="var(--muted)">только параграф словами, без баллов</text>
+    <text x="538" y="315" font-size="12.5" font-weight="700">Сотрудник</text>
+    <text x="538" y="333" font-size="11" fill="var(--muted)">свой профиль; сводное по подразделению — вопрос</text>
+  </g>
+  <g stroke="var(--line)" stroke-width="1.2" stroke-dasharray="5 4" fill="none">
+    <path d="M132,186 V172"/>
+  </g>
+</svg>
+<figcaption>Паспорт организации соединён пунктиром намеренно: он служит сверкой и контекстом,
+но на вход расчёта не подаётся. Это ограничение, а не упущение.</figcaption>
+</figure>
+
+<h2 class="sect">1. Кто что измеряет</h2>
+<div class="map-wrap">
+<table class="map">
+  <tr><th>Источник</th><th>Что даёт</th><th>Кто отвечает</th></tr>
+  <tr><td class="k">Р</td><td>каким подразделение должно быть и каким является — по четырём осям</td><td>руководитель, анкета</td></tr>
+  <tr><td class="k">С</td><td>каким подразделение является — по тем же осям</td><td>сотрудники, опрос; показ от трёх ответивших (Ваш ответ К-9, подтверждён Н-5)</td></tr>
+  <tr><td class="k">О</td><td>контекст и сверка</td><td>кадровик; на вход расчёта не подаётся</td></tr>
+</table>
+</div>
+
+<h2 class="sect">2. Что считается</h2>
+<div class="card">
+  <h3>Три величины, и ни одной сверх них</h3>
+  <ul class="tight">
+    <li><b>Ориентир</b> — эталонный профиль (Ваш ответ Н-1), а не описание руководителя.</li>
+    <li><b>Расхождение Р против С</b> — по каждой оси, в баллах шкалы. Порог <b>2 балла</b>
+        (Ваш ответ Н-2) — это <b>граница качества данных</b>: выше порога сводная оценка
+        помечается как несогласованная между источниками. Не оценка людей и не диагноз.</li>
+    <li><b>Согласие сотрудников между собой</b> — отдельная величина, показывается только
+        при пяти и более ответивших (Ваш ответ Н-5).</li>
+  </ul>
+</div>
+
+<h2 class="sect">3. Кто что видит</h2>
+<div class="map-wrap">
+<table class="map">
+  <tr><th>Кому</th><th>Видит</th><th>Не видит</th></tr>
+  <tr><td class="k">Методолог</td><td>сырое расхождение по осям, полный слой</td><td>—</td></tr>
+  <tr><td class="k">Психолог</td><td>сырое расхождение по осям, полный слой</td><td>—</td></tr>
+  <tr><td class="k">Руководитель</td><td>параграф-заключение психолога словами</td><td>числа расхождения; сводные ответы, по которым можно опознать отвечавшего</td></tr>
+  <tr><td class="k">Сотрудник</td><td>свой профиль</td><td>чужие ответы. Видит ли он сводное представление своего подразделения — в документах не задано</td></tr>
+</table>
+</div>
+<div class="note">Ваше уточнение от 19 августа мы прочитали так: <b>чувствительные шкалы
+показываются только психологу и методологу</b>, а руководитель получает соответствие
+характеристик <b>в процентах по каждой должности отдельно</b>. Если прочитано верно, это
+правило встаёт сюда же — подтвердите одной фразой.</div>
+
+<h2 class="sect">4. Рамка параграфа</h2>
+<div class="card">
+  <h3>Что обязано быть</h3>
+  <ul class="tight">
+    <li>какое подразделение;</li>
+    <li>что описания разошлись;</li>
+    <li>направление расхождения — <b>словами, без баллов</b>;</li>
+    <li>что из этого следует;</li>
+    <li>подпись психолога.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Чего быть не должно</h3>
+  <ul class="tight">
+    <li>чисел расхождения;</li>
+    <li>сводных ответов, по которым можно опознать отвечавшего;</li>
+    <li>оценки руководителя как человека.</li>
+  </ul>
+</div>
+
+<h2 class="sect">Открытых мест ровно два</h2>
+<p class="sect-sub">Всё остальное на этой странице выведено из Ваших ответов и ждёт
+подтверждения, а не решения.</p>
+
+<div class="card ask">
+  <span class="tag open">ждём одну фразу</span>
+  <h3>Х-1. «(от кого из)»</h3>
+  <p>Вставка из Вашего комментария от 14 августа, смысл которой мы не смогли восстановить
+  ни тогда, ни сейчас; в ответах 18 августа её тоже нет. Это <b>единственное место схемы,
+  которое мы не понимаем</b>. Что она означала?</p>
+</div>
+
+<div class="card ask">
+  <span class="tag open">ждём правку</span>
+  <h3>Х-2. Сама структура — согласуем сейчас</h3>
+  <p>Вы ответили «согласуем сейчас, не откладывая». Эта страница и есть предложенная
+  структура: рамка раздела 4 плюс порядок разделов 1–3. Поправьте — и она становится нормой
+  <b>до</b> пилота, а не после него.</p>
+</div>
+
+<h2 class="sect">Ограничение пилота — уже внесено</h2>
+<div class="card">
+  <span class="tag fixed">внесено по Вашему ответу Н-6</span>
+  <p>На пилоте формулировка «культура подразделения» как установленная характеристика не
+  используется: результат описывается как профиль — сводное представление ответов
+  участников — и мера согласия внутри группы. Сравнительные выводы о подразделении
+  откладываются до проверки на нескольких подразделениях.</p>
+</div>
+<div class="note warn">⚠ 19 августа заказчик расширил пилот на всю организацию. Формально
+условие «несколько подразделений» этим выполняется. Вопрос к Вам: снимается ли отсрочка
+сравнительных выводов автоматически, или нужны дополнительные условия — например,
+минимальное число ответивших в каждом подразделении.</div>
+
+<footer>
+  <p>Страница описывает согласованную часть схемы и два открытых места. Числа порогов
+  (два балла, три и пять ответивших) — Ваши ответы Н-2, К-9 и Н-5; мы их не назначали.
+  Ответы удобнее прислать одним сообщением со ссылками на Х-1, Х-2 и на вопрос о
+  сравнительных выводах.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -2,244 +2,83 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Открытые вопросы — сводная страница · «Формула компании»</title>
+<title>Открытые вопросы — «Формула компании»</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; }
   @media (prefers-color-scheme: dark) {
-    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; }
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
-  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
-  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
-  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
-  .progress-inner strong { color:var(--accent-ink); }
-  header.lead { padding-top:2.2rem; }
-  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
-  .lead p { margin:.5rem 0; max-width:62ch; }
-  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
-  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
-  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
-  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
-  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
-  .q h3 .num { color:var(--accent-ink); }
-  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
-  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
-  .q .ctx em { color:var(--warn); font-style:normal; }
-  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
-  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
-  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
-  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
-  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
-  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
-  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
-  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
-  .finish p { font-size:.94rem; max-width:62ch; }
-  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
-  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
-  button.primary { background:var(--accent); color:var(--btn-ink); }
-  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
-  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
-  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
-  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
-  .map-wrap { overflow-x:auto; margin-top:1.2rem; }
-  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
-  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
-  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
-  table.map td.full { color:var(--warn); }
+  .wrap { max-width:44rem; margin:0 auto; padding:2.4rem 1rem 4rem; }
+  h1 { font-family:Georgia,serif; font-size:1.65rem; line-height:1.25; margin:0 0 .8rem; }
+  h2 { font-family:Georgia,serif; font-size:1.2rem; margin:2rem 0 .4rem; padding-bottom:.3rem; border-bottom:2px solid var(--accent); }
+  p { margin:.6rem 0; max-width:62ch; }
+  .stamp { display:block; background:var(--accent-soft); color:var(--accent-ink); border-radius:8px; padding:.9rem 1.1rem; font-weight:600; margin:1.1rem 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:.9rem 1.05rem; margin-top:.8rem; }
+  .card.wait { border-left:3px solid var(--warn); }
+  .card h3 { font-family:Georgia,serif; font-size:1.02rem; margin:0 0 .35rem; }
+  .card p { margin:.2rem 0; font-size:.95rem; color:var(--muted); }
+  ul { margin:.4rem 0; padding-left:1.15rem; }
+  li { margin:.3rem 0; }
+  footer { margin-top:2.2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  a { color:var(--accent-ink); }
 </style>
 </head>
 <body>
-<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 12</strong></div></div>
 <div class="wrap">
-<header class="lead">
-  <h1>Открытые вопросы — сводная страница</h1>
-  <p>Страница пересобрана 19 августа (вечер). На ней остались <b>только те вопросы, ответа на
-  которые ещё нет</b>. Всё, что Вы ответили 18 и 19 августа, со страницы снято: двадцать четыре
-  прежние карточки закрыты и лежат отдельной страницей для сверки — ссылка в конце.</p>
 
-  <p class="note"><b>Почему страница выглядит иначе.</b> В прежней редакции висели все карточки
-  подряд, включая отвеченные. Это неудобно и вводит в заблуждение: открыв ссылку, Вы видели то,
-  на что уже ответили. Теперь рабочая страница показывает только оставшееся, а история ответов
-  живёт отдельно и не мешает.</p>
+<h1>Открытые вопросы — сводная страница</h1>
+<span class="stamp">На 19 августа (ночь) вопросов к Вам на этой странице НЕТ — все отвечены,
+спасибо. Ход перешёл к нам и к юристу.</span>
 
-  <p class="note"><b>Десять вопросов Вам и два заказчику.</b> Десять — это те пункты присланного
-  пакета, на которые ответа пока нет; нумерация оставлена ПАКЕТНОЙ, не сквозной по странице,
-  чтобы Вам не пришлось сопоставлять заново. Два вопроса заказчику выросли из его собственных
-  ответов: срок хранения резервных копий и уведомление о том, что резервное копирование вошло
-  в объём первой версии.</p>
+<p>Двенадцать карточек прошлой редакции закрыты Вашими ответами: таблица соответствия
+архетипов и функциональных блоков, поведение не-ядерных конструктов, оба порога, форма
+компенсаций, наследование вердикта о различимости, пункт про стрессоустойчивость,
+видимость сводного представления сотрудником, чем считается соответствие корпоративной
+культуре, соединение словарей — и два вопроса заказчику: срок хранения резервных копий и
+вхождение резервного копирования в объём первой версии.</p>
 
-  <p class="note"><b>Что уже закрыто и сюда не попало:</b> порог отказа от оценки, выдача
-  руководителю, сравнительные выводы, порядок разбора технического сбоя, вставка «от кого из»,
-  структура схемы, соответствие пунктов анкеты шкалам, пара индексов согласия, эталонные
-  значения по конструктам. Переспрашивать не будем.</p>
-</header>
-<div id="qs"></div>
+<p>Все ответы, включая прежние редакции и разбор группового перехода, собраны на одной
+странице: <a href="https://matusav.github.io/shares/arhiv-otvetov-svoda.html">архив ответов</a>
+(43 карточки, только для сверки — заполнять ничего не нужно).</p>
 
-<div class="finish">
-  <h2>Вернуть ответы</h2>
-  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
-  только те пункты, на которые Вы ответили.</p>
-  <div class="btns">
-    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
-    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
-    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
-  </div>
-  <div id="copy-status"></div>
-  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+<h2>Что теперь на нашей стороне</h2>
+<div class="card">
+  <h3>Одна каноническая таблица конструктов</h3>
+  <p>Вы попросили свести «Ядро» согласованной таблицы и «обязательные» Вашей классификации в
+  единую структуру и прислать вариант на рассмотрение. Это наша работа, не ожидание ответа —
+  пришлём отдельно.</p>
 </div>
-<footer>Страница пересобрана 19.08.2026 (вечер) с нуля: отвеченное снято, осталось только
-открытое — десять вопросов Вам и два заказчику через Вас. Прежние двадцать четыре карточки
-закрыты Вашими ответами 18 и 19 августа и лежат отдельно:
-<a href="https://matusav.github.io/shares/arhiv-otvetov-svoda.html">архив ответов</a> —
-там видно, что и когда было отвечено, заполнять ничего не нужно.
-<br><br>Соседние страницы проекта: <a href="https://matusav.github.io/shares/struktura-rashozhdeniya-opisaniy.html">структура схемы расхождения описаний</a>
-(она согласована, приведена для сверки) и <a href="https://matusav.github.io/shares/roli-pilotnogo-prilozheniya.html">ролевая модель пилота</a>.
-<br><br>Хранилище ответов этой редакции новое: прежние ответы уже выгружены и сохранены, поэтому
-ключ поднят без потерь. Если Вы начнёте отвечать и вернётесь позже — ответы сохранятся.</footer>
+<div class="card">
+  <h3>Наполнение таблицы компенсаций</h3>
+  <p>Форму Вы приняли: некомпенсируемое — жёсткий фильтр, компенсация — пара конструктов с
+  коэффициентом. Наполнение готовим и присылаем на согласование.</p>
 </div>
-<script>
-const QS = [
- { sect:"Вам — десять вопросов",
-   sub:"Это те вопросы из присланного пакета, на которые ответа пока нет. Нумерация оставлена прежней, пакетной, чтобы Вам не пришлось сопоставлять заново. Всё, что Вы уже ответили, со страницы снято и лежит отдельно — ссылка внизу.",
-   k:"q1", id:"1", t:"Таблица «архетип — функциональный блок»: подтверждаете?",
-   c:"Вы ответили: «Дивергент вне соответствия, остальные пять архетипов соответствуют пяти функциональным блокам один к одному» и попросили прислать, как это поняли мы. Мы прислали — и не выводили это сами: соответствие уже стоит в заголовках Вашей подтверждённой таблицы, мы лишь свели его в одну таблицу. Нужен один ответ: верно ли.",
-   opts:["Верно, подтверждаю","Не совсем — поправлю в комментарии"],
-   ph:"Комментарий…" },
 
- { k:"q2", id:"2", t:"Поведение не-ядерного конструкта",
-   c:"Черновик, который мы предложили, упрощает сильнее, чем позволяет Ваше же правило «обязательная не значит максимальная — используется оптимальный диапазон». Поэтому предлагаем не одно правило на все не-ядерные конструкты, а разбор по Вашим категориям: желательные участвуют с меньшим весом; нейтральные не участвуют; нежелательные участвуют с обратным направлением, то есть выраженность СНИЖАЕТ соответствие. И целевое значение для ядра — диапазон, а не точка.",
-   opts:["Верно: по категориям, целевое — диапазон","Одно правило на все не-ядерные — поясню какое","Поправлю в комментарии"],
-   ph:"Комментарий…" },
+<h2>Что у юриста</h2>
+<div class="card wait">
+  <h3>Порядок и срок хранения резервных копий</h3>
+  <p>По Вашему ответу вынесено на обсуждение с юристом вместе с порядком уничтожения копий.
+  Ограничение закона названо: копии содержат те же персональные данные, поэтому бессрочное
+  хранение недоступно.</p>
+</div>
 
- { k:"q4", id:"4", t:"Два порога: различимости и «инакие»",
-   c:"Порог отказа от оценки Вы уже решили — определяем на пилоте, это принято. Остаются два других, и они разные по смыслу. Порог различимости: с какой разницы два профиля считаются разными, а не одним и тем же с шумом. Порог «инакие»: с какого расстояния от эталона человек описывается как выпадающий из логики роли, а не просто слабее соответствующий.",
-   opts:["Назову оба значения в комментарии","Выводим на пилоте, как и порог отказа","Нужно обсудить отдельно"],
-   ph:"Значения либо правило их получения…" },
+<h2>Что впереди</h2>
+<ul>
+  <li>Оба порога — стартовые параметры пилота и проверяются на пилотных данных, как Вы и написали.</li>
+  <li>Порог отказа от оценки определяется на пилоте.</li>
+  <li>Структура схемы расхождения описаний согласуется финально перед пилотом:
+      <a href="https://matusav.github.io/shares/struktura-rashozhdeniya-opisaniy.html">страница структуры</a>.</li>
+  <li>Механизм формулы разбираем совместно — по Вашему предложению, голосом.</li>
+</ul>
 
- { k:"q5", id:"5", t:"Компенсации — сперва форма, потом наполнение",
-   c:"Прежде чем наполнять таблицу компенсаций, нужно согласовать саму форму записи. Предлагаем такую: некомпенсируемое требование работает как жёсткий фильтр — его нехватку не покрывает ничто; компенсация записывается как названная ПАРА конструктов с коэффициентом — что чем и в какой мере замещается. Наполнение сведём из Ваших материалов и пришлём на правку следующим шагом.",
-   opts:["Форма подходит","Форма другая — опишу","Компенсаций в первой версии не делаем"],
-   ph:"Комментарий…" },
+<footer>Страница переведена в состояние итога 19.08.2026: держать на ней отвеченные карточки
+значило бы показывать Вам то, на что Вы уже ответили. Адрес сохранён прежним — на него
+ссылаются отправленные письма и соседние страницы. Когда появятся новые вопросы, они
+появятся здесь же.</footer>
 
- { k:"q6", id:"6", t:"Вердикт о различимости: наследуется или зависит от состава",
-   c:"Вопрос про то, как ведёт себя вывод о различимости при переходе между слоями. Наследуется ли он полным слоем — то есть однажды установленная различимость действует и дальше, — или порог пересчитывается в зависимости от состава конструктов, попавших в конкретный расчёт. От ответа зависит, можно ли переносить вывод, полученный на полном профиле, на неполный.",
-   opts:["Наследуется полным слоем","Порог зависит от состава конструктов","Поясню в комментарии"],
-   ph:"Комментарий…" },
-
- { k:"q8", id:"8", t:"Пункт «стрессоустойчивость» в анкете руководителя",
-   c:"В анкете руководителя пункт про стрессоустойчивость может работать тремя разными способами, и от выбора зависит, как ответ переводится в значение шкалы. Первый: руководитель оценивает наблюдаемое поведение сотрудника в напряжённой ситуации. Второй: оценивает требование самой должности к устойчивости. Третий: пункт из анкеты убирается, а шкала берётся только из теста.",
-   opts:["Наблюдаемое поведение сотрудника","Требование должности","Убрать из анкеты, брать из теста"],
-   ph:"Комментарий…" },
-
- { k:"q12", id:"12", t:"Видит ли сотрудник сводное представление своего подразделения",
-   c:"В документах это не задано ни в одну сторону, и мы не хотим решать за Вас. Речь о том, видит ли рядовой сотрудник обобщённую картину по своему подразделению — профиль и меру согласия — или только собственный профиль. Порог анонимности при этом остаётся: групповая величина показывается от пяти ответивших.",
-   opts:["Видит, с соблюдением порога анонимности","Не видит — только свой профиль","Поясню в комментарии"],
-   ph:"Комментарий…" },
-
- { k:"q13", id:"13", t:"Чем считается соответствие корпоративной культуре",
-   c:"Вопрос возник из Вашего же ответа. Ориентир подразделения — эталонный профиль, а описание руководителя и сводное описание сотрудников — два независимых измерения. Значит нужно назвать, ЧТО именно сопоставляется с эталоном: описание сотрудников, описание руководителя или их среднее. Книга этого не подсказывает, вывести неоткуда — это Ваше решение.",
-   opts:["По описанию сотрудников","По описанию руководителя","По их среднему","Поясню в комментарии"],
-   ph:"Комментарий…" },
-
- { k:"q14", id:"14", t:"Какой список конструктов канонический для эталона архетипа",
-   c:"Два списка похожи, но не тождественны, и мы не можем выбрать за Вас. В «Ядре» согласованной таблицы категорий у Драйвера есть стрессоустойчивость. В «обязательных» Вашей классификации у него есть доброжелательность, которой нет в первом списке. Для эталона архетипа нужен ОДИН канонический список.",
-   opts:["Канонично «Ядро» согласованной таблицы","Канонично «обязательные» классификации","Списки надо свести — поясню как"],
-   ph:"Комментарий…" },
-
- { k:"q15", id:"15", t:"Как соединяются словари: Ваши категории и слова заказчика",
-   c:"Заказчик говорит «предпочтительные и допустимые сочетания», Вы — «обязательные, желательные, нейтральные, нежелательные». Мы прочитали это так: предпочтительное сочетание — обязательные в диапазоне и желательные выражены; допустимое — обязательные в диапазоне, нежелательные не выражены. Верно ли соединили.",
-   opts:["Верно","Не верно — поправлю в комментарии"],
-   ph:"Комментарий…" },
-
- { sect:"Заказчику — два вопроса, через Вас",
-   sub:"Оба выросли из его собственных ответов и оба меняют объём или правовую рамку. Прямого канала к заказчику у нас нет, поэтому просим согласовать их вместе с ним.",
-   k:"thranenie", id:"Т-хранение", t:"Срок хранения резервных копий",
-   c:"Отвечая про резервное копирование, Вы написали, что инфраструктура создаётся «не ограничивая себя в сроках хранения». Здесь есть жёсткое ограничение, и оно не наше: закон о персональных данных требует уничтожить данные в срок не более тридцати дней с момента, когда цель обработки достигнута, и такой же срок отсчитывается от отзыва согласия сотрудником. Резервная копия содержит те же персональные данные, поэтому бессрочное хранение копий недоступно как выбор. Вопрос практический: копии уничтожаются вместе с основными данными в тот же срок, или Вы называете свой порядок — например, более короткий цикл перезаписи копий.",
-   opts:["Уничтожаем вместе с основными данными, в тот же срок","Назову свой порядок и срок в комментарии","Вынести на обсуждение с юристом"],
-   ph:"Комментарий…" },
-
- { k:"ob7", id:"Об-7", t:"Резервное копирование входит в объём первой версии",
-   c:"Это уведомление, а не переспрашивание. Ваше требование о резервном копировании принято и внесено в задание как СЕДЬМОЕ изменение объёма первой версии. Раньше требования не было вовсе, поэтому оно увеличивает состав работ, и мы называем это прямо, а не проводим тихо. Работа здесь двойная: не только периодическое копирование, но и проверяемое восстановление в названный срок — копия, из которой ни разу не восстанавливали, задачу не решает. Предыдущие шесть изменений объёма Вы уже подтверждали.",
-   opts:["Принято, входит в первую версию","Обсудим объём и сроки этой части","Поясню в комментарии"],
-   ph:"Комментарий…" },
-];
-
-const KEY = "svod-otkrytyh-voprosov-v33"; /* Ключ ПОДНЯТ 18.08 по слову владельца: адресат к ответам не приступала, стирать было нечего, и держать расхождение "видимая v29 / ключ v26" дальше незачем. Правило прежнее и остаётся в силе: пока ответы начаты, ключ страницы не поднимают — поднимают ключ ОДНОЙ карточки. */
-const root = document.getElementById("qs");
-QS.forEach(q => {
-  if (q.sect) {
-    const h = document.createElement("h2");
-    h.className = "sect"; h.textContent = q.sect;
-    root.appendChild(h);
-    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
-  }
-  const d = document.createElement("div");
-  d.className = "q";
-  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
-    <div class="opts">${q.opts.map((o,i) =>
-      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
-    <div class="tlabel">Комментарий / свой вариант:</div>
-    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
-  root.appendChild(d);
-});
-function state() {
-  const s = {};
-  QS.forEach(q => {
-    const r = document.querySelector(`input[name="${q.k}"]:checked`);
-    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
-    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
-  });
-  return s;
-}
-function refresh() {
-  const s = state();
-  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
-  let text = "ОТВЕТЫ — «Формула компании» (страница v32: К-8-бис, К-7-хвост, §6.6, П-М2, П-М3, А-6, А-5, П-М4, П-М4-бис, П-М3-выдача, Н-6-бис; заказчику — З39, А-2а/б/в, Д4, Д-охват, З24, Д1, M-5, Д-сроки, Т-бэкап, Т-подпись, Т-согласие)\n\n";
-  let sect = "";
-  QS.forEach(q => {
-    if (q.sect) sect = q.sect;
-    const a = s[q.k];
-    if (!a) return;
-    if (sect) { text += `[${sect}]\n`; sect = ""; }
-    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
-    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
-    if (a.c) text += `   комментарий: ${a.c}\n`;
-    text += "\n";
-  });
-  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
-  document.getElementById("summary-text").value = text;
-  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
-    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
-  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
-  return text;
-}
-document.addEventListener("input", refresh);
-document.addEventListener("change", refresh);
-try {
-  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
-  Object.entries(saved).forEach(([k, a]) => {
-    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
-    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
-  });
-} catch (e) {}
-const say = m => document.getElementById("copy-status").textContent = m;
-document.getElementById("btn-copy").addEventListener("click", async () => {
-  const text = refresh();
-  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
-  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
-});
-document.getElementById("btn-dl").addEventListener("click", () => {
-  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "otvety-g4a-o4-o7.txt";
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-  say("Файл сохранён — пришлите его нам.");
-});
-refresh();
-</script>
+</div>
 </body>
 </html>

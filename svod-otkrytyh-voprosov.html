@@ -2,83 +2,176 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Открытые вопросы — «Формула компании»</title>
+<title>Свод открытых вопросов · «Формула компании»</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; }
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
   @media (prefers-color-scheme: dark) {
-    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; }
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
-  .wrap { max-width:44rem; margin:0 auto; padding:2.4rem 1rem 4rem; }
-  h1 { font-family:Georgia,serif; font-size:1.65rem; line-height:1.25; margin:0 0 .8rem; }
-  h2 { font-family:Georgia,serif; font-size:1.2rem; margin:2rem 0 .4rem; padding-bottom:.3rem; border-bottom:2px solid var(--accent); }
-  p { margin:.6rem 0; max-width:62ch; }
-  .stamp { display:block; background:var(--accent-soft); color:var(--accent-ink); border-radius:8px; padding:.9rem 1.1rem; font-weight:600; margin:1.1rem 0; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:.9rem 1.05rem; margin-top:.8rem; }
-  .card.wait { border-left:3px solid var(--warn); }
-  .card h3 { font-family:Georgia,serif; font-size:1.02rem; margin:0 0 .35rem; }
-  .card p { margin:.2rem 0; font-size:.95rem; color:var(--muted); }
-  ul { margin:.4rem 0; padding-left:1.15rem; }
-  li { margin:.3rem 0; }
-  footer { margin-top:2.2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
-  a { color:var(--accent-ink); }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .map-wrap { overflow-x:auto; margin-top:1.2rem; }
+  table.map { border-collapse:collapse; width:100%; font-size:.88rem; background:var(--card); border:1px solid var(--line); border-radius:12px; }
+  table.map th, table.map td { border:1px solid var(--line); padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  table.map th { background:var(--accent-soft); color:var(--accent-ink); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
+  table.map td.full { color:var(--warn); }
 </style>
 </head>
 <body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 2</strong></div></div>
 <div class="wrap">
+<header class="lead">
+  <h1>Открытые вопросы — сводная страница</h1>
+  <p>Здесь остались только вопросы, на которые ответа ещё не было. Отвечать можно
+  не подряд и возвращаться — ответы сохраняются в Вашем браузере, кнопка внизу
+  соберёт их в одно сообщение.</p>
+  <p class="note" style="background:#e7f2ec;border-left-color:#2e7d4f"><b>Что уже
+  закрыто Вашими ответами и здесь НЕ переспрашивается.</b> Порядок разбора
+  технического сбоя подтверждён Вами целиком: согласие сотрудника &rarr; письменная
+  заявка &rarr; разрешение методолога-психолога &rarr; доступ не более 24 часов с
+  автопогашением и журналом. Охват пилота решён: вся организация (сроки и объём —
+  отдельным разговором). Остались две точечные величины ниже — обе из этого же
+  порядка.</p>
+</header>
+<div id="qs"></div>
 
-<h1>Открытые вопросы — сводная страница</h1>
-<span class="stamp">На 19 августа (ночь) вопросов к Вам на этой странице НЕТ — все отвечены,
-спасибо. Ход перешёл к нам и к юристу.</span>
-
-<p>Двенадцать карточек прошлой редакции закрыты Вашими ответами: таблица соответствия
-архетипов и функциональных блоков, поведение не-ядерных конструктов, оба порога, форма
-компенсаций, наследование вердикта о различимости, пункт про стрессоустойчивость,
-видимость сводного представления сотрудником, чем считается соответствие корпоративной
-культуре, соединение словарей — и два вопроса заказчику: срок хранения резервных копий и
-вхождение резервного копирования в объём первой версии.</p>
-
-<p>Все ответы, включая прежние редакции и разбор группового перехода, собраны на одной
-странице: <a href="https://matusav.github.io/shares/arhiv-otvetov-svoda.html">архив ответов</a>
-(43 карточки, только для сверки — заполнять ничего не нужно).</p>
-
-<h2>Что теперь на нашей стороне</h2>
-<div class="card">
-  <h3>Одна каноническая таблица конструктов</h3>
-  <p>Вы попросили свести «Ядро» согласованной таблицы и «обязательные» Вашей классификации в
-  единую структуру и прислать вариант на рассмотрение. Это наша работа, не ожидание ответа —
-  пришлём отдельно.</p>
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите любым удобным способом. В текст попадут
+  только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
 </div>
-<div class="card">
-  <h3>Наполнение таблицы компенсаций</h3>
-  <p>Форму Вы приняли: некомпенсируемое — жёсткий фильтр, компенсация — пара конструктов с
-  коэффициентом. Наполнение готовим и присылаем на согласование.</p>
+<footer>Страница собрана 20.08.2026; редакция v34. Прежние ответы — на странице архива ответов. Ответы сохраняются в Вашем браузере, кнопка выгрузки внизу соберёт их в одно сообщение.</footer>
 </div>
+<script>
+const QS = [
+ { sect:"Заказчику — две карточки",
+   sub:"Обе — точечные величины уже подтверждённого Вами порядка разбора технического сбоя.",
+   k:"А-2а-фикс", id:"А-2а-фикс", t:"Разбор сбоя, первый шаг: что именно доступно разработчику — фиксируем формулировку",
+   c:"Ранее Вы ответили: «ответы и ключи без пояснений — да, психологические заключения — нет». Осталось зафиксировать одну формулировку, потому что «ответы и ключи» и «обезличенная копия» — не одно и то же: обезличенная копия — это те же ответы и ключи, но БЕЗ привязки к человеку (без ФИО и идентификаторов). Предлагаем записать так: на первом шаге разработчик работает с ОБЕЗЛИЧЕННОЙ копией (ответы и ключи без привязки к лицу и без пояснений); психологические заключения недоступны ни на одном шаге; исходные, необезличенные данные — только по заявке через разрешение методолога-психолога (шаги подтверждённого Вами порядка).",
+   opts:["Подтверждаю формулировку — так и записываем", "Поправлю формулировку — напишу в комментарии", "Нужно обсудить"],
+   ph:"Комментарий…" },
 
-<h2>Что у юриста</h2>
-<div class="card wait">
-  <h3>Порядок и срок хранения резервных копий</h3>
-  <p>По Вашему ответу вынесено на обсуждение с юристом вместе с порядком уничтожения копий.
-  Ограничение закона названо: копии содержат те же персональные данные, поэтому бессрочное
-  хранение недоступно.</p>
-</div>
+ { k:"А-2в-хвост", id:"А-2в-хвост", t:"Разбор сбоя: сколько живёт неодобренная заявка",
+   c:"Срок самого ДОСТУПА Вы подтвердили — не более 24 часов с автопогашением. Осталась одна величина: сколько живёт ЗАЯВКА, пока её никто не одобрил. Без срока заявка может висеть неделями и потерять актуальность; со сроком — сгорает и подаётся заново, и это видно в журнале. Ориентир из прошлой карточки: в процедуре Microsoft Customer Lockbox (доступ инженера к данным клиента по заявке; публичная документация Microsoft) заявка живёт 12 часов. Если ответа не будет — запишем 12 часов как предложение исполнителя с пометкой «заказчиком не подтверждено», до Вашего слова.",
+   opts:["12 часов", "24 часа — как срок доступа", "Без срока жизни заявки — висящие заявки видны в журнале", "Назову свой срок в комментарии"],
+   ph:"Комментарий…" },
 
-<h2>Что впереди</h2>
-<ul>
-  <li>Оба порога — стартовые параметры пилота и проверяются на пилотных данных, как Вы и написали.</li>
-  <li>Порог отказа от оценки определяется на пилоте.</li>
-  <li>Структура схемы расхождения описаний согласуется финально перед пилотом:
-      <a href="https://matusav.github.io/shares/struktura-rashozhdeniya-opisaniy.html">страница структуры</a>.</li>
-  <li>Механизм формулы разбираем совместно — по Вашему предложению, голосом.</li>
-</ul>
+];
 
-<footer>Страница переведена в состояние итога 19.08.2026: держать на ней отвеченные карточки
-значило бы показывать Вам то, на что Вы уже ответили. Адрес сохранён прежним — на него
-ссылаются отправленные письма и соседние страницы. Когда появятся новые вопросы, они
-появятся здесь же.</footer>
-
-</div>
+const KEY = "svod-otkrytyh-voprosov-v34";  /* Ключ ЭТОЙ редакции; прежних ответов на итог-странице не было. */
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = "ОТВЕТЫ — «Формула компании», свод (разбор сбоя)\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-g4a-o4-o7.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
 </body>
 </html>

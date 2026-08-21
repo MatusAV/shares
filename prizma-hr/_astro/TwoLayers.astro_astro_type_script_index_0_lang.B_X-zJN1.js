@@ -1,0 +1,1 @@
+var e=Array.from(document.querySelectorAll(`.two__tab`));e.forEach(t=>t.addEventListener(`click`,()=>{e.forEach(e=>{let n=e===t;e.classList.toggle(`is-on`,n),e.setAttribute(`aria-selected`,String(n));let r=document.getElementById(e.getAttribute(`aria-controls`));r&&(r.classList.toggle(`is-on`,n),r.hidden=!n)})}));

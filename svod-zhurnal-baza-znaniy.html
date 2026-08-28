@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Журнал и база знаний — методологу · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 0</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Журнал: пошаговая инструкция и вкладка «База знаний»</h1>
+  <p>Ваш запрос принят (приём M091). Пошаговая инструкция СДЕЛАНА: лист «Инструкция» книги журнала переписан — первый день семью шагами, порядок заполнения каждого листа по колонкам, раздел «что делать, если…». Состав и форма колонок при этом не менялись: они утверждены Вами 22.08 (M074), и построчная сверка показала изменение только на листе «Инструкция».</p>
+  <p>Вкладка «База знаний» пока не собрана: пять её блоков упираются в нормы выдачи, которые ставили Вы же. Ниже пять карточек — по одной на блок. Наш вариант стоит первым; полный разбор с ссылками на нормы — в PDF (tz/198).</p>
+  <p class="note"><b>Кто держит книгу.</b> Журнал ведут руководители подразделений и кадровик пилотной организации, а охват пилота — вся организация. Значит вкладка «База знаний» — это выдача наружу, тем же людям, которым отчёт кое-чего не показывает. Отсюда все пять вопросов.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите. В текст попадут только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница собрана 28.08.2026 по документу tz/198 (приём M091). Пять карточек — по одному блоку вкладки на карточку.</footer>
+</div>
+<script>
+const QS = [
+ {
+  "sect": "Методологу — вкладка «База знаний», пять блоков",
+  "sub": "По каждому блоку — что мешает собрать его прямо сейчас и какие есть варианты.",
+  "k": "v123",
+  "id": "В-123",
+  "t": "Блок «214 вопросов» — что именно во вкладке",
+  "c": "Важный факт, который меняет вопрос: полные формулировки всех 214 пунктов УЖЕ у заказчика — они идут Приложением А документа «Структура проекта», а он ушёл в эту группу 28.08. Значит вопрос не «раскрывать ли», а «дублировать ли в книге то, что уже выдано». Отдельно ниже — то, что из этого следует для замера.",
+  "opts": [
+   "Во вкладке — структура банка: батчи А–Ж, 39 конструктов, 208 личностных + 6 служебных, шкала +2 / 0 / −2, правило обратных; формулировки — ссылкой на Приложение А",
+   "Повторить в книге полный список 214 формулировок",
+   "Только идентификаторы и конструкты, без формулировок",
+   "Обсудить"
+  ],
+  "ph": "Состав блока…"
+ },
+ {
+  "k": "v124",
+  "id": "В-124",
+  "t": "Блок «методики и описание» — называть ли методики руководителю подразделения",
+  "c": "Ваша норма закрывает названия методик, шкал и источников норм В ОТЧЁТЕ руководителю (подтверждено Вами 27.08, В-111). Книга журнала отчётом не является, формального запрета нет — но адресат тот же самый человек, и вкладка вернёт ему то, что отчёт от него закрывает. Это вопрос объёма нормы, и решать его Вам.",
+  "opts": [
+   "Называть и описывать, как Вы просите, с оговоркой во вкладке: «в отчёте по человеку этих названий нет»",
+   "Без названий: описать подход — что измеряем и зачем, — без имён методик, шкал и источников норм",
+   "Вкладка с названиями идёт отдельным файлом Вам и кадровику; книга руководителя — без неё",
+   "Обсудить"
+  ],
+  "ph": "Объём нормы…"
+ },
+ {
+  "k": "v125",
+  "id": "В-125",
+  "t": "Блок «категории сотрудников» — каким именем",
+  "c": "Действует норма двух категорий (карточка В-122 рядом): наружу — функциональные группы. Книга журнала — выдача наружу, поэтому по действующей норме блок называется функциональными группами. Если Вы хотите иначе — это уточнение самой нормы.",
+  "opts": [
+   "Только функциональные группы, с пометкой, что внутреннее имя существует и в выдачу не выносится",
+   "Пара: «функциональная группа (внутреннее имя)»",
+   "Только внутренние имена — это меняет норму для книги, тогда скажите, распространяется ли изменение на прочую выдачу",
+   "Обсудить"
+  ],
+  "ph": "Как называть…"
+ },
+ {
+  "k": "v126",
+  "id": "В-126",
+  "t": "Блок «категории компаний»",
+  "c": "Пять имён архетипов предприятия существуют. Но жёсткая привязка «сфера бизнеса → архетип» отменена Вашей же конструкцией: архетип предприятия определяется по характеристикам организации, а не по отрасли. И там же стоит Ваше ограничение: правила, веса, пороги и таблица совместимости «архетип сотрудника ↔ архетип бизнеса» пользователям системы не раскрываются — заказчик получает итоги и рекомендации. Имена и описания под это ограничение не подпадают, правила отнесения — подпадают.",
+  "opts": [
+   "Имена и описания пяти архетипов предприятия, без правил отнесения и без таблицы совместимости",
+   "Имена, описания И признаки отнесения по характеристикам организации — это выход за Ваше ограничение, подтвердите отдельно",
+   "Блок не включать до пилота",
+   "Обсудить"
+  ],
+  "ph": "Состав блока…"
+ },
+ {
+  "k": "v127",
+  "id": "В-127",
+  "t": "Блок «структура отчёта с нормами и критериями»",
+  "c": "Источники готовы: параметры отчёта, критерии статистической оценки резюме К-1…К-12 и уровни А–Г экспертного психологического анализа — те, что Вы утвердили 28.08. Ограничение одно, и оно Ваше: в журнале числовые нормативы не назначаются, а пороги уточняются по данным пилота.",
+  "opts": [
+   "Структура отчёта + К-1…К-12 + уровни А–Г перечнями, без числовых порогов; пороги — после пилота",
+   "То же, но с рабочими порогами и пометкой «рабочие, уточняются по данным пилота»",
+   "Только структура разделов, без критериев",
+   "Обсудить"
+  ],
+  "ph": "Состав блока…"
+ },
+ {
+  "sect": "Отдельно — не карточка, а находка",
+  "sub": "Вкладкой это не закрывается ни при каком ответе на В-123, поэтому вынесено отдельно.",
+  "k": "n1",
+  "id": "Н-1",
+  "t": "Банк 214 у участников пилота — до первого тестирования",
+  "c": "Полные формулировки пунктов переданы организации, чьи сотрудники и руководители этой же батареей будут тестироваться (охват пилота — вся организация), причём ДО первого тестирования: Ваш порог требует хотя бы один полный период журнала до него, а журнал ещё не начат. Предварительное знакомство с формулировками — известный риск для замера. Психометрика банка и проверка архетипов и без того отнесены на после пилота.",
+  "opts": [
+   "Принять как риск валидации и записать это в протокол — состав Приложения А не меняем",
+   "Ограничить состав Приложения А в следующей редакции «Структуры проекта» — оставить структуру банка без формулировок",
+   "Обсудить"
+  ],
+  "ph": "Как поступаем…"
+ }
+];
+const KEY = "svod-zhurnal-baza-znaniy-v1";
+const SUMMARY_TITLE = "ОТВЕТЫ — «Формула компании», журнал и база знаний (В-123…В-127)";
+const DOWNLOAD = "otvety-zhurnal-baza-znaniy.txt";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = SUMMARY_TITLE + "\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = DOWNLOAD;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

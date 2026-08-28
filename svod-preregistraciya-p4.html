@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Пререгистрация валидации П4 — методологу · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 0</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Пререгистрация валидации П4: протокол на утверждение</h1>
+  <p>По решению владельца 28.08: до старта пилота зафиксировать, что и как проверяется на пилоте — гипотезы, метрики, правило решения, мощность и протокол данных, — чтобы проверка не превратилась в подгонку после факта. Полный протокол — в PDF (tz/195). Три карточки; наш вариант стоит первым. Ответы сохраняются в браузере; кнопка внизу соберёт их в текст.</p>
+  <p class="note"><b>Что не меняется:</b> две проверки §13 (количественная П4 и Ваша качественная сверка с руководителем), исходы только из журнала tz/68, пороги и веса — после пилота (Д6), динамический слой — по своему протоколу (tz/12) при появлении истории.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите. В текст попадут только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница собрана 28.08.2026 по протоколу tz/195 (к У-4, Р-99).</footer>
+</div>
+<script>
+const QS = [
+ { sect:"Методологу — пререгистрация валидации П4 (В-119…В-121)",
+   sub:"Протокол фиксируется до данных: что проверяется, какими метриками, при каком числе участников проверка имеет мощность, что считается «прошло». Полный текст — в PDF (tz/195). Наш вариант стоит первым.",
+   k:"v119", id:"В-119", t:"Протокол пререгистрации П4 целиком (разделы 1–5): объекты, гипотезы H1–H6, правило решения, мощность, протокол данных",
+   c:"Первичные гипотезы: H1 — индекс соответствия должности на момент тестирования связан с результативностью за 6 месячных периодов (Спирмен ρ, нижняя граница 95 % ДИ > 0); H2 — с удержанием за 12 месяцев (ранг-бисериальная связь с событием выхода, нижняя граница ДИ > 0). Исходы проверяются раздельно, как в ТЗ §15. Вторичные (без порога): достоверность как модератор, совпадение архетипов против Вашей же сверки руководителя (tz/141), классы прогноза (tz/181) через ≥ 3 периода, критерии резюме (tz/187). Правило решения: не пройдено по обоим исходам → shadow-mode, заключение по отчёту пилота — Ваше; пороги задним числом не меняются. Мощность (формула Фишера): при 20–25 участниках нижняя граница > 0 достижима только для истинной связи от ~0.4–0.5; при N ≥ 44 — для 0.3; число участников заказчик назовёт к старту.",
+   opts:["Утвердить протокол как пререгистрацию П4", "Утвердить с правками — укажу в комментарии", "Обсудить"],
+   ph:"Правки к гипотезам, метрикам, окнам…" },
+
+ { k:"v120", id:"В-120", t:"Первичный исход результативности — что считать результативностью по журналу",
+   c:"Журнал tz/68 даёт два ряда: лист А-2 — KPI роли из карточки с планом (шаг месяц), лист А-1 — задачи периода: поставлено / выполнено в срок (шаг неделя). Предлагаем первичным исход по А-2 — средний индекс выполнения (факт/план) по показателям, у которых план задан, за 6 периодов; где план не задан ни по одному KPI — резервный исход по А-1: доля задач, выполненных в срок. Альтернатива — доля задач в срок первичным для всех (проще и однороднее, но не про содержание работы).",
+   opts:["Средний индекс выполнения KPI (А-2), резерв — доля задач в срок (А-1)", "Доля задач, выполненных в срок (А-1) — первичный для всех", "Свой вариант — опишу в комментарии", "Обсудить"],
+   ph:"Определение исхода…" },
+
+ { k:"v121", id:"В-121", t:"Уровень доверительного интервала при двух первичных гипотезах (результативность и удержание)",
+   c:"Две первичные проверки на уровне 95 % каждая дают семейную ошибку до ~10 % (1 − 0.95²). Протокол это заявляет, а не прячет. Варианты: оставить 95 % на каждую с явной оговоркой в отчёте (исходы по ТЗ §15 проверяются раздельно, как два разных вопроса) или взять 97,5 % на каждую (поправка Бонферрони) — строже, но при малом N шанс пройти П4 заметно ниже.",
+   opts:["95 % на каждую гипотезу с оговоркой о семейной ошибке в отчёте", "97,5 % на каждую (поправка Бонферрони)", "Обсудить"],
+   ph:"Оговорки…" },
+
+];
+
+const KEY = "svod-preregistraciya-p4-v1";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  if (q.done) {
+    d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <p style="background:#e7f2ec;border-left:3px solid #2e7d4f;padding:.5rem .7rem;border-radius:6px;font-weight:600;overflow-wrap:break-word">✅ ${q.done}</p>`;
+    root.appendChild(d);
+    return;
+  }
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.filter(q => !q.done).length}`;
+  let text = "ОТВЕТЫ — «Формула компании», пререгистрация валидации П4 (В-119…В-121)\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-preregistraciya-p4.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

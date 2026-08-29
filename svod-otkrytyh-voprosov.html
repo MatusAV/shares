@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Открытые вопросы — «Формула компании»</title>
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .note.warn { background:var(--warn-soft); color:var(--warn); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .who { display:inline-block; font-size:.72rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; padding:.15rem .5rem; border-radius:5px; margin-bottom:.5rem; }
+  .w-m { background:var(--accent-soft); color:var(--accent-ink); }
+  .w-z { background:var(--ok-soft); color:var(--ok); }
+  .w-y { background:var(--warn-soft); color:var(--warn); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible, .opt:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено <strong id="pcount">0 из 0</strong></span><span>ред. v1.0</span></div></div>
+<div class="wrap">
+
+<header class="lead">
+  <h1>Открытые вопросы проекта — единый свод</h1>
+  <p>Здесь собраны <b>все</b> вопросы, на которые проект сейчас ждёт ответа. Прежние отдельные страницы закрыты — эта заменяет их целиком, чтобы не приходилось держать в голове несколько ссылок.</p>
+  <p>Вопросы сгруппированы по темам. У каждого стоит пометка, к чьей зоне он относится: <b>методолог</b>, <b>заказчик</b> или <b>юрист</b>. Отвечать можно частично и в несколько заходов — ответы сохраняются в браузере.</p>
+  <div class="note"><b>Как прислать ответы.</b> Заполните, что относится к Вам, нажмите «Скопировать текст» внизу и пришлите в рабочую группу. В текст попадут только те пункты, на которые Вы ответили.</div>
+  <div class="note warn"><b>Если Вы уже начинали отвечать на прежней странице «журнал и база знаний».</b> Два вопроса оттуда — про носитель вкладки и про архетипы предприятия — перенесены сюда без изменений (первые в списке). Начатые там ответы на эту страницу не переносятся: продублируйте их здесь, пожалуйста.</div>
+</header>
+
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Прислать ответы</h2>
+  <p>Соберите текст кнопкой и пришлите в группу. Можно отвечать не на всё сразу — присылайте по мере готовности.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy">Скопировать текст</button>
+    <button class="ghost" id="btn-dl">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly></textarea>
+</div>
+
+<footer>Страница собрана 29.08.2026. Заменяет прежние отдельные своды: они закрыты, все незакрытые вопросы перенесены сюда. Держатель — <code>tz/199</code>.</footer>
+
+</div>
+<script>
+const QS = [
+ { sect:"1. Пилот: запуск и организация", sub:"Эти четыре пункта запрашивались письмом 28.08 и остаются открытыми. Оформлены карточками, чтобы не потерялись.",
+   k:"s28", id:"С-28", who:"z", t:"Дата начала ведения журнала и ответственные",
+   c:"Журнал результатов — на критическом пути: срок проверки методики отсчитывается от первой записи. Нужна дата начала (одна на подразделение) и имя ответственного за ведение в каждом.",
+   opts:["Назову дату и ответственных в комментарии","Начинаем с ближайшего понедельника, ответственных назову позже","Нужно обсудить — есть сложность"], ph:"Дата, подразделения, ответственные…" },
+ { k:"s29", id:"С-29", who:"z", t:"Контактное лицо со стороны компании",
+   c:"Один человек, через которого идут организационные вопросы: доступы, графики, согласования внутри компании.",
+   opts:["Назову в комментарии","Контактное лицо — руководитель подразделения","Обсудить"], ph:"Имя, роль, способ связи…" },
+ { k:"s30", id:"С-30", who:"z", t:"Первые слоты интервью по карточкам ролей",
+   c:"Интервью проводим мы по готовому гайду; от Вас — время и участники. Достаточно первых двух-трёх слотов, чтобы начать.",
+   opts:["Предложу слоты в комментарии","Пусть контактное лицо соберёт график","Обсудить"], ph:"Даты, время, участники…" },
+ { k:"s31", id:"С-31", who:"z", t:"Порядок подразделений — с какого начинаем",
+   c:"Пилот идёт по подразделениям последовательно. Нужен порядок: с какого начать и какие следом.",
+   opts:["Назову порядок в комментарии","Начинаем с того, где больше всего вопросов по людям","Обсудить"], ph:"Перечислите подразделения по порядку…" },
+
+ { sect:"2. Журнал и база знаний", sub:"Перенесено с прежней страницы второго круга без изменений формулировок.",
+   k:"v128", id:"В-128", who:"m", t:"Носитель вкладки «База знаний» — который из двух",
+   c:"Общую книгу учёта держат руководители подразделений, и пара «внутреннее имя архетипа» ушла бы к ним. Вопрос: вкладка «База знаний» живёт в общей книге учёта — или в отдельной книге методолога, которая к руководителям не попадает?",
+   opts:["Отдельная книга методолога — к руководителям не попадает","Общая книга учёта — вкладка видна руководителям","Иначе — опишу в комментарии"], ph:"Ваш вариант…" },
+ { k:"v129", id:"В-129", who:"m", t:"Описания архетипов предприятия и признаки отнесения",
+   c:"В проекте нет описаний архетипов предприятия и не подтверждены признаки, по которым компанию к архетипу относят. Без них раздел собирается вариантом по умолчанию.",
+   opts:["Пришлю описания и признаки отдельно","Используйте вариант по умолчанию, потом поправим","Обсудить состав"], ph:"Описания, признаки отнесения…" },
+
+ { sect:"3. Анкета компании — 15 характеристик", sub:"Новый инструмент из обновления программы. Четыре вопроса о том, как он ложится на уже существующее.",
+   k:"v130", id:"В-130", who:"m", t:"Четыре характеристики совпадают с осями культуры — тот же конструкт или другой?",
+   c:"Иерархичность культуры, ориентация на результат/процесс, толерантность к риску и стиль коммуникации содержательно пересекаются с четырьмя осями, которые у нас уже измеряются утверждённым инструментом из 16 пунктов. Двойной учёт одних и тех же осей Вы однажды уже отклоняли.",
+   opts:["Тот же конструкт — использовать существующий инструмент, не дублировать","Другой конструкт для другой цели — нужен свой, поля развести явно","Обсудить"], ph:"Пояснение…" },
+ { k:"v131", id:"В-131", who:"m", t:"Расширять паспорт организации или заводить отдельный инструмент",
+   c:"У нас есть паспорт организации: семь характеристик плюс отрасль признаком. Анкета компании из обновления — 15 характеристик другого назначения (подбор компании под соискателя).",
+   opts:["Отдельный инструмент — паспорт не трогаем","Расширить паспорт недостающими полями","Обсудить"], ph:"Пояснение…" },
+ { k:"v132", id:"В-132", who:"m", t:"Правило «поле анкеты → балл» — задавать сейчас?",
+   c:"Сегодня паспорт организации в расчёт не входит: он контекст и сверка, потому что правила перевода поля в балл не существует. Новая анкета компании предполагает прямой числовой вход.",
+   opts:["Новый инструмент получает свою шкалу с нуля; правило для паспорта не трогаем","Задать правило «поле → балл» сейчас, для обоих","Обсудить"], ph:"Пояснение…" },
+ { k:"v133", id:"В-133", who:"m", t:"Семь характеристик, которых нет нигде в проекте",
+   c:"Оплата относительно рынка, текучесть, баланс работы и личной жизни, карьерный рост, автономия сотрудника, миссия компании, формат работы — у нас для них места нет вообще. Они нужны для подбора компании под соискателя.",
+   opts:["Только в новом инструменте","Добавить их и в паспорт организации","Часть нужна, часть нет — уточню в комментарии"], ph:"Какие оставить, какие убрать…" },
+ { k:"s32", id:"С-32", who:"z", t:"Кто и когда заполняет анкету компании",
+   c:"Анкета описывает компанию как работодателя. Нужно назвать, кто её заполняет и на каком этапе — иначе инструмент останется без владельца.",
+   opts:["Кадровая служба при заведении компании","Руководитель подразделения","Обсудить"], ph:"Кто и когда…" },
+
+ { sect:"4. Трёхуровневая иерархия", sub:"Обновление вводит соответствие между соседними уровнями: хозяин ↔ топ-менеджер ↔ директор ↔ компания.",
+   k:"v134", id:"В-134", who:"m", t:"Роли уровней: три новые или одна с признаком уровня",
+   c:"Согласованная Вами ролевая модель держит одну управленческую роль «Руководитель» на любой уровень — от начальника отдела до владельца компании. Трёхуровневая схема требует их различать.",
+   opts:["Одна роль плюс признак уровня — модель не переписывается","Три отдельные роли: хозяин, топ-менеджер, директор","Обсудить"], ph:"Пояснение…" },
+ { k:"s33", id:"С-33", who:"z", t:"Есть ли в компании реально топ-менеджер и директор как разные уровни",
+   c:"Вопрос практический: если в пилотном контуре эти уровни не разведены, трёхуровневая схема на пилоте останется теоретической.",
+   opts:["Да, уровни разные — опишу в комментарии","Нет, фактически один управленческий уровень","Частично — поясню"], ph:"Как устроено у Вас…" },
+ { k:"v135", id:"В-135", who:"m", t:"Чем считать соответствие между двумя людьми",
+   c:"Сегодня мы считаем соответствие «человек ↔ роль». Соответствие «человек ↔ человек» на соседних уровнях — другая операция: она симметрична, тогда как нынешняя формула направленная.",
+   opts:["Взять существующую модель, применив её к паре людей","Нужна отдельная симметричная формула","Обсудить"], ph:"Пояснение…" },
+
+ { sect:"5. Пороги и формулировки выдачи", sub:"Самая чувствительная часть: от неё зависит, что именно система говорит о человеке.",
+   k:"v136", id:"В-136", who:"m", t:"Порог, ниже которого человек считается не соответствующим позиции",
+   c:"В обновлении появляется вывод «кто подлежит замене», но порога для него нет. Ни один из трёх существующих порогов проекта под решение о замене не проектировался.",
+   opts:["Нужен отдельный порог — предложу значение и обоснование","Взять по аналогии существующий порог рекомендации","Порог задавать рано — сначала данные пилота"], ph:"Значение, обоснование…" },
+ { k:"v137", id:"В-137", who:"m", t:"Что хозяин видит о себе по результатам психопортрета",
+   c:"Для существующего теста руководителя правило есть: свой результат он получает через специалиста. Для нового психопортрета правило нужно подтвердить — содержание там чувствительнее (управленческий стиль, неприемлемое в заместителе).",
+   opts:["То же правило: свой результат — через специалиста","Нужно отдельное правило, поясню","Обсудить"], ph:"Пояснение…" },
+
+ { sect:"6. Психопортрет хозяина", sub:"Новый инструмент: 20–25 вопросов, темы намечены в обновлении черновиком.",
+   k:"v138", id:"В-138", who:"m", t:"Кто пишет содержание психопортрета",
+   c:"Темы намечены: управленческий стиль, ценностные приоритеты, ожидания от заместителя, готовность делегировать, стиль обратной связи, неприемлемое. Формулировки вопросов и ключи — методическая работа, как это было с анкетой руководителя.",
+   opts:["Пишу я — пришлю формулировки","Готовьте черновик, я поправлю — как делали с анкетой руководителя","Обсудить"], ph:"Пояснение…" },
+
+ { sect:"7. Проверка нового объёма", sub:"Утверждённая программа проверки покрывает только один контур — тот, где есть история для сверки.",
+   k:"v139", id:"В-139", who:"m", t:"Нужен ли отдельный протокол проверки для новых веток и управленческого слоя",
+   c:"Пока протокола нет, их выходы честно показывать только с пометкой повышенной неопределённости — как у рекрутингового контура. Утверждённая пререгистрация меняется только новым протоколом.",
+   opts:["Да, для веток соответствия нужен свой протокол; управленческому слою — не нужен","Отдельный протокол не нужен — всё под пометкой неопределённости","Обсудить"], ph:"Пояснение…" },
+
+ { sect:"8. Юридическое", sub:"Два вопроса ждут с 27.08, два появились из-за нового объёма.",
+   k:"y10", id:"Ю-10", who:"y", t:"Комментарии к местам «уточнить юристу» в шаблоне актов об обезличивании",
+   c:"Шаблон передан 27.08; в нём отмечены места, по которым Вы обещали комментарии. Без них шаблон не может уйти заказчику как рабочий.",
+   opts:["Замечаний нет — можно использовать","Пришлю правки в комментарии","Нужно обсудить"], ph:"Комментарии по местам…" },
+ { k:"y11", id:"Ю-11", who:"y", t:"Порядок по статье 22 в единой редакции договора",
+   c:"Текст договора Вы согласовали 27.08; оставался обещанный комментарий по порядку, предусмотренному статьёй 22.",
+   opts:["Порядок описан верно — замечаний нет","Пришлю формулировку в комментарии","Обсудить"], ph:"Формулировка…" },
+ { k:"y12", id:"Ю-12", who:"y", t:"Владелец компании одновременно проходит диагностику и является оператором данных",
+   c:"Новый объём вводит психодиагностику владельца, топ-менеджера и директора. При этом заказчик — он же владелец — выступает оператором персональных данных. Весь прежний пакет вопросов писался под сотрудника, кандидата и соискателя; такой конфигурации в нём нет.",
+   opts:["Допустимо, ограничения назову в комментарии","Требуется отдельная правовая конструкция — поясню","Нужна встреча по этому вопросу"], ph:"Ограничения, требования…" },
+ { k:"y13", id:"Ю-13", who:"y", t:"Сто согласий вместо пяти: анкету проходят все кандидаты пула",
+   c:"Принято решение, что развёрнутую анкету проходят все кандидаты пула, а не только прошедшие отбор по резюме. Это значит, что субъектов персональных данных на пилоте становится существенно больше, и согласие требуется от каждого.",
+   opts:["Тот же порядок получения согласия, объём роли не играет","Нужны дополнительные меры при таком объёме — назову","Обсудить"], ph:"Меры, ограничения…" }
+];
+const KEY = "svod-otkrytyh-voprosov-edinyy-v1";
+const SUMMARY_TITLE = "ОТВЕТЫ — «Формула компании», единый свод открытых вопросов";
+const DOWNLOAD = "otvety-svod-otkrytyh-voprosov.txt";
+const WHO = { m:["методолог","w-m"], z:["заказчик","w-z"], y:["юрист","w-y"] };
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const w = WHO[q.who] || ["",""];
+  const d = document.createElement("div");
+  d.className = "q";
+  d.innerHTML = `<span class="who ${w[1]}">${w[0]}</span><h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.length}`;
+  let text = SUMMARY_TITLE + "\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    const w = WHO[q.who] ? ` (${WHO[q.who][0]})` : "";
+    text += `${q.id ? q.id + " " : ""}${q.t}${w}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = DOWNLOAD;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

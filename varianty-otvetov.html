@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Варианты ответов по нашим проектам · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 0</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Наши проекты: восемнадцать решений, которые за Вами</h1>
+  <p>Это НЕ новые вопросы. Это то, что лежит внутри четырёх карточек единого свода — В-134, В-135, В-138 и В-140 с С-34. По каждой мы прислали свой проект; чтобы его принять или поправить, нужно решить восемнадцать конкретных вещей. Здесь они разложены по одной, с нашим вариантом первым.</p>
+  <p>Если проект устраивает целиком — достаточно выбрать первый вариант в каждой карточке. Где не устраивает, напишите в комментарии: он важнее выбора.</p>
+  <p class="note"><b>Зачем отдельная страница.</b> В карточке свода стоит вопрос верхнего уровня — «подтвердите проект». Ответить на него одним словом нельзя: внутри проекта есть места, где программе нужно однозначное правило, и без них она либо встанет, либо примет умолчание за Ваше решение. Мы предпочитаем спросить.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите. В текст попадут только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница собрана 29.08.2026 по документам tz/202–tz/205 (приём M094).</footer>
+</div>
+<script>
+const QS = [
+ {
+  "sect": "1. Симметричная мера «человек — человек» (карточка В-135, документ tz/202)",
+  "sub": "Формулу Вы прислали, и она принята как отдельная от направленной. Ниже — шесть мест, где она молчит, а программе нужно правило.",
+  "k": "m1",
+  "id": "В-135.1",
+  "t": "Чем задан диапазон R в знаменателе сходства",
+  "c": "Если R — размах шкалы (максимум минус минимум), то разность никогда его не превысит и сходство лежит от 0 до 1, как задумано. Если R — что-то другое, например разброс по выборке, сходство уходит в минус на далёких парах и перестаёт читаться как доля. Для наших стенов размах равен 9 — то же число уже стоит знаменателем в мере роли.",
+  "opts": [
+   "Размах шкалы (для стенов 9)",
+   "Другое — назову в комментарии",
+   "Обсудить"
+  ],
+  "ph": "Если другое — что именно…"
+ },
+ {
+  "k": "m2",
+  "id": "В-135.2",
+  "t": "Что делать, если характеристика есть у одного и нет у другого",
+  "c": "Если подставить ноль, разность станет максимальной и ПРОПУСК прочитается как предельная непохожесть — то есть отсутствие данных станет фактом о людях. Мы предлагаем тот же приём, что уже принят в звене 5: характеристику исключить из обеих сумм и считать по общему подмножеству.",
+  "opts": [
+   "Исключать характеристику из обеих сумм",
+   "Обнулять",
+   "Другое правило — назову",
+   "Обсудить"
+  ],
+  "ph": "Правило для пропуска…"
+ },
+ {
+  "k": "m3",
+  "id": "В-135.3",
+  "t": "Откуда берутся веса характеристик",
+  "c": "Это единственное место, где источника нет вовсе. В направленной мере веса берутся из канона роли: конструкт числится обязательным или желательным. Между двумя людьми роли нет — и канона тоже. Пока считаем по равным и помечаем это в выдаче как наше умолчание, а не Ваше решение.",
+  "opts": [
+   "Все веса равны",
+   "Веса от общей значимости конструкта — дам ранжирование",
+   "Свой набор весов на каждый случай сравнения",
+   "Обсудить"
+  ],
+  "ph": "Если ранжирование — приложите его…"
+ },
+ {
+  "k": "m4",
+  "id": "В-135.4",
+  "t": "Ипсативные инструменты — включать в меру?",
+  "c": "Разностное сходство не читается на ипсативной шкале: там баллы связаны между собой внутри человека, и разность двух людей по одной шкале не имеет самостоятельного смысла. В проекте такой случай уже разобран — Белбин не входит в общую метрику по конструкции.",
+  "opts": [
+   "Исключать, как Белбина",
+   "Включать — поясню как",
+   "Обсудить"
+  ],
+  "ph": "Если включать — как считать…"
+ },
+ {
+  "k": "m5",
+  "id": "В-135.5",
+  "t": "Как величина называется НАРУЖУ",
+  "c": "Величина, названная процентом и показанная рядом с двумя фамилиями, будет прочитана как «совместимость» независимо от того, что написано в сноске. Вы сами оговорили: это степень близости профилей, а не оценка качества взаимодействия. Предлагаем закрепить это в имени.",
+  "opts": [
+   "«Сходство профилей»",
+   "Другое имя — назову",
+   "Обсудить"
+  ],
+  "ph": "Имя величины наружу…"
+ },
+ {
+  "k": "m6",
+  "id": "В-135.6",
+  "t": "Кто видит число, которое говорит о ДВУХ людях",
+  "c": "Направленная мера говорит о человеке и роли. Симметричная говорит о двух людях сразу, и показанная одному из них она сообщает ему нечто о втором. Предлагаем распространить правило, которое Вы уже приняли для психопортрета: через специалиста, с записью в журнал доступа.",
+  "opts": [
+   "Через специалиста, как в В-137",
+   "Можно показывать напрямую",
+   "Обсудить"
+  ],
+  "ph": "Ограничения на выдачу…"
+ },
+ {
+  "sect": "2. Ветки соответствия и уровни (карточка В-134, документ tz/203)",
+  "sub": "Три отдельные роли приняты, уровни описал заказчик. Ниже — что нужно решить, чтобы это стало правилом.",
+  "k": "v1",
+  "id": "В-134.1",
+  "t": "Три ветки — разного ли они рода?",
+  "c": "Ветки «Хозяин — Топ-менеджер» и «Топ-менеджер — Директор» сравнивают человека с человеком, а ветка «уровень — Компания» сравнивает человека с требованиями организации. Первая пара — симметричная мера, третья — направленная. Считать третью симметричной значило бы объявить, что человек СИЛЬНЕЕ требуемого соответствует компании хуже подходящего ровно.",
+  "opts": [
+   "Подтверждаю: две симметричные, третья направленная",
+   "Иначе — поясню",
+   "Обсудить"
+  ],
+  "ph": "Если иначе — как…"
+ },
+ {
+  "k": "v2",
+  "id": "В-134.2",
+  "t": "Чем описывать уровень",
+  "c": "Предлагаем описывать уровень не новым набором конструктов, а требованиями к уже существующим: какие обязательны, какие желательны, какие не требуются — тем же способом, каким описана любая роль. Отдельный измерительный слой для уровней завёл бы второй параллельный язык описания там, где хватает существующего.",
+  "opts": [
+   "Да, требованиями к существующим конструктам",
+   "Нужен отдельный слой — поясню",
+   "Обсудить"
+  ],
+  "ph": "Замечания…"
+ },
+ {
+  "k": "v3",
+  "id": "В-134.3",
+  "t": "Конструкты и пороги для каждого из трёх уровней",
+  "c": "Это за Вами: назначить их самим значило бы решить за методолога ровно то, что методологу и принадлежит. Наше прочтение описаний заказчика приложено в проекте — им можно пользоваться как черновиком.",
+  "opts": [
+   "Пришлю таблицу отдельно",
+   "Назову в комментарии",
+   "Обсудить"
+  ],
+  "ph": "Конструкты и пороги по уровням…"
+ },
+ {
+  "k": "v4",
+  "id": "В-134.4",
+  "t": "Операционная вовлечённость Хозяина",
+  "c": "Заказчик прямо написал, что Хозяин может не участвовать в ежедневной работе. Значит для его уровня это НОРМА, а не недостаток, и требование к операционной вовлечённости должно быть низким. Иначе общая мера накажет его за то, что по описанию является свойством уровня.",
+  "opts": [
+   "Подтверждаю: требование низкое",
+   "Нет, требование обычное",
+   "Обсудить"
+  ],
+  "ph": "Пояснение…"
+ },
+ {
+  "sect": "3. Психопортрет хозяина (карточка В-138, документ tz/204)",
+  "sub": "Черновик составлен: четыре блока, 22 вопроса, структура выдачи взята из Вашего ответа В-137 дословно.",
+  "k": "p1",
+  "id": "В-138.1",
+  "t": "Психопортрет — из существующей батареи или отдельный инструмент?",
+  "c": "Если отдельный — понадобятся его шкалы и нормы. Если из батареи — понадобится соответствие «вопрос — конструкт». Это разные объёмы работы, и выбрать может только методолог.",
+  "opts": [
+   "Из существующей батареи",
+   "Отдельный инструмент — опишу",
+   "Обсудить"
+  ],
+  "ph": "Если отдельный — шкалы и нормы…"
+ },
+ {
+  "k": "p2",
+  "id": "В-138.2",
+  "t": "Кто такой «специалист», через которого хозяин получает результат",
+  "c": "Ваше правило называет роль, но не человека. На пилоте это должен быть кто-то конкретный — иначе правило не исполнимо в первый же день.",
+  "opts": [
+   "Назову человека или роль в комментарии",
+   "Определим при старте пилота",
+   "Обсудить"
+  ],
+  "ph": "Кто это…"
+ },
+ {
+  "k": "p3",
+  "id": "В-138.3",
+  "t": "Сравнивается ли психопортрет хозяина с укладом компании?",
+  "c": "Если да — это ещё одна ветка соответствия, которой в списке трёх нет, и её надо завести явно.",
+  "opts": [
+   "Нет, не сравнивается",
+   "Да — это четвёртая ветка",
+   "Обсудить"
+  ],
+  "ph": "Пояснение…"
+ },
+ {
+  "sect": "4. Опросник личного собеседования (карточки В-140 и С-34, документ tz/205)",
+  "sub": "Требование заказчика: 10–15 вопросов по блокам, каждому процент, в сумме сто. Наш проект — пять блоков, 14 вопросов.",
+  "k": "o1",
+  "id": "В-140.1",
+  "t": "Как называются две стобалльные величины, чтобы их не складывали",
+  "c": "В продукте уже есть величина в процентах — процент соответствия профиля, у которого свой порог. Опросник даёт ДРУГИЕ сто баллов: оценку живого разговора, выставленную человеком. Разное происхождение, разный предмет, разная воспроизводимость. Если обе окажутся в одном отчёте без разделения, первый же читатель их сложит или спросит, почему числа разные. Предлагаем: процент остаётся один, опросник даёт БАЛЛ.",
+  "opts": [
+   "Согласен: «процент соответствия» и «балл собеседования»",
+   "Назвать иначе — предложу",
+   "Обсудить"
+  ],
+  "ph": "Имена величин…"
+ },
+ {
+  "k": "o2",
+  "id": "В-140.2",
+  "t": "Веса блоков опросника",
+  "c": "Наш проект: опыт по существу задачи 25 · как решает и как ошибается 25 · взаимодействие 20 · мотивация и горизонт 15 · условия и ограничения 15. В сумме сто. Веса предложены нами и подлежат Вашей правке — назначение их по существу за методологом.",
+  "opts": [
+   "Принимаю 25/25/20/15/15",
+   "Назначу свои — в комментарии",
+   "Обсудить"
+  ],
+  "ph": "Свои веса…"
+ },
+ {
+  "k": "o3",
+  "id": "В-140.3",
+  "t": "Шкала оценки одного вопроса",
+  "c": "Предлагаем единую шкалу от 0 до 4 с умножением на вес блока: иначе интервьюеры будут ставить баллы в разных диапазонах, и суммы разных людей окажутся несравнимыми. Отдельное правило: к каждой оценке одна строка обоснования, балл без строки не засчитывается.",
+  "opts": [
+   "Шкала 0–4 подходит",
+   "Нужна другая — назову",
+   "Обсудить"
+  ],
+  "ph": "Если другая — какая…"
+ },
+ {
+  "k": "o4",
+  "id": "С-34.1",
+  "t": "Нужен ли порог по баллу собеседования (заказчику)",
+  "c": "Порог по машинному проценту в проекте есть. Нужен ли отдельный порог по баллу собеседования — то есть значение, ниже которого кандидат не проходит по итогам разговора? Если нужен, его лучше назначить до пилота, а не после первых собеседований.",
+  "opts": [
+   "Порог не нужен",
+   "Нужен — назову значение",
+   "Обсудить"
+  ],
+  "ph": "Значение порога…"
+ },
+ {
+  "k": "o5",
+  "id": "С-34.2",
+  "t": "Четырнадцать вопросов при заказанных 10–15 (заказчику)",
+  "c": "Вы просили 10–15 вопросов. В нашем проекте их четырнадцать: три в блоке опыта, три о решениях и ошибках, три о взаимодействии, два о мотивации, три об условиях. Формулировки самих вопросов мы намеренно не приводим до согласования рамки — так же делали с анкетой руководителя, и это сэкономило переписывание.",
+  "opts": [
+   "Четырнадцать годится",
+   "Хочу другое число — назову",
+   "Обсудить"
+  ],
+  "ph": "Число вопросов и замечания по блокам…"
+ }
+];
+const KEY = "varianty-otvetov-v1";
+const SUMMARY_TITLE = "ОТВЕТЫ — «Формула компании», варианты по нашим проектам";
+const DOWNLOAD = "otvety-varianty-po-proektam.txt";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  if (q.done) {
+    d.innerHTML = `<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <p style="background:var(--ok-soft);border-left:3px solid var(--ok);padding:.5rem .7rem;border-radius:6px;font-weight:600;overflow-wrap:break-word">✅ ${q.done}</p>`;
+    root.appendChild(d);
+    return;
+  }
+  d.innerHTML = `<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.filter(q => !q.done).length}`;
+  let text = SUMMARY_TITLE + "\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `${q.id ? q.id + " " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = DOWNLOAD;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>

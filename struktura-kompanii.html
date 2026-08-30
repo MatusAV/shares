@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Калькулятор компании — структура и паспорт · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:48rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:48rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  .note.warn { background:var(--warn-soft); color:var(--warn); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 .8rem; max-width:62ch; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1rem 1.05rem; margin-top:1rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .toolbar { display:flex; flex-wrap:wrap; gap:.5rem; margin:.2rem 0 .9rem; align-items:center; }
+  .toolbar .grp { display:flex; gap:.35rem; align-items:center; }
+  .toolbar select { width:auto; max-width:16rem; }
+  button, a.btn { font:inherit; font-size:.92rem; font-weight:600; border-radius:9px; padding:.5rem .9rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); background:transparent; color:var(--accent-ink); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.small { font-size:.85rem; font-weight:500; padding:.3rem .6rem; border-color:var(--line); color:var(--muted); }
+  button.small:hover { border-color:var(--accent); color:var(--accent-ink); }
+  button[disabled] { opacity:.45; cursor:not-allowed; }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, li:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  ul.tree, ul.tree ul { list-style:none; margin:0; padding:0; }
+  ul.tree ul { margin-left:1.1rem; border-left:1px dotted var(--line); padding-left:.7rem; }
+  li.node > .row { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; padding:.35rem .4rem; border-radius:8px; }
+  li.node[aria-selected="true"] > .row { background:var(--accent-soft); }
+  li.node:focus { outline:none; }
+  li.node:focus > .row { outline:2px solid var(--accent); outline-offset:1px; }
+  .twist { flex:none; width:1.3rem; text-align:center; color:var(--muted); cursor:pointer; user-select:none; background:none; border:none; font-size:.9rem; padding:0; }
+  .nname { font-weight:600; }
+  .nmeta { font-size:.85rem; color:var(--muted); }
+  .badge { font-size:.75rem; border-radius:6px; padding:.05rem .4rem; background:var(--accent-soft); color:var(--accent-ink); }
+  .badge.warn { background:var(--warn-soft); color:var(--warn); }
+  .fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:.6rem; margin-top:.5rem; }
+  label.f { display:flex; flex-direction:column; gap:.2rem; font-size:.85rem; color:var(--muted); }
+  input, select, textarea { font:inherit; font-size:.92rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.4rem .55rem; width:100%; }
+  textarea { min-height:3.4rem; resize:vertical; }
+  .err { color:var(--warn); font-size:.85rem; margin-top:.35rem; }
+  .posrow { display:grid; grid-template-columns:1fr 5.5rem 6.5rem auto; gap:.5rem; align-items:end; margin-top:.5rem; }
+  .hint { font-size:.85rem; color:var(--muted); margin:.4rem 0 0; }
+  .sug { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; margin-top:.5rem; font-size:.85rem; color:var(--muted); }
+  .sug .chip { font:inherit; font-size:.82rem; font-weight:500; border:1.5px dashed var(--accent); background:var(--card); color:var(--accent-ink); border-radius:999px; padding:.15rem .6rem; cursor:pointer; }
+  .sug .chip:hover { background:var(--accent-soft); }
+  .sug .chip::before { content:"+ "; }
+  .sug .lbl { font-weight:600; color:var(--accent-ink); }
+  .arch { margin-top:.8rem; font-size:.9rem; }
+  .arch summary { cursor:pointer; color:var(--muted); }
+  .arch ul { margin:.4rem 0 0; padding-left:1.1rem; }
+  .arch li { margin:.2rem 0; }
+  dialog { border:1.5px solid var(--accent); border-radius:12px; background:var(--card); color:var(--ink); max-width:28rem; width:92%; padding:1.1rem; }
+  dialog::backdrop { background:rgba(0,0,0,.45); }
+  dialog h3 { font-family:Georgia,serif; margin:0 0 .5rem; font-size:1.15rem; }
+  dialog ul.codes { margin:.4rem 0 .6rem; padding-left:1.1rem; font-size:.9rem; max-height:12rem; overflow:auto; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font-size:.85rem; line-height:1.5; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Подразделений <strong id="pcount">0</strong></span><span>Численность <strong id="hcount">0</strong></span><span>Паспорт <strong id="pfill">0 из 7</strong></span><span>ред. v2.0</span></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Калькулятор компании — структура и паспорт</h1>
+  <p>Страница для тех, кто заводит структуру компании в проекте «Формула компании»:
+  владелец компании, кадровая служба, методолог, администратор. Здесь перечень
+  подразделений заполняется прямо на экране — вместо списка в письме. Всё, что вы
+  введёте, остаётся в вашем браузере; наружу уходит только файл или текст, который вы
+  сами соберёте кнопкой внизу.</p>
+  <p class="note"><b>Зачем это нужно.</b> Система сравнивает человека с эталоном
+  должности, а должности живут в подразделениях: без структуры не с чем сравнивать и
+  некуда расставлять. Введённое один раз уезжает в продукт файлом — перенабирать не
+  придётся.</p>
+  <p class="note"><b>Как заполнять.</b> Начните с верхних подразделений, потом добавляйте
+  вложенные. Минимум по каждому — <b>название</b> и <b>численность</b> (своя, без
+  вложенных подразделений). Страница подсказывает типовые подразделения, коды и
+  должности — <b>подсказка применяется только после вашего подтверждения</b>, ничего не
+  делается за вас молча. Персональные данные сотрудников (ФИО, контакты) здесь
+  <b>не собираются</b> и не нужны. Любое действие можно отменить кнопкой «Отменить».</p>
+  <p class="note warn" id="notice" hidden></p>
+</header>
+
+<h2 class="sect">1. Паспорт организации</h2>
+<p class="sect-sub">Название и семь характеристик компании в целом плюс отрасль как признак.
+Они нужны, чтобы система понимала контекст, в котором работают люди: одна и та же
+должность в разных компаниях требует разного. Если сомневаетесь — выберите ближайшее,
+уточнить можно позже.</p>
+<div class="card" id="passport"></div>
+
+<h2 class="sect">1а. Дополнительные характеристики</h2>
+<p class="sect-sub">Семь полей из обновления методологии (28.08). Заполняются по желанию, точность
+«как есть»: они сравниваются с ответами соискателя, в расчёт не входят.</p>
+<div class="card" id="extra"></div>
+
+<h2 class="sect">2. Подразделения</h2>
+<p class="sect-sub">Дерево: выберите подразделение и добавьте в него вложенное. Перемещать можно
+кнопкой «Переместить» — перетаскивание не требуется. Работает с клавиатуры: стрелки —
+переход и раскрытие, Home и End — начало и конец, буква — переход к подразделению на
+эту букву.</p>
+<div class="card">
+  <div class="toolbar">
+    <button type="button" class="primary" id="btn-add-root">Добавить подразделение</button>
+    <button type="button" id="btn-add-child" disabled>Добавить внутрь выбранного</button>
+    <span class="grp"><label class="sr" for="sel-typical">Типовое подразделение</label><select id="sel-typical"><option value="">Типовое подразделение…</option></select><button type="button" id="btn-add-typical" disabled>Добавить</button></span>
+  </div>
+  <div class="toolbar">
+    <button type="button" id="btn-move" disabled>Переместить…</button>
+    <button type="button" id="btn-archive" disabled>В архив</button>
+    <button type="button" id="btn-undo" disabled title="Ctrl+Z">Отменить</button>
+    <button type="button" class="small" id="btn-sample">Заполнить примером</button>
+    <button type="button" class="small" id="btn-clear">Начать заново</button>
+  </div>
+  <ul class="tree" id="tree" role="tree" aria-label="Структура подразделений"></ul>
+  <p class="hint" id="tree-empty">Пока пусто — нажмите «Добавить подразделение» или выберите типовое.</p>
+  <details class="arch" id="arch" hidden><summary>Архив: <span id="arch-count">0</span></summary><ul id="arch-list"></ul></details>
+</div>
+
+<div class="card" id="editor" hidden>
+  <h3 style="font-family:Georgia,serif;margin:.1rem 0 .5rem;font-size:1.15rem;" id="ed-title">Подразделение</h3>
+  <div class="fields">
+    <label class="f">Название<input id="ed-name" placeholder="Отдел продаж"></label>
+    <label class="f">Код (если есть)<input id="ed-code" placeholder="ОП-01"></label>
+    <label class="f">Численность, чел. (своя, без вложенных)<input id="ed-head" type="number" min="0" step="1" placeholder="42"></label>
+    <label class="f">Должность руководителя<input id="ed-lead" placeholder="Начальник отдела"></label>
+  </div>
+  <div class="fields" style="margin-top:.6rem;">
+    <label class="f" style="grid-column:1/-1;">Чем занимается — одной строкой<input id="ed-func" placeholder="Прямые продажи корпоративным клиентам"></label>
+  </div>
+  <div class="sug" id="ed-sug"></div>
+  <div id="ed-err" class="err" role="status" aria-live="polite"></div>
+
+  <p class="hint" style="margin-top:.9rem;"><b>Должности в этом подразделении</b> — по желанию.
+  Грейд 1–9 — уровень квалификации по общероссийской шкале (1 — простой труд по инструкции,
+  9 — стратегическое руководство). Не уверены — оставьте пустым.</p>
+  <div id="ed-positions"></div>
+  <div class="sug" id="ed-pos-sug"></div>
+  <button type="button" class="small" id="btn-add-pos" style="margin-top:.5rem;">+ должность</button>
+</div>
+
+<dialog id="dlg-move">
+  <h3>Переместить подразделение</h3>
+  <p class="hint" id="dlg-move-what"></p>
+  <label class="f">Новое родительское подразделение
+    <select id="dlg-move-target"></select>
+  </label>
+  <div class="btns" style="margin-bottom:0;">
+    <button type="button" class="primary" id="dlg-move-ok">Переместить</button>
+    <button type="button" id="dlg-move-cancel">Отмена</button>
+  </div>
+</dialog>
+
+<dialog id="dlg-confirm">
+  <h3 id="dlg-confirm-title">Подтвердите</h3>
+  <p id="dlg-confirm-text"></p>
+  <ul class="codes" id="dlg-confirm-list" hidden></ul>
+  <div class="btns" style="margin-bottom:0;">
+    <button type="button" class="primary" id="dlg-confirm-ok">Да</button>
+    <button type="button" id="dlg-confirm-cancel">Отмена</button>
+  </div>
+</dialog>
+
+<div class="finish">
+  <h2>Вернуть структуру</h2>
+  <p>Кнопки соберут всё введённое. Таблица <b>.csv</b> — то, что читает продукт (ничего не
+  перенабирается); текст <b>.txt</b> — для чтения и обсуждения, в нём же машиночитаемая
+  часть, чтобы позже загрузить обратно и продолжить.</p>
+  <div class="btns">
+    <button class="primary" id="btn-csv" type="button">Скачать таблицу для продукта (.csv)</button>
+    <button id="btn-dl" type="button">Скачать текст (.txt)</button>
+    <button id="btn-copy" type="button">Скопировать текст</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+    <label class="btn" for="file-in" style="cursor:pointer;">Загрузить файл…</label>
+    <input type="file" id="file-in" accept=".txt,.json,text/plain,application/json" class="sr">
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст структуры"></textarea>
+</div>
+
+<footer>Страница проекта «Формула компании». Ред. v2.0 — 30.08.2026: паспорт приведён к продукту,
+добавлены дополнительные характеристики, подсказки с подтверждением, отмена, архив с возвратом,
+загрузка файла и выгрузка таблицы для продукта. Ред. v1.0 — 13.08.2026. Заменяет вопрос «пришлите
+список подразделений» рабочей формой. Данные хранятся только в вашем браузере, пока вы сами не
+отправите файл. Персональные данные сотрудников здесь не собираются. Держатель — <code>tz/70</code>.</footer>
+</div>
+
+<script>
+"use strict";
+const KEY = "struktura-kompanii-v2";
+const KEY_V1 = "struktura-kompanii-v1";
+
+/* Оси паспорта — те же ключи и значения, что в продукте (pr-app/src/passport.rs, AXES). */
+const AXES = [
+  { k:"size",          t:"Размер",                          o:["до 15","16–100","101–250","251–1000","более 1000"] },
+  { k:"lifecycle",     t:"Стадия жизненного цикла",         o:["становление","рост","зрелость","перестройка","спад"] },
+  { k:"decisions",     t:"Способ принятия решений",         o:["централизованно","распределённо","смешанно"] },
+  { k:"horizon",       t:"Горизонт планирования",           o:["до квартала","год","три года","более трёх лет"] },
+  { k:"change_risk",   t:"Отношение к изменениям и риску",  o:["избегающее","осторожное","взвешенное","склонное к риску"] },
+  { k:"result_source", t:"Источник результата",             o:["процесс","продукт","отношения","знание"] },
+  { k:"structure",     t:"Тип структуры",                   o:["функциональная","дивизиональная","матричная","плоская","проектная"] }
+];
+/* Семь новых полей обновления 28.08 — корзина В (tz/221 §1). */
+const EXTRA = [
+  { k:"pay_vs_market", t:"Оплата относительно рынка",   o:["ниже","на уровне","выше"] },
+  { k:"turnover",      t:"Текучесть кадров за год",      o:["низкая","средняя","высокая"] },
+  { k:"workload",      t:"Режим нагрузки",               o:["нормированный","с переработками","ненормированный"] },
+  { k:"growth",        t:"Карьерный рост",               o:["вертикальный есть","только горизонтальный","нет"] },
+  { k:"autonomy",      t:"Самостоятельность сотрудника", o:["широкая","по регламенту"] },
+  { k:"mission",       t:"Миссия компании",              o:["сформулирована и известна","есть, но не известна","нет"] },
+  { k:"work_format",   t:"Формат работы",                o:["офис","удалённо","гибрид"] }
+];
+/* Типовые подразделения — заготовки; название и код правятся свободно. */
+const TYPICAL = [
+  ["Руководство","РК"],["Коммерческий отдел","КО"],["Отдел продаж","ОП"],["Отдел маркетинга","МК"],
+  ["Бухгалтерия","БХ"],["Финансовый отдел","ФО"],["Юридический отдел","ЮО"],["Кадровая служба","КС"],
+  ["Производство","ПР"],["Цех","ЦХ"],["Склад","СК"],["Отдел логистики","ЛГ"],["Отдел закупок","ЗК"],
+  ["Служба качества","КЧ"],["Сервисная служба","СВ"],["Отдел ИТ","ИТ"],["Отдел разработки","РЗ"],
+  ["Проектный офис","ПО"],["Административно-хозяйственный отдел","АХО"],["Служба безопасности","СБ"]
+];
+/* Подсказки должностей по словам в названии подразделения. Первая — руководитель. */
+const JOBS = [
+  [/руководств|дирекц|правлен/i, ["Генеральный директор","Заместитель генерального директора"]],
+  [/продаж|сбыт|коммерч/i, ["Руководитель отдела продаж","Менеджер по продажам"]],
+  [/маркет|реклам/i, ["Руководитель отдела маркетинга","Маркетолог"]],
+  [/бухгалт/i, ["Главный бухгалтер","Бухгалтер"]],
+  [/финанс|экономич/i, ["Финансовый директор","Экономист"]],
+  [/юрид|правов/i, ["Руководитель юридического отдела","Юрист"]],
+  [/кадр|персонал/i, ["Руководитель кадровой службы","Специалист по кадрам"]],
+  [/производ|цех/i, ["Начальник цеха","Мастер участка","Рабочий"]],
+  [/склад/i, ["Заведующий складом","Кладовщик"]],
+  [/логист|транспорт/i, ["Руководитель отдела логистики","Логист"]],
+  [/закуп|снабж/i, ["Руководитель отдела закупок","Специалист по закупкам"]],
+  [/качеств/i, ["Начальник службы качества","Контролёр качества"]],
+  [/\bит\b|информац|разработ|программ/i, ["Руководитель ИТ-отдела","Системный администратор","Программист"]],
+  [/сервис|обслужив|поддержк/i, ["Руководитель сервисной службы","Инженер сервиса"]],
+  [/безопасн/i, ["Руководитель службы безопасности","Специалист по безопасности"]],
+  [/проект/i, ["Руководитель проектного офиса","Руководитель проекта"]],
+  [/хозяйств|админ/i, ["Начальник АХО","Администратор"]]
+];
+const GENERIC = new Set(["отдел","служба","группа","департамент","управление","блок","центр","сектор","дирекция","офис","подразделение","участок","отделение","бюро","и","по","для","с","на"]);
+
+let data = fresh();
+let selectedId = null;
+const undoStack = [];
+function fresh() { return { v:2, org:{ name:"", passport:{}, extra:{}, note:"" }, units:[], seq:1 }; }
+
+/* ---------- модель ---------- */
+const byId = id => data.units.find(u => u.id === id);
+const childrenOf = pid => data.units.filter(u => u.parent === pid && !u.archived);
+const isDescendant = (id, maybeAncestor) => {
+  let cur = byId(id), guard = 0;
+  while (cur && cur.parent !== null && guard++ < 1000) {
+    if (cur.parent === maybeAncestor) return true;
+    cur = byId(cur.parent);
+  }
+  return false;
+};
+const ownHead = u => (u.head === "" || u.head === null || u.head === undefined) ? 0 : (+u.head || 0);
+function subtreeHead(id) { let n = ownHead(byId(id)); childrenOf(id).forEach(c => { n += subtreeHead(c.id); }); return n; }
+function countSubtree(id) { let n = 1; childrenOf(id).forEach(c => { n += countSubtree(c.id); }); return n; }
+const isInt = v => /^\s*\d+\s*$/.test(String(v));
+
+function newUnit(parent, name, code) {
+  return { id: data.seq++, parent, name: name || "", code: code || "", head:"", lead:"", func:"", positions:[], archived:false, open:true };
+}
+function addUnit(parent, name, code) {
+  pushUndo();
+  const u = newUnit(parent, name, code);
+  data.units.push(u);
+  if (parent !== null) byId(parent).open = true;
+  selectedId = u.id;
+  save(); render();
+  const n = document.getElementById("ed-name");
+  if (n) n.focus();
+  return u;
+}
+
+/* ---------- подсказки ---------- */
+function codePrefix(name) {
+  const words = name.trim().split(/[\s\-–—/,.()]+/).filter(w => w.length > 1);
+  const sig = words.filter(w => !GENERIC.has(w.toLowerCase()));
+  const src = sig.length ? sig : words;
+  if (!src.length) return "";
+  const t = TYPICAL.find(([n]) => n.toLowerCase() === name.trim().toLowerCase());
+  if (t) return t[1];
+  const p = src.length >= 2 ? src[0][0] + src[1][0] : src[0].slice(0, 2);
+  return p.toUpperCase();
+}
+function suggestCode(u) {
+  const prefix = codePrefix(u.name);
+  if (!prefix) return "";
+  const taken = new Set(data.units.filter(x => !x.archived && x.id !== u.id && x.code.trim()).map(x => x.code.trim().toLowerCase()));
+  for (let n = 1; n < 100; n++) {
+    const c = prefix + "-" + String(n).padStart(2, "0");
+    if (!taken.has(c.toLowerCase())) return c;
+  }
+  return "";
+}
+function suggestJobs(name) {
+  for (const [re, list] of JOBS) if (re.test(name)) return list;
+  return [];
+}
+
+/* ---------- проверки ---------- */
+function validate() {
+  const errs = [];
+  const codes = {};
+  data.units.filter(u => !u.archived).forEach(u => {
+    if (!u.name.trim()) errs.push({ id:u.id, m:"не заполнено название" });
+    const c = u.code.trim().toLowerCase();
+    if (c) { if (codes[c]) errs.push({ id:u.id, m:"код повторяется: " + u.code }); else codes[c] = u.id; }
+    if (u.head !== "" && !isInt(u.head)) errs.push({ id:u.id, m:"численность — целое число без знака" });
+    let sum = 0;
+    u.positions.forEach(p => {
+      if (p.count !== "" && !isInt(p.count)) errs.push({ id:u.id, m:`мест по должности «${p.title || "без названия"}» — целое число` });
+      else sum += (+p.count || 0);
+    });
+    if (u.head !== "" && isInt(u.head) && sum > +u.head) errs.push({ id:u.id, m:`мест по должностям ${sum} при численности ${u.head} — проверьте`, soft:true });
+    if (childrenOf(u.id).length > 12) errs.push({ id:u.id, m:"более 12 прямых подчинённых подразделений — обычно стоит сгруппировать", soft:true });
+    let depth = 1, cur = u.parent, guard = 0;
+    while (cur !== null && guard++ < 1000) { depth++; const p = byId(cur); cur = p ? p.parent : null; }
+    if (depth > 6) errs.push({ id:u.id, m:`глубина вложенности ${depth} — обычно достаточно шести уровней`, soft:true });
+  });
+  return errs;
+}
+
+/* ---------- отрисовка ---------- */
+function render() {
+  renderPassport();
+  renderTree();
+  renderArchive();
+  renderEditor();
+  refresh();
+  document.getElementById("btn-undo").disabled = undoStack.length === 0;
+}
+function selectBlock(root, list, store, extraLabel) {
+  root.innerHTML = list.map(p => `
+    <label class="f" style="margin-bottom:.6rem;">${p.t}
+      <select data-key="${p.k}">
+        <option value="">— не выбрано —</option>
+        ${p.o.map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join("")}
+      </select>
+    </label>`).join("") + (extraLabel || "");
+}
+function renderPassport() {
+  const root = document.getElementById("passport");
+  if (!root.dataset.built) {
+    root.dataset.built = "1";
+    root.innerHTML = `<label class="f" style="margin-bottom:.6rem;">Название организации<input id="org-name" placeholder="ООО «Пример»"></label>`;
+    const box = document.createElement("div");
+    selectBlock(box, AXES, "passport",
+      `<label class="f" style="margin-bottom:.6rem;">Отрасль (признак, не правило)<input id="org-industry" placeholder="торговля, производство, ИТ…"></label>
+       <label class="f">Что ещё важно знать о компании (по желанию)<textarea id="org-note" placeholder="Например: две производственные площадки в разных городах…"></textarea></label>`);
+    root.appendChild(box);
+    root.querySelectorAll("select[data-key]").forEach(el => el.addEventListener("change", () => { pushUndo(); data.org.passport[el.dataset.key] = el.value; save(); refresh(); }));
+    document.getElementById("org-name").addEventListener("input", e => { data.org.name = e.target.value; save(); refresh(); });
+    document.getElementById("org-industry").addEventListener("input", e => { data.org.passport.industry = e.target.value; save(); refresh(); });
+    document.getElementById("org-note").addEventListener("input", e => { data.org.note = e.target.value; save(); refresh(); });
+    const ex = document.getElementById("extra");
+    selectBlock(ex, EXTRA, "extra");
+    ex.querySelectorAll("select[data-key]").forEach(el => el.addEventListener("change", () => { pushUndo(); data.org.extra[el.dataset.key] = el.value; save(); refresh(); }));
+    ["org-name","org-industry","org-note"].forEach(id => document.getElementById(id).addEventListener("focus", () => pushUndo()));
+  }
+  const setv = (id, v) => { const el = document.getElementById(id); if (el && el.value !== (v || "")) el.value = v || ""; };
+  setv("org-name", data.org.name); setv("org-industry", data.org.passport.industry); setv("org-note", data.org.note);
+  root.querySelectorAll("select[data-key]").forEach(el => { const v = data.org.passport[el.dataset.key] || ""; if (el.value !== v) el.value = v; });
+  document.querySelectorAll("#extra select[data-key]").forEach(el => { const v = data.org.extra[el.dataset.key] || ""; if (el.value !== v) el.value = v; });
+}
+function renderTree() {
+  const tree = document.getElementById("tree");
+  const roots = childrenOf(null);
+  document.getElementById("tree-empty").hidden = roots.length > 0;
+  tree.innerHTML = "";
+  const build = (list, level, container) => {
+    list.forEach((u, i) => {
+      const kids = childrenOf(u.id);
+      const li = document.createElement("li");
+      li.className = "node";
+      li.setAttribute("role", "treeitem");
+      li.setAttribute("aria-level", level);
+      li.setAttribute("aria-setsize", list.length);
+      li.setAttribute("aria-posinset", i + 1);
+      li.setAttribute("aria-selected", u.id === selectedId ? "true" : "false");
+      li.tabIndex = u.id === selectedId ? 0 : -1;
+      li.dataset.id = u.id;
+      if (kids.length) li.setAttribute("aria-expanded", u.open ? "true" : "false");
+      const own = ownHead(u), total = subtreeHead(u.id);
+      const posSum = u.positions.reduce((s,p) => s + (+p.count || 0), 0);
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML =
+        (kids.length ? `<button class="twist" type="button" tabindex="-1" aria-hidden="true">${u.open ? "▾" : "▸"}</button>` : `<span class="twist">·</span>`) +
+        `<span class="nname">${esc(u.name || "(без названия)")}</span>` +
+        (u.code ? `<span class="nmeta">${esc(u.code)}</span>` : "") +
+        (u.head !== "" ? `<span class="nmeta">· ${esc(String(u.head))} чел.</span>` : "") +
+        (kids.length && total !== own ? `<span class="nmeta">· всего ${total} чел.</span>` : "") +
+        (posSum ? `<span class="nmeta">· должностей ${posSum}</span>` : "") +
+        (!u.name.trim() ? `<span class="badge warn">заполните название</span>` : "");
+      li.appendChild(row);
+      container.appendChild(li);
+      if (kids.length && u.open) {
+        const ul = document.createElement("ul");
+        ul.setAttribute("role", "group");
+        li.appendChild(ul);
+        build(kids, level + 1, ul);
+      }
+    });
+  };
+  build(roots, 1, tree);
+  const has = selectedId !== null && byId(selectedId) && !byId(selectedId).archived;
+  ["btn-add-child","btn-move","btn-archive"].forEach(id => { document.getElementById(id).disabled = !has; });
+  const sel = document.getElementById("sel-typical");
+  if (!sel.dataset.built) {
+    sel.dataset.built = "1";
+    sel.innerHTML = `<option value="">Типовое подразделение…</option>` + TYPICAL.map(([n], i) => `<option value="${i}">${esc(n)}</option>`).join("");
+  }
+  document.getElementById("btn-add-typical").disabled = sel.value === "";
+}
+function renderArchive() {
+  const arch = data.units.filter(u => u.archived && (u.parent === null || !byId(u.parent) || !byId(u.parent).archived));
+  const box = document.getElementById("arch");
+  box.hidden = arch.length === 0;
+  document.getElementById("arch-count").textContent = String(arch.length);
+  document.getElementById("arch-list").innerHTML = arch.map(u =>
+    `<li>${esc(u.name || "(без названия)")}${u.code ? " · " + esc(u.code) : ""} <button type="button" class="small" data-restore="${u.id}">вернуть</button></li>`).join("");
+}
+function renderEditor() {
+  const ed = document.getElementById("editor");
+  const u = selectedId !== null ? byId(selectedId) : null;
+  if (!u || u.archived) { ed.hidden = true; return; }
+  ed.hidden = false;
+  document.getElementById("ed-title").textContent = u.name.trim() || "Новое подразделение";
+  const set = (id, v) => { const el = document.getElementById(id); if (el.value !== v) el.value = v; };
+  set("ed-name", u.name); set("ed-code", u.code); set("ed-head", u.head); set("ed-lead", u.lead); set("ed-func", u.func);
+  const errs = validate().filter(e => e.id === u.id);
+  document.getElementById("ed-err").textContent = errs.map(e => (e.soft ? "⚠ " : "") + e.m).join(" · ");
+  renderSuggestions(u);
+  const pos = document.getElementById("ed-positions");
+  pos.innerHTML = u.positions.map((p, i) => `
+    <div class="posrow">
+      <label class="f">Должность<input data-pos="${i}" data-fld="title" value="${esc(p.title)}" placeholder="Менеджер по продажам"></label>
+      <label class="f">Мест<input data-pos="${i}" data-fld="count" type="number" min="0" step="1" value="${esc(String(p.count))}"></label>
+      <label class="f">Грейд<select data-pos="${i}" data-fld="grade">${
+        ["","1","2","3","4","5","6","7","8","9"].map(g => `<option value="${g}"${String(p.grade) === g ? " selected" : ""}>${g || "—"}</option>`).join("")
+      }</select></label>
+      <button type="button" class="small" data-del="${i}">удалить</button>
+    </div>`).join("");
+}
+/* Подсказки — по мере ввода, без перерисовки полей (фокус не теряется). Показываются только
+   для пустых полей; применяются только по нажатию — ничего не подставляется молча. */
+function renderSuggestions(u) {
+  const sug = [];
+  if (u.name.trim() && !u.code.trim()) { const c = suggestCode(u); if (c) sug.push(`<span class="lbl">Подсказка:</span> код <button type="button" class="chip" data-sug="code" data-val="${esc(c)}">${esc(c)}</button>`); }
+  if (u.name.trim() && !u.lead.trim()) { const j = suggestJobs(u.name); if (j.length) sug.push(`${sug.length ? "" : '<span class="lbl">Подсказка:</span> '}руководитель <button type="button" class="chip" data-sug="lead" data-val="${esc(j[0])}">${esc(j[0])}</button>`); }
+  document.getElementById("ed-sug").innerHTML = sug.length ? sug.join(" · ") + ` <span>— нажмите, чтобы принять</span>` : "";
+  const have = new Set(u.positions.map(p => p.title.trim().toLowerCase()));
+  const js = u.name.trim() ? suggestJobs(u.name).filter(t => !have.has(t.toLowerCase())) : [];
+  document.getElementById("ed-pos-sug").innerHTML = js.length
+    ? `<span class="lbl">Подсказка:</span> ` + js.map(t => `<button type="button" class="chip" data-sug="job" data-val="${esc(t)}">${esc(t)}</button>`).join(" ") + ` <span>— нажмите, чтобы добавить</span>`
+    : "";
+}
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+
+/* ---------- сводка и выгрузки ---------- */
+function activeUnits() { return data.units.filter(u => !u.archived); }
+function passportFilled() { return AXES.filter(a => (data.org.passport[a.k] || "").trim()).length; }
+function machinePart() {
+  return { v:2, org:{ name:data.org.name, passport:data.org.passport, extra:data.org.extra, note:data.org.note },
+    units: activeUnits().map(u => ({ id:u.id, parent:u.parent, name:u.name, code:u.code, head:u.head, lead:u.lead, func:u.func, positions:u.positions })) };
+}
+function summary() {
+  const active = activeUnits();
+  const total = active.reduce((s,u) => s + ownHead(u), 0);
+  document.getElementById("pcount").textContent = String(active.length);
+  document.getElementById("hcount").textContent = String(total);
+  document.getElementById("pfill").textContent = `${passportFilled()} из ${AXES.length}`;
+  let t = "СТРУКТУРА КОМПАНИИ — «Формула компании», " + new Date().toLocaleDateString("ru-RU") + "\n\n";
+  t += "[ПАСПОРТ ОРГАНИЗАЦИИ]\n";
+  let anyP = false;
+  if (data.org.name.trim()) { t += `Организация: ${data.org.name.trim()}\n`; anyP = true; }
+  AXES.forEach(a => { const v = data.org.passport[a.k]; if (v) { t += `${a.t}: ${v}\n`; anyP = true; } });
+  if ((data.org.passport.industry || "").trim()) { t += `Отрасль (признак): ${data.org.passport.industry.trim()}\n`; anyP = true; }
+  if (data.org.note.trim()) { t += `Дополнительно: ${data.org.note.trim()}\n`; anyP = true; }
+  if (!anyP) t += "— (не заполнен)\n";
+  const ex = EXTRA.filter(e => data.org.extra[e.k]);
+  if (ex.length) { t += "\n[ДОПОЛНИТЕЛЬНЫЕ ХАРАКТЕРИСТИКИ]\n"; ex.forEach(e => { t += `${e.t}: ${data.org.extra[e.k]}\n`; }); }
+  t += "\n[ПОДРАЗДЕЛЕНИЯ] (численность — своя, без вложенных; «всего» — с вложенными)\n";
+  if (!active.length) t += "— (не заполнены)\n";
+  const walk = (pid, depth) => {
+    childrenOf(pid).forEach(u => {
+      t += "  ".repeat(depth) + "• " + (u.name.trim() || "(без названия)");
+      const bits = [];
+      if (u.code) bits.push("код " + u.code);
+      if (u.head !== "") bits.push(u.head + " чел.");
+      const tot = subtreeHead(u.id);
+      if (childrenOf(u.id).length && tot !== ownHead(u)) bits.push("всего " + tot + " чел.");
+      if (u.lead) bits.push("рук.: " + u.lead);
+      if (bits.length) t += " — " + bits.join(", ");
+      t += "\n";
+      if (u.func) t += "  ".repeat(depth) + "  занимается: " + u.func + "\n";
+      u.positions.filter(p => p.title.trim()).forEach(p => {
+        t += "  ".repeat(depth) + "  – " + p.title + (p.count ? ", мест " + p.count : "") + (p.grade ? ", грейд " + p.grade : "") + "\n";
+      });
+      walk(u.id, depth + 1);
+    });
+  };
+  walk(null, 0);
+  t += `\nИтого: подразделений ${active.length}, суммарная численность ${total}.\n`;
+  const errs = validate().filter(e => !e.soft);
+  if (errs.length) t += `\n⚠ Не заполнено или требует проверки: ${errs.length} (см. страницу).\n`;
+  t += "\n[МАШИНОЧИТАЕМАЯ ЧАСТЬ — не редактируйте]\n" + JSON.stringify(machinePart()) + "\n";
+  return t;
+}
+function refresh() {
+  const t = summary();
+  document.getElementById("summary-text").value = t;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    t.length > 3800 ? t.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скачать текст»)" : t);
+  return t;
+}
+/* Таблица для продукта: колонки и порядок — pr-app/src/import.rs (tz/70 §9). Разделитель «;», UTF-8 с BOM, CRLF — как из Excel. */
+const CSV_HEADER = ["код подразделения","наименование","код родителя","плановая численность","должность","количество штатных единиц","грейд","код места руководителя"];
+const csvCell = v => { const s = String(v ?? ""); return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+function csvText() {
+  const rows = [CSV_HEADER];
+  const walk = pid => {
+    childrenOf(pid).forEach(u => {
+      const parentCode = u.parent !== null && byId(u.parent) ? byId(u.parent).code : "";
+      rows.push([u.code, u.name, parentCode, u.head, "", "", "", ""]);
+      u.positions.filter(p => p.title.trim()).forEach(p => rows.push([u.code, u.name, parentCode, u.head, p.title, p.count, p.grade, ""]));
+      walk(u.id);
+    });
+  };
+  walk(null);
+  return "﻿" + rows.map(r => r.map(csvCell).join(";")).join("\r\n") + "\r\n";
+}
+function unitsWithoutCode() { return activeUnits().filter(u => !u.code.trim()); }
+function assignSuggestedCodes() {
+  const out = [];
+  activeUnits().forEach(u => { if (!u.code.trim()) { const c = suggestCode(u) || ("П-" + String(u.id).padStart(2, "0")); u.code = c; out.push([u, c]); } });
+  return out;
+}
+function download(name, text, type) {
+  const blob = new Blob([text], { type: type || "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
+/* ---------- отмена ---------- */
+function pushUndo() {
+  const snap = JSON.stringify({ data, selectedId });
+  if (undoStack.length && undoStack[undoStack.length - 1] === snap) return;
+  undoStack.push(snap);
+  if (undoStack.length > 40) undoStack.shift();
+  document.getElementById("btn-undo").disabled = false;
+}
+function undo() {
+  if (!undoStack.length) return;
+  const snap = JSON.parse(undoStack.pop());
+  data = snap.data; selectedId = snap.selectedId;
+  save(); render();
+  say("Отменено.");
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {} }
+const say = m => { document.getElementById("copy-status").textContent = m; };
+function notice(m) { const n = document.getElementById("notice"); n.textContent = m; n.hidden = !m; }
+
+/* ---------- события: дерево ---------- */
+document.getElementById("tree").addEventListener("click", e => {
+  const li = e.target.closest("li.node");
+  if (!li) return;
+  const id = +li.dataset.id;
+  if (e.target.classList.contains("twist")) { const u = byId(id); u.open = !u.open; save(); render(); return; }
+  selectedId = id; save(); render();
+  const el = document.querySelector(`li.node[data-id="${id}"]`);
+  if (el) el.focus();
+});
+document.getElementById("tree").addEventListener("keydown", e => {
+  const li = e.target.closest("li.node");
+  if (!li) return;
+  const all = [...document.querySelectorAll("li.node")];
+  const idx = all.indexOf(li);
+  const u = byId(+li.dataset.id);
+  const move = to => { if (!to) return; selectedId = +to.dataset.id; save(); render(); const f = document.querySelector(`li.node[data-id="${selectedId}"]`); if (f) f.focus(); };
+  switch (e.key) {
+    case "ArrowDown": e.preventDefault(); move(all[idx + 1]); break;
+    case "ArrowUp":   e.preventDefault(); move(all[idx - 1]); break;
+    case "ArrowRight":
+      e.preventDefault();
+      if (childrenOf(u.id).length && !u.open) { u.open = true; save(); render(); document.querySelector(`li.node[data-id="${u.id}"]`).focus(); }
+      else if (childrenOf(u.id).length) move(all[idx + 1]);
+      break;
+    case "ArrowLeft":
+      e.preventDefault();
+      if (childrenOf(u.id).length && u.open) { u.open = false; save(); render(); document.querySelector(`li.node[data-id="${u.id}"]`).focus(); }
+      else if (u.parent !== null) move(document.querySelector(`li.node[data-id="${u.parent}"]`));
+      break;
+    case "Home": e.preventDefault(); move(all[0]); break;
+    case "End":  e.preventDefault(); move(all[all.length - 1]); break;
+    default:
+      if (e.key.length === 1 && /\S/.test(e.key) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const ch = e.key.toLowerCase();
+        for (let k = 1; k <= all.length; k++) {
+          const cand = all[(idx + k) % all.length];
+          const name = (byId(+cand.dataset.id).name || "").trim().toLowerCase();
+          if (name.startsWith(ch)) { e.preventDefault(); move(cand); break; }
+        }
+      }
+  }
+});
+document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === "z") {
+    const t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return; // в поле — родная отмена браузера
+    e.preventDefault(); undo();
+  }
+});
+
+/* ---------- события: кнопки ---------- */
+document.getElementById("btn-add-root").addEventListener("click", () => addUnit(null));
+document.getElementById("btn-add-child").addEventListener("click", () => { const u = byId(selectedId); if (!u) return; addUnit(selectedId); });
+document.getElementById("sel-typical").addEventListener("change", e => { document.getElementById("btn-add-typical").disabled = e.target.value === ""; });
+document.getElementById("btn-add-typical").addEventListener("click", () => {
+  const sel = document.getElementById("sel-typical");
+  if (sel.value === "") return;
+  const [name] = TYPICAL[+sel.value];
+  const parent = (selectedId !== null && byId(selectedId) && !byId(selectedId).archived) ? selectedId : null;
+  addUnit(parent, name, "");
+  sel.value = ""; document.getElementById("btn-add-typical").disabled = true;
+  say(parent === null ? `Добавлено «${name}» на верхний уровень. Код и должности — подсказками ниже.` : `Добавлено «${name}» внутрь выбранного.`);
+});
+document.getElementById("btn-undo").addEventListener("click", undo);
+document.getElementById("btn-add-pos").addEventListener("click", () => {
+  const u = byId(selectedId); if (!u) return;
+  pushUndo(); u.positions.push({ title:"", count:"", grade:"" });
+  save(); render();
+});
+["ed-sug","ed-pos-sug"].forEach(id => document.getElementById(id).addEventListener("click", e => {
+  const b = e.target.closest("button.chip"); if (!b) return;
+  const u = byId(selectedId); if (!u) return;
+  pushUndo();
+  if (b.dataset.sug === "code") u.code = b.dataset.val;
+  else if (b.dataset.sug === "lead") u.lead = b.dataset.val;
+  else if (b.dataset.sug === "job") u.positions.push({ title:b.dataset.val, count:"", grade:"" });
+  save(); render();
+  say("Подсказка принята — при необходимости поправьте.");
+}));
+document.getElementById("ed-positions").addEventListener("focusin", () => pushUndo());
+["input","change"].forEach(ev => document.getElementById("ed-positions").addEventListener(ev, e => {
+  const i = e.target.dataset.pos;
+  if (i === undefined) return;
+  const u = byId(selectedId); if (!u || !u.positions[+i]) return;
+  u.positions[+i][e.target.dataset.fld] = e.target.value;
+  save(); renderTree(); refresh();
+  document.getElementById("ed-err").textContent = validate().filter(x => x.id === u.id).map(x => (x.soft ? "⚠ " : "") + x.m).join(" · ");
+}));
+document.getElementById("ed-positions").addEventListener("click", e => {
+  const d = e.target.dataset.del;
+  if (d === undefined) return;
+  pushUndo(); byId(selectedId).positions.splice(+d, 1);
+  save(); render();
+});
+["ed-name","ed-code","ed-head","ed-lead","ed-func"].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener("focus", () => pushUndo());
+  el.addEventListener("input", e => {
+    const u = byId(selectedId); if (!u) return;
+    u[id.replace("ed-", "")] = e.target.value;
+    save(); renderTree(); refresh();
+    document.getElementById("ed-err").textContent = validate().filter(x => x.id === u.id).map(x => (x.soft ? "⚠ " : "") + x.m).join(" · ");
+    if (id === "ed-name") document.getElementById("ed-title").textContent = u.name.trim() || "Новое подразделение";
+    renderSuggestions(u);
+  });
+  // Перерисовки по change НЕТ намеренно: она пересобирала подсказки между mousedown и mouseup
+  // по кнопке-подсказке, и клик по ней терялся (цель исчезала из DOM).
+});
+
+/* ---------- перемещение (альтернатива перетаскиванию) ---------- */
+const dlgMove = document.getElementById("dlg-move");
+document.getElementById("btn-move").addEventListener("click", () => {
+  const u = byId(selectedId); if (!u) return;
+  document.getElementById("dlg-move-what").textContent =
+    `«${u.name.trim() || "(без названия)"}» вместе со всем, что внутри (${countSubtree(u.id)} подразделений).`;
+  const sel = document.getElementById("dlg-move-target");
+  sel.innerHTML = `<option value="">— верхний уровень —</option>` +
+    data.units.filter(t => !t.archived && t.id !== u.id && !isDescendant(t.id, u.id))
+      .map(t => `<option value="${t.id}"${t.id === u.parent ? " selected" : ""}>${esc(t.name.trim() || "(без названия)")}</option>`).join("");
+  dlgMove.showModal();
+});
+document.getElementById("dlg-move-cancel").addEventListener("click", () => dlgMove.close());
+document.getElementById("dlg-move-ok").addEventListener("click", () => {
+  const v = document.getElementById("dlg-move-target").value;
+  const u = byId(selectedId); if (!u) { dlgMove.close(); return; }
+  const target = v === "" ? null : +v;
+  if (target !== null && (target === u.id || isDescendant(target, u.id))) { dlgMove.close(); return; }
+  pushUndo();
+  u.parent = target;
+  if (target !== null) byId(target).open = true;
+  save(); render(); dlgMove.close();
+});
+
+/* ---------- подтверждения: архив, пример, очистка, коды ---------- */
+const dlgConfirm = document.getElementById("dlg-confirm");
+let confirmAction = null;
+function confirmDialog(title, text, list, action) {
+  document.getElementById("dlg-confirm-title").textContent = title;
+  document.getElementById("dlg-confirm-text").textContent = text;
+  const ul = document.getElementById("dlg-confirm-list");
+  ul.hidden = !list || !list.length;
+  ul.innerHTML = (list || []).map(s => `<li>${esc(s)}</li>`).join("");
+  confirmAction = action;
+  dlgConfirm.showModal();
+}
+document.getElementById("dlg-confirm-cancel").addEventListener("click", () => { confirmAction = null; dlgConfirm.close(); });
+document.getElementById("dlg-confirm-ok").addEventListener("click", () => { const a = confirmAction; confirmAction = null; dlgConfirm.close(); if (a) a(); });
+
+document.getElementById("btn-archive").addEventListener("click", () => {
+  const u = byId(selectedId); if (!u) return;
+  const n = countSubtree(u.id);
+  confirmDialog("Убрать в архив",
+    n > 1 ? `«${u.name.trim() || "(без названия)"}» и всё вложенное — это ${n} подразделений. Вернуть можно из списка «Архив» под деревом.`
+          : `«${u.name.trim() || "(без названия)"}» будет убрано из списка. Вернуть можно из списка «Архив» под деревом.`,
+    null, () => {
+      pushUndo();
+      const mark = id => { byId(id).archived = true; childrenOf(id).forEach(c => mark(c.id)); };
+      const kids = childrenOf(u.id).map(c => c.id);
+      u.archived = true; kids.forEach(mark);
+      selectedId = null; save(); render();
+    });
+});
+document.getElementById("arch-list").addEventListener("click", e => {
+  const b = e.target.closest("button[data-restore]"); if (!b) return;
+  const u = byId(+b.dataset.restore); if (!u) return;
+  pushUndo();
+  const restore = id => { const x = byId(id); x.archived = false; data.units.filter(c => c.parent === id && c.archived).forEach(c => restore(c.id)); };
+  restore(u.id);
+  if (u.parent !== null && (!byId(u.parent) || byId(u.parent).archived)) { u.parent = null; say(`«${u.name}» возвращено на верхний уровень: прежнее родительское подразделение в архиве.`); }
+  else say(`«${u.name}» возвращено.`);
+  selectedId = u.id; save(); render();
+});
+document.getElementById("btn-clear").addEventListener("click", () => {
+  if (!data.units.length && !data.org.name && !Object.keys(data.org.passport).length) return;
+  confirmDialog("Начать заново", "Всё введённое на этой странице будет удалено. Отменить можно кнопкой «Отменить» сразу после.", null, () => {
+    pushUndo(); data = fresh(); selectedId = null; save(); render(); notice("");
+  });
+});
+document.getElementById("btn-sample").addEventListener("click", () => {
+  if (activeUnits().length) confirmDialog("Заменить примером", "Текущая структура будет заменена демонстрационным примером. Продолжить?", null, fillSample);
+  else fillSample();
+});
+function fillSample() {
+  pushUndo();
+  data = fresh();
+  data.org.name = "ООО «Пример»";
+  data.org.passport = { size:"101–250", structure:"функциональная", industry:"производство" };
+  const mk = (parent, name, code, head, lead, func, positions) => {
+    const u = newUnit(parent, name, code); u.head = String(head); u.lead = lead; u.func = func; u.positions = positions || [];
+    data.units.push(u); return u.id;
+  };
+  const prod = mk(null, "Производство", "ПР-01", 38, "Директор по производству", "Выпуск продукции");
+  mk(prod, "Цех сборки", "ЦХ-01", 64, "Начальник цеха", "Сборка изделий", [{ title:"Слесарь-сборщик", count:"48", grade:"3" }, { title:"Мастер участка", count:"6", grade:"5" }]);
+  mk(prod, "Служба качества", "КЧ-01", 18, "Начальник службы качества", "Контроль качества", [{ title:"Контролёр качества", count:"14", grade:"4" }]);
+  const sales = mk(null, "Коммерческий отдел", "КО-01", 24, "Коммерческий директор", "Продажи и работа с клиентами");
+  mk(sales, "Отдел продаж", "ОП-01", 34, "Руководитель отдела продаж", "Прямые продажи корпоративным клиентам", [{ title:"Менеджер по продажам", count:"26", grade:"4" }, { title:"Руководитель группы", count:"4", grade:"6" }]);
+  selectedId = null; save(); render();
+  say("Пример: численность у каждого подразделения — своя; «всего» в дереве — с вложенными.");
+}
+
+/* ---------- выгрузка и загрузка ---------- */
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const t = refresh();
+  try { await navigator.clipboard.writeText(t); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => { download("struktura-kompanii.txt", refresh()); say("Файл сохранён — пришлите его нам."); });
+function doCsv() {
+  const errs = validate().filter(e => !e.soft);
+  if (errs.length) { say(`Сначала исправьте: ${errs.length} — ${errs.map(e => e.m).slice(0, 3).join("; ")}${errs.length > 3 ? "…" : ""}`); return; }
+  download("struktura-kompanii.csv", csvText(), "text/csv;charset=utf-8");
+  say("Таблица сохранена — её читает продукт без перенабора.");
+}
+document.getElementById("btn-csv").addEventListener("click", () => {
+  const missing = unitsWithoutCode();
+  if (!missing.length) { doCsv(); return; }
+  const preview = missing.map(u => `${u.name.trim() || "(без названия)"} → ${suggestCode(u) || ("П-" + String(u.id).padStart(2, "0"))}`);
+  confirmDialog("Присвоить коды", `В таблице для продукта у каждого подразделения нужен код. Без кода — ${missing.length}. Присвоить предложенные? Коды можно поправить в карточке подразделения.`, preview, () => {
+    pushUndo(); assignSuggestedCodes(); save(); render(); doCsv();
+  });
+});
+document.getElementById("file-in").addEventListener("change", e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { try { loadText(String(r.result), f.name); } catch (err) { say("Файл не распознан: " + err.message); } e.target.value = ""; };
+  r.readAsText(f, "utf-8");
+});
+function loadText(text, name) {
+  let json = text.trim();
+  const m = text.indexOf("[МАШИНОЧИТАЕМАЯ ЧАСТЬ");
+  if (m >= 0) json = text.slice(text.indexOf("\n", m) + 1).trim();
+  const obj = JSON.parse(json);
+  if (!obj || !Array.isArray(obj.units)) throw new Error("нет списка подразделений");
+  const loaded = fromMachine(obj);
+  const msg = loaded._notice || ""; delete loaded._notice;
+  confirmDialog("Загрузить файл", `«${name}»: подразделений ${loaded.units.filter(u => !u.archived).length}. Текущее содержимое страницы будет заменено (отменить — кнопкой «Отменить»).`, null, () => {
+    pushUndo(); data = loaded; selectedId = null; save(); render(); notice(msg); say("Загружено.");
+  });
+}
+function fromMachine(obj) {
+  const d = fresh();
+  let notice_ = "";
+  if (obj.v === 2 && obj.org) {
+    d.org.name = obj.org.name || ""; d.org.passport = obj.org.passport || {}; d.org.extra = obj.org.extra || {}; d.org.note = obj.org.note || "";
+  } else if (obj.passport && Object.keys(obj.passport).length) {
+    notice_ = "Загружен файл прежней версии страницы (v1): подразделения перенесены, паспорт организации — нет (наборы ответов изменились), заполните его заново.";
+    if (obj.passport.note) d.org.note = String(obj.passport.note);
+  }
+  const ids = new Set();
+  (obj.units || []).forEach(u => {
+    const id = Number.isInteger(+u.id) ? +u.id : d.seq;
+    d.units.push({ id, parent: (u.parent === null || u.parent === undefined || u.parent === "") ? null : +u.parent,
+      name:String(u.name ?? ""), code:String(u.code ?? ""), head:String(u.head ?? ""), lead:String(u.lead ?? ""), func:String(u.func ?? ""),
+      positions:Array.isArray(u.positions) ? u.positions.map(p => ({ title:String(p.title ?? ""), count:String(p.count ?? ""), grade:String(p.grade ?? "") })) : [],
+      archived: !!u.archived, open: u.open !== false });
+    ids.add(id);
+  });
+  d.units.forEach(u => { if (u.parent !== null && !ids.has(u.parent)) u.parent = null; });
+  d.seq = d.units.reduce((m, u) => Math.max(m, u.id), 0) + 1;
+  if (notice_) d._notice = notice_;
+  return d;
+}
+
+/* ---------- восстановление из браузера ---------- */
+(function boot() {
+  let restored = null;
+  try { const s = JSON.parse(localStorage.getItem(KEY) || "null"); if (s && Array.isArray(s.units) && s.v === 2) restored = s; } catch (e) {}
+  if (!restored) {
+    try {
+      const v1 = JSON.parse(localStorage.getItem(KEY_V1) || "null");
+      if (v1 && Array.isArray(v1.units) && v1.units.length) { restored = fromMachine(v1); }
+    } catch (e) {}
+  }
+  if (restored) {
+    const msg = restored._notice || ""; delete restored._notice;
+    data = restored; save(); if (msg) notice(msg);
+  }
+  render();
+})();
+</script>
+</body>
+</html>

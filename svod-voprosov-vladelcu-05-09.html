@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Свод вопросов на согласование — владельцу · «Формула компании»</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --paper:#F6F8F7; --card:#FFFFFF; --ink:#20302C; --muted:#5C6F6A; --accent:#0E7C7B; --accent-ink:#0A5B5A; --accent-soft:#E3F0EF; --line:#D6DEDB; --warn:#A8632B; --warn-soft:#FBF0E6; --ok:#2E7D52; --ok-soft:#E4F2EA; --btn-ink:#FFFFFF; }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#131A18; --card:#1B2320; --ink:#E4ECE9; --muted:#96A6A1; --accent:#53B4B0; --accent-ink:#7CCBC7; --accent-soft:#16302E; --line:#2A3531; --warn:#D89055; --warn-soft:#2A2018; --ok:#6FC194; --ok-soft:#16281F; --btn-ink:#10201E; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:44rem; margin:0 auto; padding:0 1rem 4rem; }
+  .progress { position:sticky; top:0; z-index:10; background:var(--paper); border-bottom:1px solid var(--line); padding:.5rem 1rem .55rem; }
+  .progress-inner { max-width:44rem; margin:0 auto; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; }
+  .progress-inner strong { color:var(--accent-ink); }
+  header.lead { padding-top:2.2rem; }
+  h1 { font-family:Georgia,serif; font-size:1.7rem; line-height:1.25; margin:0 0 .8rem; }
+  .lead p { margin:.5rem 0; max-width:62ch; }
+  .note { margin-top:1rem; padding:.75rem 1rem; background:var(--accent-soft); border-radius:8px; font-size:.92rem; color:var(--accent-ink); }
+  h2.sect { font-family:Georgia,serif; font-size:1.3rem; margin:2.2rem 0 .2rem; padding-bottom:.35rem; border-bottom:2px solid var(--accent); }
+  .sect-sub { font-size:.9rem; color:var(--muted); margin:.3rem 0 0; max-width:62ch; }
+  .q { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.15rem 1rem; margin-top:1.2rem; box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .q h3 { font-family:Georgia,serif; font-size:1.15rem; margin:0 0 .4rem; }
+  .q h3 .num { color:var(--accent-ink); }
+  .q .tag { display:inline-block; font-size:.75rem; letter-spacing:.04em; text-transform:uppercase; color:var(--warn); background:var(--warn-soft); border-radius:6px; padding:.1rem .5rem; margin-bottom:.5rem; }
+  .q .ctx { font-size:.93rem; color:var(--muted); margin:0 0 .7rem; }
+  .q .ctx em { color:var(--warn); font-style:normal; }
+  .opts { display:flex; flex-direction:column; gap:.45rem; margin:0 0 .8rem; }
+  .opt { display:flex; gap:.55rem; align-items:flex-start; border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; cursor:pointer; font-size:.94rem; }
+  .opt:has(input:checked) { border-color:var(--accent); background:var(--accent-soft); }
+  .opt input { margin-top:.2rem; accent-color:var(--accent); flex:none; }
+  .q textarea { width:100%; min-height:4.2rem; font:inherit; font-size:.93rem; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  .q textarea:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .tlabel { font-size:.85rem; color:var(--muted); margin:.2rem 0 .25rem; }
+  .finish { margin-top:2.4rem; background:var(--card); border:1.5px solid var(--accent); border-radius:12px; padding:1.2rem 1.15rem 1.3rem; }
+  .finish h2 { font-family:Georgia,serif; font-size:1.3rem; margin:0 0 .5rem; }
+  .finish p { font-size:.94rem; max-width:62ch; }
+  .btns { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0 .9rem; }
+  button, a.btn { font:inherit; font-size:.95rem; font-weight:600; border-radius:9px; padding:.65rem 1.05rem; cursor:pointer; text-decoration:none; text-align:center; border:1.5px solid var(--accent); }
+  button.primary { background:var(--accent); color:var(--btn-ink); }
+  button.ghost, a.btn { background:transparent; color:var(--accent-ink); }
+  #copy-status { font-size:.9rem; color:var(--accent-ink); min-height:1.3em; }
+  #summary-text { width:100%; min-height:9rem; font:inherit; font-size:.85rem; line-height:1.5; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:8px; padding:.55rem .7rem; resize:vertical; }
+  footer { margin-top:2rem; font-size:.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:.9rem; max-width:62ch; }
+</style>
+</head>
+<body>
+<div class="progress"><div class="progress-inner"><span>Отвечено</span><strong id="pcount">0 из 0</strong></div></div>
+<div class="wrap">
+<header class="lead">
+  <h1>Свод вопросов на согласование: пять строк для сущностей, три карточки методологу, запрос юристу</h1>
+  <p>По Вашему слову 05.09 («подготовь сводную таблицу вопросов с вариантами ответов»). По каждому вопросу — что это, зачем решать сейчас, варианты с ценой и наша рекомендация (первой, помечена). Полный разбор с держателями — в tz/260. Ответы сохраняются в браузере; кнопка внизу соберёт их в текст — пришлите его в чат бота одним сообщением.</p>
+  <p class="note"><b>Порядок после ответов:</b> ответы записываются решениями Р-232 и далее; по ответам «завести» строки С6, К11, Э13, К12 встают в очередь tz/258; карточки методологу уходят в свод ботом в группу; карточка юристу — тем же порядком. До ответов код идёт по плану Э2 → Э5 → Э4.</p>
+</header>
+<div id="qs"></div>
+
+<div class="finish">
+  <h2>Вернуть ответы</h2>
+  <p>Соберите текст кнопкой и пришлите. В текст попадут только те пункты, на которые Вы ответили.</p>
+  <div class="btns">
+    <button class="primary" id="btn-copy" type="button">Скопировать текст</button>
+    <button class="ghost" id="btn-dl" type="button">Скачать файлом (.txt)</button>
+    <a class="btn" id="btn-tg" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+  </div>
+  <div id="copy-status"></div>
+  <textarea id="summary-text" readonly aria-label="Сводный текст ответов"></textarea>
+</div>
+<footer>Страница собрана 05.09.2026 по tz/260 (к §314). Внутренняя: адресатам не передаётся. Ответы записываются решениями Р-232 и далее.</footer>
+</div>
+<script>
+const QS = [
+ {sect:"Владельцу — семь вопросов (tz/260)",
+   sub:"Рекомендация стоит первой и помечена. У каждого вопроса есть «Нет данных / обсудить».",
+   k:"q1", id:"1", t:"Канал «сам» по сети — строка для сущности",
+   c:"По §10.1 ответы батареи человек вводит сам с экрана; входит одноразовым кодом ограниченного срока, без учётной записи; код выдаёт кадровик лично при вручении бланка согласия (Р-83); ориентир параметров кода из §10.1 — не менее шести цифр, одноразовый, подтверждение в пределах десяти минут, не более ста неудачных попыток подряд. Сегодня модель форм (К1) и обследования (Э1) канал принимают, а транспортом по сети он не построен. Без него: шаг 7 сценария Р0.7 неисполним, «сотрудник видит своё» невозможно, батарея на пилоте не предъявляется. Тащит за собой: таблицу кодов (события журнала уже предусмотрены), сеанс человека без учётной записи, новый обязательный ключ конфигурации — путь к оцифровке (состав Р-213/Р-224 меняется Вашим словом вместе со строкой).",
+   opts:["A) Завести строку С6 и исполнить сразу после Э2 → Э5 → Э4 (рекомендация)", "B) Завести, но исполнить после экранов И1", "C) Не заводить — ответы вводятся вне продукта (противоречит §10.1 «экран»)", "D) Нет данных / обсудить"],
+   ph:"Оговорки…" },
+
+ {k:"q2", id:"2", t:"Анкета руководителя в продукте — строка для сущности (предпосылка К4 и шага 7)",
+   c:"Анкета tz/136 (звено 0) утверждена методологом 22.08; расчёт по ней в pr-calc есть; Р-201 п. 6 добавил два поля свободного текста — «ожидаемые результаты / KPI» и «недопустимые ошибки» (строка К4). В приложении сущности нет: руководителю нечем подать анкету, требования должности в базе не появляются, значит нет выдачи «человек ↔ должность» (шаг 7). По матрице tz/227 §3 анкета — вход руководителя, правится только им.",
+   opts:["A) Завести строку К11 «анкета руководителя в pr-app»: первичные данные, подача учётной записью руководителя, событие журнала, чтение по матрице; К4 следом (рекомендация)", "B) Отложить до экранов И1", "C) Нет данных / обсудить"],
+   ph:"Оговорки…" },
+
+ {k:"q3", id:"3", t:"Согласие в продукте — строка для сущности",
+   c:"tz/10 §3 называет сущность «согласие: дата, версия текста, способ, отзыв»; пакет бланков tz/52 согласован юристом 10.08; Р-73 вынес согласие субъектов вперёд пилота; инвариант — согласие ДО первого тестирования; §10.5 требует событий «согласие получено или отозвано». В приложении согласий нет (граница К1/К3). Вид электронной подписи — вопрос юридический (tz/82); продукт фиксирует факт, способ и версию текста. Канал «сам» (вопрос 1) нельзя открывать человеку без действующего согласия.",
+   opts:["A) Завести строку Э13 «согласие в pr-app»: запись у человека (версия бланка, дата, способ, кто внёс, отзыв), гейт «нет действующего согласия — обследование и формы отказывают», события журнала (рекомендация)", "B) Вести согласия вне продукта (бумажный журнал tz/52), продукт не проверяет", "C) Нет данных / обсудить"],
+   ph:"Оговорки…" },
+
+ {k:"q4", id:"4", t:"Рынок компаний (К6 → К7, К9): когда стартовать",
+   c:"tz/239 §2 называет пять объектов, которых нет: реестр компаний, витрина профиля, вакансия рынка, учётная запись соискателя вне заказчика (К7), отклик как событие. К9 — страница правил рекомендательных технологий до запуска рынка (Ю-33 закрыта юристом). По плану К6 зависит только от С1 (закрыта), то есть формально исполнима, но это самая большая подсистема очереди. Вопрос порядка: рынок раньше или позже того, что нужно пилоту контуров А/Б/Г (вопросы 1–3, 5).",
+   opts:["A) После пилотных предпосылок (С6, К11, Э13, К12) — когда пилот способен работать (рекомендация)", "B) Параллельно, сразу после Э2 → Э5 → Э4", "C) После старта пилота", "D) Нет данных / обсудить"],
+   ph:"Оговорки…" },
+
+ {k:"q5", id:"5", t:"Форма собеседования (tz/213) в продукте — строка для сущности",
+   c:"Опросник tz/213 принят заказчиком (С-34, Р-136 п. 1): 14 вопросов, веса из ста, шкала 0–4, строка обоснования к оценке, балл = сумма (вес × оценка / 4), порог 65 подтверждён числом. Балл собеседования и процент соответствия — два имени, в отчёте рядом и не складываются (В-140.1). В расчётном слое блок компетенций (К2) считается от отметок входом; формы интервью в приложении нет — оценки негде хранить, отчёт на пилоте неполон. Роль интервьюера нормой не названа (прочтение: руководитель или кадровик) — назовите в комментарии, если знаете.",
+   opts:["A) Завести строку К12 «форма собеседования»: оценки и обоснования как первичные данные, балл и порог 65, рядом с процентом без сложения, читатели по матрице — после вопросов 1–3 (рекомендация)", "B) Отложить до экранов И1", "C) Нет данных / обсудить"],
+   ph:"Кто интервьюер? Оговорки…" },
+
+ {k:"q6", id:"6", t:"Три карточки методологу: отправлять ли, и какие",
+   c:"(а) «Одна из двух основных шкал дала стен» (Р-182, Р4): экстраверсия и эмоциональная нестабильность имеют по две основные шкалы (EPQ E/N и EPI-57 Э/Н), значение — среднее при равных весах; если стен дала только одна, продукт выдаёт значение по одной с пометкой состава — выдавать так, считать конструкт недоступным до обеих или иначе? (б) «Словари правила А» (tz/221 §2, К8): правило переводит поля паспорта в баллы четырёх осей культуры, наш проект таблицы использует значения «терпят», «средний», «смешанно», которых в tz/70 §8 нет — утвердить таблицу или поправить; до ответа правило в продукте не считается. (в) «Отчёт о пересчёте грейдов» (T12, tz/70 §4): при новой версии должности унаследованные места пересчитываются, переопределённые вручную помечаются «расходится с эталоном» — утвердить состав отчёта: место · должность · грейд был / стал · переопределён ли вручную · дата версии. Все три блокируют код, который сейчас стоит на «прочтении, не норме».",
+   opts:["A) Отправить все три сейчас одной подачей (рекомендация)", "B) Отправить (а) и (б); (в) — позже, вместе с экраном отчёта", "C) Пока не отправлять", "D) Нет данных / обсудить"],
+   ph:"Правки текстов карточек…" },
+
+ {k:"q7", id:"7", t:"Запрос юристу по строке Э9 (договор на пилот)",
+   c:"Ответ юриста ЮП-42 (02.09) под единым сервисом: для контуров А/Б/Г заказчик — оператор, мы — обработчик по поручению с договором. Согласованная им же редакция договора tz/179 (Ю-11, 27.08) построена на обратном: два самостоятельных оператора, поручения нет. Решением Р-207 отдельная карточка не заводилась, риск принят: на старте пилота действует tz/179, не соответствующая последнему ответу; снимается словом на карточку в любой момент или при Р-190. Строка Э9 требует договор до старта пилота. Текст запроса: «ЮП-42 и tz/179 расходятся по нашей роли в контурах А/Б/Г: обработчик по поручению против самостоятельного оператора. Какая конструкция действует для договора с заказчиком на пилот в едином сервисе (Р-172)? Если поручение — какие пункты tz/179 переписать под ч. 3 ст. 6 152-ФЗ?»",
+   opts:["A) Отправить карточку юристу сейчас — снять риск Р-207 до пилота (рекомендация)", "B) Оставить до Р-190 — риск принят, договор на пилот по tz/179", "C) Нет данных / обсудить"],
+   ph:"Правки текста запроса…" },
+
+];
+
+const KEY = "svod-voprosov-vladelcu-2026-09-05-v1";
+const root = document.getElementById("qs");
+QS.forEach(q => {
+  if (q.sect) {
+    const h = document.createElement("h2");
+    h.className = "sect"; h.textContent = q.sect;
+    root.appendChild(h);
+    if (q.sub) { const p = document.createElement("p"); p.className = "sect-sub"; p.textContent = q.sub; root.appendChild(p); }
+  }
+  const d = document.createElement("div");
+  d.className = "q";
+  if (q.done) {
+    d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <p style="background:#e7f2ec;border-left:3px solid #2e7d4f;padding:.5rem .7rem;border-radius:6px;font-weight:600;overflow-wrap:break-word">✅ ${q.done}</p>`;
+    root.appendChild(d);
+    return;
+  }
+  d.innerHTML = `${q.tag ? `<span class="tag">${q.tag}</span>` : ""}<h3>${q.id ? `<span class="num">${q.id}.</span> ` : ""}${q.t}</h3><p class="ctx">${q.c}</p>
+    <div class="opts">${q.opts.map((o,i) =>
+      `<label class="opt"><input type="radio" name="${q.k}" value="${i}"><span>${o}</span></label>`).join("")}</div>
+    <div class="tlabel">Комментарий / свой вариант:</div>
+    <textarea data-id="${q.k}" placeholder="${q.ph}"></textarea>`;
+  root.appendChild(d);
+});
+function state() {
+  const s = {};
+  QS.forEach(q => {
+    const r = document.querySelector(`input[name="${q.k}"]:checked`);
+    const t = document.querySelector(`textarea[data-id="${q.k}"]`);
+    if (r || (t && t.value.trim())) s[q.k] = { o: r ? +r.value : null, c: t ? t.value.trim() : "" };
+  });
+  return s;
+}
+function refresh() {
+  const s = state();
+  document.getElementById("pcount").textContent = `${Object.keys(s).length} из ${QS.filter(q => !q.done).length}`;
+  let text = "ОТВЕТЫ — «Формула компании», свод вопросов владельцу 05.09 (tz/260, вопросы 1–7)\n\n";
+  let sect = "";
+  QS.forEach(q => {
+    if (q.sect) sect = q.sect;
+    const a = s[q.k];
+    if (!a) return;
+    if (sect) { text += `[${sect}]\n`; sect = ""; }
+    text += `Вопрос ${q.id ? q.id + " — " : ""}${q.t}\n`;
+    text += `   ${a.o !== null ? q.opts[a.o] : "(вариант не выбран)"}\n`;
+    if (a.c) text += `   комментарий: ${a.c}\n`;
+    text += "\n";
+  });
+  if (!Object.keys(s).length) text += "— (пока ничего не заполнено)\n";
+  document.getElementById("summary-text").value = text;
+  document.getElementById("btn-tg").href = "https://t.me/share/url?url=&text=" + encodeURIComponent(
+    text.length > 3800 ? text.slice(0, 3800) + "\n…(сокращено — полная версия кнопкой «Скопировать»)" : text);
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  return text;
+}
+document.addEventListener("input", refresh);
+document.addEventListener("change", refresh);
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+  Object.entries(saved).forEach(([k, a]) => {
+    if (a.o !== null && a.o !== undefined) { const r = document.querySelector(`input[name="${k}"][value="${a.o}"]`); if (r) r.checked = true; }
+    if (a.c) { const t = document.querySelector(`textarea[data-id="${k}"]`); if (t) t.value = a.c; }
+  });
+} catch (e) {}
+const say = m => document.getElementById("copy-status").textContent = m;
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const text = refresh();
+  try { await navigator.clipboard.writeText(text); say("Скопировано — вставьте в чат или письмо."); }
+  catch (e) { const s = document.getElementById("summary-text"); s.focus(); s.select(); say("Автокопирование не сработало — текст выделен, скопируйте вручную."); }
+});
+document.getElementById("btn-dl").addEventListener("click", () => {
+  const blob = new Blob([refresh()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "otvety-svod-voprosov-05-09.txt";
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  say("Файл сохранён — пришлите его нам.");
+});
+refresh();
+</script>
+</body>
+</html>
